@@ -8,7 +8,7 @@ const meta = {
   // This component will have an automatically generated docsPage entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
   argTypes: {
-    size: { control: "select", options: ["xs", "md", "lg"] },
+    size: { control: "select", options: ["sm", "md", "lg"] },
     theme: {
       control: "select",
       options: [

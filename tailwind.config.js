@@ -1,9 +1,5 @@
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{vue,js,ts,jsx,tsx}",
-    "./.storybook/**/*.{js,ts}",
-  ],
+module.exports = {
+  content: ["./src/**/*.{js,ts,vue}", "./.storybook/**/*.{js,ts,vue}"],
   theme: {
     extend: {},
   },

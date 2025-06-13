@@ -2,7 +2,7 @@
 import { defineComponent } from "vue";
 
 defineComponent({
-  name: "JetButton",
+  name: "PMGButton",
 });
 defineProps({
   text: { type: String, required: false },
@@ -26,11 +26,26 @@ defineEmits(["click"]);
 </script>
 <template>
   <button
-    @click="$emit('click')"
     :disabled="disabled"
-    class="jet-btn font-black bg-red-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-150 ease-in-out"
-    :class="`jet-btn-${theme}`"
+    :class="[
+      'px-4 py-2 text-base font-medium rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2',
+      size === 'sm'
+        ? 'text-sm'
+        : size === 'md'
+        ? 'text-base'
+        : size === 'lg'
+        ? 'text-lg'
+        : '',
+      theme === 'primary' ? 'bg-blue-500 text-white hover:bg-blue-600' : '',
+      theme === 'secondary' ? 'bg-gray-500 text-white hover:bg-gray-600' : '',
+      theme === 'success' ? 'bg-green-500 text-white hover:bg-green-600' : '',
+      theme === 'warning' ? 'bg-yellow-500 text-white hover:bg-yellow-600' : '',
+      theme === 'danger' ? 'bg-red-500 text-white hover:bg-red-600' : '',
+      theme === 'default' ? 'bg-gray-200 text-gray-800 hover:bg-gray-300' : '',
+      disabled ? 'opacity-50 cursor-not-allowed' : '',
+    ]"
+    @click="$emit('click')"
   >
-    <slot name="default">{{ text }}</slot>
+    <slot>{{ text }}</slot>
   </button>
 </template>

@@ -1,5 +1,5 @@
-import { defineComponent as o, createElementBlock as i, openBlock as l, normalizeClass as s, renderSlot as a, createTextVNode as r, toDisplayString as d } from "vue";
-const u = ["disabled"], m = /* @__PURE__ */ o({
+import { defineComponent as i, createElementBlock as a, openBlock as l, normalizeClass as o, renderSlot as r, createTextVNode as d, toDisplayString as s } from "vue";
+const g = ["disabled"], b = /* @__PURE__ */ i({
   __name: "PMGButton",
   props: {
     text: { type: String, required: !1 },
@@ -15,19 +15,29 @@ const u = ["disabled"], m = /* @__PURE__ */ o({
   },
   emits: ["click"],
   setup(e) {
-    return o({
-      name: "JetButton"
-    }), (t, n) => (l(), i("button", {
-      onClick: n[0] || (n[0] = (f) => t.$emit("click")),
+    return i({
+      name: "PMGButton"
+    }), (t, n) => (l(), a("button", {
       disabled: e.disabled,
-      class: s(["jet-btn font-black bg-red-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-150 ease-in-out", `jet-btn-${e.theme}`])
+      class: o([
+        "px-4 py-2 text-base font-medium rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2",
+        e.size === "sm" ? "text-sm" : e.size === "md" ? "text-base" : e.size === "lg" ? "text-lg" : "",
+        e.theme === "primary" ? "bg-blue-500 text-white hover:bg-blue-600" : "",
+        e.theme === "secondary" ? "bg-gray-500 text-white hover:bg-gray-600" : "",
+        e.theme === "success" ? "bg-green-500 text-white hover:bg-green-600" : "",
+        e.theme === "warning" ? "bg-yellow-500 text-white hover:bg-yellow-600" : "",
+        e.theme === "danger" ? "bg-red-500 text-white hover:bg-red-600" : "",
+        e.theme === "default" ? "bg-gray-200 text-gray-800 hover:bg-gray-300" : "",
+        e.disabled ? "opacity-50 cursor-not-allowed" : ""
+      ]),
+      onClick: n[0] || (n[0] = (m) => t.$emit("click"))
     }, [
-      a(t.$slots, "default", {}, () => [
-        r(d(e.text), 1)
+      r(t.$slots, "default", {}, () => [
+        d(s(e.text), 1)
       ])
-    ], 10, u));
+    ], 10, g));
   }
 });
 export {
-  m as PMGButton
+  b as PMGButton
 };
