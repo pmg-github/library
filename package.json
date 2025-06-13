@@ -3,13 +3,13 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
-  "main": "./dist/pmg-library.cjs.js",
+  "main": "./dist/pmg-library.umd.cjs",
   "module": "./dist/pmg-library.es.js",
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/pmg-library.es.js",
-      "require": "./dist/pmg-library.cjs.js"
+      "require": "./dist/pmg-library.umd.cjs"
     }
   },
   "files": [
