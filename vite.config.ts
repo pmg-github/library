@@ -9,7 +9,8 @@ export default defineConfig({
     copyPublicDir: false,
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),
-      name: "library",
+      name: "pmg-library",
+      fileName: "pmg-library",
     },
     rollupOptions: {
       external: ["vue"],
