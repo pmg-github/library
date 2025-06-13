@@ -4,11 +4,11 @@
   "version": "0.0.1",
   "type": "module",
   "main": "./dist/pmg-library.umd.cjs",
-  "module": "./dist/pmg-library.es.js",
+  "module": "./dist/pmg-library.js",
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/pmg-library.es.js",
+      "import": "./dist/pmg-library.js",
       "require": "./dist/pmg-library.umd.cjs"
     }
   },

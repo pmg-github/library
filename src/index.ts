@@ -1,1 +1,3 @@
-export { default as PMGButton } from "./components/button/PMGButton.vue";
+import PMGButton from "./components/button/PMGButton.vue";
+
+export { PMGButton };
