@@ -1,5 +1,10 @@
-import { createApp } from "vue";
-import "./index.css";
-import App from "./App.vue";
+import type { App } from "vue";
+import PMGButton from "./components/button/PMGButton.vue";
 
-createApp(App).mount("#app");
+export default {
+  install: (app: App) => {
+    app.component("PMGButton", PMGButton);
+  },
+};
+
+export { PMGButton };
