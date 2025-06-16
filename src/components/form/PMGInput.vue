@@ -11,10 +11,7 @@ const props = defineProps({
     type: String,
     required: false,
   },
-  modelValue: {
-    type: [String, Number],
-    required: false,
-  },
+
   type: {
     type: String,
     default: "text",
@@ -27,6 +24,11 @@ const props = defineProps({
     type: String,
     required: false,
   },
+});
+
+defineModel<string | number>({
+  type: [String, Number],
+  default: "",
 });
 
 const attrs = useAttrs();
