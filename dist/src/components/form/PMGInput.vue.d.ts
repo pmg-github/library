@@ -1,4 +1,5 @@
 declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+    modelValue: (StringConstructor | NumberConstructor)[];
     name: {
         type: StringConstructor;
         required: true;
@@ -19,12 +20,18 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         type: StringConstructor;
         required: false;
     };
-    modelValue: {
-        type: import('vue').PropType<string | number>;
+    errorMessage: {
+        type: StringConstructor;
+        required: false;
+    };
+    meta: {
+        type: ObjectConstructor;
+        required: false;
     };
 }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
-    "update:modelValue": (value: string | number) => any;
+    "update:modelValue": (...args: any[]) => void;
 }, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+    modelValue: (StringConstructor | NumberConstructor)[];
     name: {
         type: StringConstructor;
         required: true;
@@ -45,11 +52,16 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         type: StringConstructor;
         required: false;
     };
-    modelValue: {
-        type: import('vue').PropType<string | number>;
+    errorMessage: {
+        type: StringConstructor;
+        required: false;
+    };
+    meta: {
+        type: ObjectConstructor;
+        required: false;
     };
 }>> & Readonly<{
-    "onUpdate:modelValue"?: ((value: string | number) => any) | undefined;
+    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }>, {
     disabled: boolean;
     type: string;
