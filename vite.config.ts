@@ -9,6 +9,13 @@ export default defineConfig({
     vue(),
     dts({
       insertTypesEntry: true,
+      outDir: "dist/types",
+      beforeWriteFile: (filePath, content) => {
+        return {
+          filePath: filePath.replace(/\/src\//, "/"),
+          content,
+        };
+      },
     }),
   ],
   build: {

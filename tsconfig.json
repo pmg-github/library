@@ -25,5 +25,6 @@
     "components.d.ts",
     "app.config.ts",
     "vite.config.ts"
-  ]
+  ],
+  "exclude": ["**/*.stories.ts", "**/*.stories.d.ts", "**/*.stories.js"]
 }
