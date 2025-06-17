@@ -21,7 +21,7 @@ export default defineConfig({
   build: {
     copyPublicDir: false,
     lib: {
-      entry: path.resolve(__dirname, "src/main.ts"), // <-- change this line
+      entry: path.resolve(__dirname, "src/index.ts"),
       name: "PMGLibrary",
       fileName: "pmg-library",
     },
@@ -31,7 +31,6 @@ export default defineConfig({
         globals: {
           vue: "Vue",
         },
-        exports: "named",
       },
     },
   },
