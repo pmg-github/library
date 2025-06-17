@@ -1,12 +1,12 @@
 import type { App } from "vue";
-import PMGButton from "./components/button/PMGButton.vue";
-import PMGInput from "./components/form/PMGInput.vue";
+import * as components from "./components";
 
 export default {
-  install: (app: App) => {
-    app.component("PMGButton", PMGButton);
-    app.component("PMGInput", PMGInput);
+  install(app: App) {
+    Object.entries(components).forEach(([name, component]) => {
+      app.component(name, component);
+    });
   },
 };
 
-export { PMGButton, PMGInput };
+export * from "./components";

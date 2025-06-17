@@ -2,8 +2,9 @@ import PMGInput from "./PMGInput.vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 
 const meta: Meta<typeof PMGInput> = {
-  title: "Form/PMGInput",
+  title: "PMG/Input",
   component: PMGInput,
+  tags: ["autodocs"],
   argTypes: {
     name: { control: "text" },
     label: { control: "text" },
