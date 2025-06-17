@@ -5,7 +5,6 @@ defineComponent({
   name: "PMGButton",
 });
 defineProps({
-  text: { type: String, required: false },
   disabled: { type: Boolean, default: false },
   size: {
     type: String as () => "sm" | "md" | "lg",
@@ -46,6 +45,6 @@ defineEmits(["click"]);
     ]"
     @click="$emit('click')"
   >
-    <slot>{{ text }}</slot>
+    <slot></slot>
   </button>
 </template>

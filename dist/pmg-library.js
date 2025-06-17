@@ -1,8 +1,7 @@
-import { defineComponent as d, createElementBlock as r, openBlock as t, normalizeClass as u, renderSlot as g, createTextVNode as i, toDisplayString as s, useAttrs as p, computed as y, ref as x, createElementVNode as w, createCommentVNode as l, mergeProps as v, unref as k } from "vue";
-const S = ["disabled"], M = /* @__PURE__ */ d({
+import { defineComponent as d, createElementBlock as r, openBlock as t, normalizeClass as u, renderSlot as h, useAttrs as g, computed as p, ref as y, createElementVNode as x, createCommentVNode as l, mergeProps as w, unref as v, createTextVNode as k, toDisplayString as b } from "vue";
+const M = ["disabled"], S = /* @__PURE__ */ d({
   __name: "PMGButton",
   props: {
-    text: { type: String, required: !1 },
     disabled: { type: Boolean, default: !1 },
     size: {
       type: String,
@@ -32,12 +31,10 @@ const S = ["disabled"], M = /* @__PURE__ */ d({
       ]),
       onClick: a[0] || (a[0] = (n) => o.$emit("click"))
     }, [
-      g(o.$slots, "default", {}, () => [
-        i(s(e.text), 1)
-      ])
-    ], 10, S));
+      h(o.$slots, "default")
+    ], 10, M));
   }
-}), q = { class: "relative" }, B = ["name", "type", "disabled", "placeholder", "value"], P = { key: 0 }, G = {
+}), B = { class: "relative" }, P = ["name", "type", "disabled", "placeholder", "value"], q = { key: 0 }, G = {
   key: 1,
   class: "mt-1 text-xs text-red-500"
 }, V = /* @__PURE__ */ d({
@@ -54,24 +51,24 @@ const S = ["disabled"], M = /* @__PURE__ */ d({
   },
   emits: ["update:modelValue"],
   setup(e, { emit: o }) {
-    const a = o, n = p(), c = y(() => "required" in n), m = x(null);
-    return (z, f) => (t(), r("div", q, [
-      w("input", v({
+    const a = o, n = g(), i = p(() => "required" in n), c = y(null);
+    return (z, s) => (t(), r("div", B, [
+      x("input", w({
         ref_key: "inputRef",
-        ref: m,
+        ref: c,
         name: e.name,
         type: e.type,
         disabled: e.disabled,
         placeholder: e.placeholder && e.placeholder !== " " ? e.placeholder : " ",
         value: e.modelValue,
-        onInput: f[0] || (f[0] = (h) => {
-          var b;
-          return a("update:modelValue", (b = h.target) == null ? void 0 : b.value);
+        onInput: s[0] || (s[0] = (m) => {
+          var f;
+          return a("update:modelValue", (f = m.target) == null ? void 0 : f.value);
         }),
         class: ["peer h-10 w-full rounded-[6px] border bg-transparent px-3 py-2.5 font-sans text-sm font-normal outline-0 transition-all placeholder-shown:border focus:border-2 focus:outline-0", [
           e.meta && e.meta.valid === !1 && e.meta.touched ? "!placeholder-shown:border-red-500 border-red-500 border-t-transparent text-red-500 placeholder-shown:border-t-red-500 focus:border-red-500 focus:border-t-transparent" : "!placeholder-shown:border-gray-500 border-gray-500 border-t-transparent text-gray-500 placeholder-shown:border-t-gray-500 focus:border-gray-500 focus:border-t-transparent "
         ]]
-      }, k(n)), null, 16, B),
+      }, v(n)), null, 16, P),
       e.label ? (t(), r("label", {
         key: 0,
         class: u([
@@ -79,19 +76,19 @@ const S = ["disabled"], M = /* @__PURE__ */ d({
           e.meta && e.meta.valid === !1 && e.meta.touched ? "text-red-500 before:border-red-500 after:border-red-500  peer-placeholder-shown:text-red-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-red-500 peer-focus:before:border-t-2 peer-focus:before:!border-red-500 peer-focus:after:border-t-2 peer-focus:after:!border-red-500" : "text-gray-500 before:border-gray-500 after:border-gray-500  peer-placeholder-shown:text-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-gray-500 peer-focus:before:border-t-2 peer-focus:before:!border-gray-500 peer-focus:after:border-t-2 peer-focus:after:!border-gray-500"
         ])
       }, [
-        i(s(e.label) + " ", 1),
-        c.value ? (t(), r("span", P, "  *")) : l("", !0)
+        k(b(e.label) + " ", 1),
+        i.value ? (t(), r("span", q, "  *")) : l("", !0)
       ], 2)) : l("", !0),
-      e.errorMessage ? (t(), r("p", G, s(e.errorMessage), 1)) : l("", !0)
+      e.errorMessage ? (t(), r("p", G, b(e.errorMessage), 1)) : l("", !0)
     ]));
   }
 }), C = {
   install(e) {
-    e.component("PMGButton", M), e.component("PMGInput", V);
+    e.component("PMGButton", S), e.component("PMGInput", V);
   }
 };
 export {
-  M as PMGButton,
+  S as PMGButton,
   V as PMGInput,
   C as default
 };

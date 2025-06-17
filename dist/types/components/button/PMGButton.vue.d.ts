@@ -8,10 +8,6 @@ declare function __VLS_template(): {
 };
 type __VLS_TemplateResult = ReturnType<typeof __VLS_template>;
 declare const __VLS_component: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
-    text: {
-        type: StringConstructor;
-        required: false;
-    };
     disabled: {
         type: BooleanConstructor;
         default: boolean;
@@ -27,10 +23,6 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
 }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
     click: (...args: any[]) => void;
 }, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
-    text: {
-        type: StringConstructor;
-        required: false;
-    };
     disabled: {
         type: BooleanConstructor;
         default: boolean;
