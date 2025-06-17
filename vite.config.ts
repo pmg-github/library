@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import dts from "vite-plugin-dts";
+import Components from "unplugin-vue-components/vite";
 import path from "path";
 
 // https://vitejs.dev/config/
@@ -17,6 +18,9 @@ export default defineConfig({
         };
       },
     }),
+    Components({
+      dirs: path.resolve(__dirname, "src/components"),
+    }),
   ],
   build: {
     copyPublicDir: false,
@@ -31,6 +35,7 @@ export default defineConfig({
         globals: {
           vue: "Vue",
         },
+        exports: "named",
       },
     },
   },
