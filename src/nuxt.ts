@@ -16,7 +16,6 @@ export default defineNuxtModule<ModuleOptions>({
     prefix: "",
   },
   setup(_options: ModuleOptions) {
-    // Auto-import components from the built library
     addComponent({
       name: "PMGButton",
       export: "PMGButton",
