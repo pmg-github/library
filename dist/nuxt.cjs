@@ -23,14 +23,7 @@ __export(nuxt_exports, {
   default: () => nuxt_default
 });
 module.exports = __toCommonJS(nuxt_exports);
-
-// node_modules/tsup/assets/cjs_shims.js
-var getImportMetaUrl = () => typeof document === "undefined" ? new URL(`file:${__filename}`).href : document.currentScript && document.currentScript.src || new URL("main.js", document.baseURI).href;
-var importMetaUrl = /* @__PURE__ */ getImportMetaUrl();
-
-// src/nuxt.ts
 var import_kit = require("@nuxt/kit");
-var { resolve } = (0, import_kit.createResolver)(importMetaUrl);
 var nuxt_default = (0, import_kit.defineNuxtModule)({
   meta: {
     name: "pmg-library",
@@ -42,15 +35,16 @@ var nuxt_default = (0, import_kit.defineNuxtModule)({
   defaults: {
     prefix: ""
   },
-  setup(_options, nuxt) {
+  setup(_options) {
     (0, import_kit.addComponent)({
       name: "PMGButton",
-      filePath: resolve("./components/button/PMGButton.vue")
+      export: "PMGButton",
+      filePath: "pmg-library"
     });
     (0, import_kit.addComponent)({
       name: "PMGInput",
-      filePath: resolve("./components/form/PMGInput.vue")
+      export: "PMGInput",
+      filePath: "pmg-library"
     });
-    nuxt.options.css.push(resolve("./index.css"));
   }
 });

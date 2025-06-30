@@ -1,6 +1,5 @@
 // src/nuxt.ts
-import { createResolver, defineNuxtModule, addComponent } from "@nuxt/kit";
-var { resolve } = createResolver(import.meta.url);
+import { defineNuxtModule, addComponent } from "@nuxt/kit";
 var nuxt_default = defineNuxtModule({
   meta: {
     name: "pmg-library",
@@ -12,16 +11,17 @@ var nuxt_default = defineNuxtModule({
   defaults: {
     prefix: ""
   },
-  setup(_options, nuxt) {
+  setup(_options) {
     addComponent({
       name: "PMGButton",
-      filePath: resolve("./components/button/PMGButton.vue")
+      export: "PMGButton",
+      filePath: "pmg-library"
     });
     addComponent({
       name: "PMGInput",
-      filePath: resolve("./components/form/PMGInput.vue")
+      export: "PMGInput",
+      filePath: "pmg-library"
     });
-    nuxt.options.css.push(resolve("./index.css"));
   }
 });
 export {

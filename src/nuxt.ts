@@ -1,6 +1,4 @@
-import { createResolver, defineNuxtModule, addComponent } from "@nuxt/kit";
-
-const { resolve } = createResolver(import.meta.url);
+import { defineNuxtModule, addComponent } from "@nuxt/kit";
 
 interface ModuleOptions {
   prefix?: string;
@@ -17,19 +15,20 @@ export default defineNuxtModule<ModuleOptions>({
   defaults: {
     prefix: "",
   },
-  setup(_options: ModuleOptions, nuxt: any) {
-    // Auto-import components
+  setup(_options: ModuleOptions) {
+    // Auto-import components from the built library
     addComponent({
       name: "PMGButton",
-      filePath: resolve("./components/button/PMGButton.vue"),
+      export: "PMGButton",
+      filePath: "pmg-library",
     });
 
     addComponent({
       name: "PMGInput",
-      filePath: resolve("./components/form/PMGInput.vue"),
+      export: "PMGInput",
+      filePath: "pmg-library",
     });
 
-    // Add CSS
-    nuxt.options.css.push(resolve("./index.css"));
+    // Add CSS from the library
   },
 });
