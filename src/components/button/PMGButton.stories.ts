@@ -24,7 +24,6 @@ const meta = {
   args: {
     size: "md",
     theme: "primary",
-    text: "Button text",
     // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
   },
 } satisfies Meta<typeof PMGButton>;
@@ -40,7 +39,6 @@ export const Primary: Story = {
   args: {
     size: "md",
     theme: "primary",
-    text: "Primary button",
   },
 };
 
@@ -48,7 +46,6 @@ export const Secondary: Story = {
   args: {
     size: "md",
     theme: "secondary",
-    text: "Secondary button",
   },
 };
 
@@ -56,7 +53,6 @@ export const Success: Story = {
   args: {
     size: "md",
     theme: "success",
-    text: "Success button",
   },
 };
 
@@ -64,36 +60,17 @@ export const Warning: Story = {
   args: {
     size: "md",
     theme: "warning",
-    text: "Warning button",
   },
 };
 export const Danger: Story = {
   args: {
     size: "md",
     theme: "danger",
-    text: "Danger button",
   },
 };
 export const Default: Story = {
   args: {
     size: "md",
     theme: "default",
-    text: "Default button",
-  },
-};
-
-export const Small: Story = {
-  args: {
-    size: "sm",
-    theme: "primary",
-    text: "Primary button",
-  },
-};
-
-export const Large: Story = {
-  args: {
-    size: "lg",
-    theme: "primary",
-    text: "Primary button",
   },
 };
