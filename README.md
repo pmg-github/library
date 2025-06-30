@@ -21,6 +21,71 @@ This library provides a set of pre-styled, accessible UI components for use in V
 npm install https://github.com/pmg-github/library.git
 ```
 
+### For Nuxt 3 Projects (Auto-import)
+
+To enable auto-importing of components in Nuxt 3, add the module to your `nuxt.config.ts`:
+
+```typescript
+export default defineNuxtConfig({
+  modules: ["pmg-library/nuxt"],
+});
+```
+
+After adding the module, all PMG components will be auto-imported and available globally in your Nuxt project without explicit imports.
+
+📖 **For detailed Nuxt setup instructions, see [NUXT_SETUP.md](./NUXT_SETUP.md)**
+
+**Example usage in Nuxt:**
+
+```vue
+<template>
+  <div>
+    <!-- Components are auto-imported, no import statements needed -->
+    <PMGButton theme="primary" @click="handleClick"> Click me </PMGButton>
+
+    <PMGInput
+      v-model="formData.username"
+      name="username"
+      label="Username"
+      placeholder="Enter your username"
+    />
+  </div>
+</template>
+
+<script setup>
+const formData = ref({ username: "" });
+
+const handleClick = () => {
+  console.log("Button clicked!");
+};
+</script>
+```
+
+### For Vue 3 Projects
+
+You can either install the plugin globally or import components individually.
+
+**Global Plugin Installation:**
+
+```typescript
+// main.ts
+import { createApp } from "vue";
+import PMGLibrary from "pmg-library";
+import App from "./App.vue";
+
+const app = createApp(App);
+app.use(PMGLibrary);
+app.mount("#app");
+```
+
+**Individual Component Import:**
+
+```vue
+<script setup>
+import { PMGButton, PMGInput } from "pmg-library";
+</script>
+```
+
 ---
 
 ## Usage

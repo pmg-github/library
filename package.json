@@ -11,6 +11,11 @@
       "types": "./dist/types/index.d.ts",
       "import": "./dist/pmg-library.js",
       "require": "./dist/pmg-library.umd.cjs"
+    },
+    "./nuxt": {
+      "types": "./dist/nuxt.d.ts",
+      "import": "./dist/nuxt.js",
+      "require": "./dist/nuxt.cjs"
     }
   },
   "files": [
@@ -18,7 +23,8 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && npm run build:nuxt",
+    "build:nuxt": "tsup src/nuxt.ts --format esm,cjs --dts",
     "storybook": "storybook dev -p 6006"
   },
   "dependencies": {
