@@ -11,10 +11,6 @@
       "types": "./dist/types/index.d.ts",
       "import": "./dist/pmg-library.js",
       "require": "./dist/pmg-library.umd.cjs"
-    },
-    "./module": {
-      "import": "./dist/module.mjs",
-      "types": "./dist/module.d.ts"
     }
   },
   "files": [
@@ -22,7 +18,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build && tsup src/module.ts --format esm --dts --out-dir dist",
+    "build": "vite build",
     "storybook": "storybook dev -p 6006"
   },
   "dependencies": {
@@ -50,6 +46,7 @@
     "tailwindcss": "^4.1.10",
     "tsup": "^8.5.0",
     "typescript": "~5.8.3",
+    "unplugin-vue-components": "^28.8.0",
     "vee-validate": "^4.15.1",
     "vite": "^6.3.5",
     "vitest": "^3.2.3",
