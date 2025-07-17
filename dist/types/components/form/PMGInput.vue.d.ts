@@ -1,17 +1,32 @@
-interface Props {
-    name: string;
-    label?: string;
-    modelValue?: string;
-    type?: string;
-    disabled?: boolean;
-    placeholder?: string;
-}
-declare const _default: import('vue').DefineComponent<Props, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<Props> & Readonly<{}>, {
-    disabled: boolean;
-    type: string;
-    modelValue: string;
-    placeholder: string;
-}, {}, {}, {}, string, import('vue').ComponentProvideOptions, false, {
+declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+    name: {
+        type: StringConstructor;
+        required: true;
+    };
+    label: {
+        type: StringConstructor;
+        required: false;
+    };
+    modelValue: {
+        type: StringConstructor;
+        required: false;
+    };
+    type: StringConstructor;
+}>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+    name: {
+        type: StringConstructor;
+        required: true;
+    };
+    label: {
+        type: StringConstructor;
+        required: false;
+    };
+    modelValue: {
+        type: StringConstructor;
+        required: false;
+    };
+    type: StringConstructor;
+}>> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {
     inputRef: HTMLInputElement;
 }, HTMLDivElement>;
 export default _default;

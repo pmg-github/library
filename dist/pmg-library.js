@@ -1,4 +1,4 @@
-import { defineComponent as ne, createElementBlock as G, openBlock as q, normalizeClass as Ae, renderSlot as He, computed as S, toValue as y, unref as c, onMounted as Qe, getCurrentInstance as B, provide as Ze, isRef as ue, watch as R, onBeforeUnmount as et, inject as tt, onUnmounted as rt, ref as H, reactive as nt, nextTick as ot, useAttrs as it, withDirectives as lt, createCommentVNode as te, createElementVNode as at, mergeProps as ut, vModelDynamic as st, createTextVNode as dt, toDisplayString as he } from "vue";
+import { defineComponent as ne, createElementBlock as q, openBlock as G, normalizeClass as je, renderSlot as He, computed as k, toValue as g, unref as c, onMounted as Qe, getCurrentInstance as B, provide as Ze, isRef as ue, watch as R, onBeforeUnmount as et, inject as tt, onUnmounted as rt, ref as H, reactive as nt, nextTick as ot, useAttrs as it, withDirectives as lt, createCommentVNode as te, createElementVNode as at, mergeProps as ut, vModelDynamic as st, createTextVNode as dt, toDisplayString as he } from "vue";
 const ct = ["disabled"], ft = /* @__PURE__ */ ne({
   __name: "PMGButton",
   props: {
@@ -16,9 +16,9 @@ const ct = ["disabled"], ft = /* @__PURE__ */ ne({
   setup(e) {
     return ne({
       name: "PMGButton"
-    }), (t, r) => (q(), G("button", {
+    }), (t, r) => (G(), q("button", {
       disabled: e.disabled,
-      class: Ae([
+      class: je([
         "px-4 py-2 text-base font-medium rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2",
         e.size === "sm" ? "text-sm" : e.size === "md" ? "text-base" : e.size === "lg" ? "text-lg" : "",
         e.theme === "primary" ? "bg-blue-500 text-white hover:bg-blue-600" : "",
@@ -47,7 +47,7 @@ function vt(e) {
   return e == null;
 }
 const z = (e) => e !== null && !!e && typeof e == "object" && !Array.isArray(e);
-function je(e) {
+function xe(e) {
   return Number(e) >= 0;
 }
 function mt(e) {
@@ -60,7 +60,7 @@ function bt(e) {
     return "";
   let r = String(t[0]);
   for (let n = 1; n < t.length; n++) {
-    if (je(t[n])) {
+    if (xe(t[n])) {
       r += `[${t[n]}]`;
       continue;
     }
@@ -69,10 +69,10 @@ function bt(e) {
   return r;
 }
 const ht = {};
-function pt(e) {
+function yt(e) {
   return ht[e];
 }
-function pe(e, t, r) {
+function ye(e, t, r) {
   typeof r.value == "object" && (r.value = I(r.value)), !r.enumerable || r.get || r.set || !r.configurable || !r.writable || t === "__proto__" ? Object.defineProperty(e, t, r) : e[t] = r.value;
 }
 function I(e) {
@@ -80,17 +80,17 @@ function I(e) {
   var t = 0, r, n, o, i = Object.prototype.toString.call(e);
   if (i === "[object Object]" ? o = Object.create(e.__proto__ || null) : i === "[object Array]" ? o = Array(e.length) : i === "[object Set]" ? (o = /* @__PURE__ */ new Set(), e.forEach(function(l) {
     o.add(I(l));
-  })) : i === "[object Map]" ? (o = /* @__PURE__ */ new Map(), e.forEach(function(l, u) {
-    o.set(I(u), I(l));
+  })) : i === "[object Map]" ? (o = /* @__PURE__ */ new Map(), e.forEach(function(l, a) {
+    o.set(I(a), I(l));
   })) : i === "[object Date]" ? o = /* @__PURE__ */ new Date(+e) : i === "[object RegExp]" ? o = new RegExp(e.source, e.flags) : i === "[object DataView]" ? o = new e.constructor(I(e.buffer)) : i === "[object ArrayBuffer]" ? o = e.slice(0) : i.slice(-6) === "Array]" && (o = new e.constructor(e)), o) {
     for (n = Object.getOwnPropertySymbols(e); t < n.length; t++)
-      pe(o, n[t], Object.getOwnPropertyDescriptor(e, n[t]));
+      ye(o, n[t], Object.getOwnPropertyDescriptor(e, n[t]));
     for (t = 0, n = Object.getOwnPropertyNames(e); t < n.length; t++)
-      Object.hasOwnProperty.call(o, r = n[t]) && o[r] === e[r] || pe(o, r, Object.getOwnPropertyDescriptor(e, r));
+      Object.hasOwnProperty.call(o, r = n[t]) && o[r] === e[r] || ye(o, r, Object.getOwnPropertyDescriptor(e, r));
   }
   return o || e;
 }
-const Ce = Symbol("vee-validate-form"), yt = Symbol("vee-validate-field-instance"), ye = Symbol("Default empty value"), Ee = typeof window < "u";
+const Ce = Symbol("vee-validate-form"), gt = Symbol("vee-validate-field-instance"), ge = Symbol("Default empty value"), Ee = typeof window < "u";
 function oe(e) {
   return _(e) && !!e.__locatorRef;
 }
@@ -103,7 +103,7 @@ function ie(e) {
 function Ne(e) {
   return e === "checkbox" || e === "radio";
 }
-function gt(e) {
+function pt(e) {
   return z(e) || Array.isArray(e);
 }
 function se(e) {
@@ -168,7 +168,7 @@ function A(e, t) {
       return e.valueOf() === t.valueOf();
     if (e.toString !== Object.prototype.toString)
       return e.toString() === t.toString();
-    if (e = ge(e), t = ge(t), o = Object.keys(e), r = o.length, r !== Object.keys(t).length)
+    if (e = pe(e), t = pe(t), o = Object.keys(e), r = o.length, r !== Object.keys(t).length)
       return !1;
     for (n = r; n-- !== 0; )
       if (!Object.prototype.hasOwnProperty.call(t, o[n]))
@@ -182,7 +182,7 @@ function A(e, t) {
   }
   return e !== e && t !== t;
 }
-function ge(e) {
+function pe(e) {
   return Object.fromEntries(Object.entries(e).filter(([, t]) => t !== void 0));
 }
 function Ve(e) {
@@ -192,9 +192,9 @@ function Pe(e) {
   return se(e) ? e.replace(/\[|\]/gi, "") : e;
 }
 function U(e, t, r) {
-  return e ? se(t) ? e[Pe(t)] : (t || "").split(/\.|\[(\d+)\]/).filter(Boolean).reduce((o, i) => gt(o) && i in o ? o[i] : r, e) : r;
+  return e ? se(t) ? e[Pe(t)] : (t || "").split(/\.|\[(\d+)\]/).filter(Boolean).reduce((o, i) => pt(o) && i in o ? o[i] : r, e) : r;
 }
-function wt(e, t, r) {
+function St(e, t, r) {
   if (se(t)) {
     e[Pe(t)] = r;
     return;
@@ -206,7 +206,7 @@ function wt(e, t, r) {
       o[n[i]] = r;
       return;
     }
-    (!(n[i] in o) || vt(o[n[i]])) && (o[n[i]] = je(n[i + 1]) ? [] : {}), o = o[n[i]];
+    (!(n[i] in o) || vt(o[n[i]])) && (o[n[i]] = xe(n[i + 1]) ? [] : {}), o = o[n[i]];
   }
 }
 function Ie(e) {
@@ -223,7 +223,7 @@ function Oe(e, t, r) {
   }
   return A(e, t) ? r : t;
 }
-function St(e, t) {
+function wt(e, t) {
   let r, n;
   return function(...o) {
     const i = this;
@@ -233,7 +233,7 @@ function St(e, t) {
 function kt(e, t) {
   return z(t) && t.number ? mt(e) : e;
 }
-function we(e, t) {
+function Se(e, t) {
   let r;
   return async function(...o) {
     const i = e(...o);
@@ -242,7 +242,7 @@ function we(e, t) {
     return i !== r ? l : (r = void 0, t(l, o));
   };
 }
-function xt(e) {
+function At(e) {
   return Array.isArray(e) ? e : e ? [e] : [];
 }
 function re(e) {
@@ -252,7 +252,7 @@ function re(e) {
 function Fe(e) {
   return "_value" in e;
 }
-function At(e) {
+function jt(e) {
   return e.type === "number" || e.type === "range" ? Number.isNaN(e.valueAsNumber) ? e.value : e.valueAsNumber : e.value;
 }
 function De(e) {
@@ -271,7 +271,7 @@ function De(e) {
     const r = Array.from(t.options).find((n) => n.selected);
     return r ? re(r) : t.value;
   }
-  return At(t);
+  return jt(t);
 }
 function Te(e) {
   const t = {};
@@ -281,17 +281,17 @@ function Te(e) {
     enumerable: !1,
     configurable: !1
   }), e ? z(e) && e._$$isNormalized ? e : z(e) ? Object.keys(e).reduce((r, n) => {
-    const o = jt(e[n]);
-    return e[n] !== !1 && (r[n] = Se(o)), r;
+    const o = xt(e[n]);
+    return e[n] !== !1 && (r[n] = we(o)), r;
   }, t) : typeof e != "string" ? t : e.split("|").reduce((r, n) => {
     const o = Ct(n);
-    return o.name && (r[o.name] = Se(o.params)), r;
+    return o.name && (r[o.name] = we(o.params)), r;
   }, t) : t;
 }
-function jt(e) {
+function xt(e) {
   return e === !0 ? [] : Array.isArray(e) || z(e) ? e : [e];
 }
-function Se(e) {
+function we(e) {
   const t = (r) => typeof r == "string" && r[0] === "@" ? Et(r.slice(1)) : r;
   return Array.isArray(e) ? e.map(t) : e instanceof RegExp ? [e] : Object.keys(e).reduce((r, n) => (r[n] = t(e[n]), r), {});
 }
@@ -335,35 +335,35 @@ async function Ft(e, t) {
   if (W(r) || ie(r))
     return Rt(t, Object.assign(Object.assign({}, e), { rules: r }));
   if (_(r) || Array.isArray(r)) {
-    const u = {
+    const a = {
       field: e.label || e.name,
       name: e.name,
       label: e.label,
       form: e.formData,
       value: t
-    }, s = Array.isArray(r) ? r : [r], d = s.length, b = [];
+    }, s = Array.isArray(r) ? r : [r], d = s.length, h = [];
     for (let m = 0; m < d; m++) {
-      const O = s[m], h = await O(t, u);
-      if (!(typeof h != "string" && !Array.isArray(h) && h)) {
-        if (Array.isArray(h))
-          b.push(...h);
+      const j = s[m], b = await j(t, a);
+      if (!(typeof b != "string" && !Array.isArray(b) && b)) {
+        if (Array.isArray(b))
+          h.push(...b);
         else {
-          const M = typeof h == "string" ? h : Re(u);
-          b.push(M);
+          const M = typeof b == "string" ? b : Re(a);
+          h.push(M);
         }
         if (e.bails)
           return {
-            errors: b
+            errors: h
           };
       }
     }
     return {
-      errors: b
+      errors: h
     };
   }
   const n = Object.assign(Object.assign({}, e), { rules: Te(r) }), o = [], i = Object.keys(n.rules), l = i.length;
-  for (let u = 0; u < l; u++) {
-    const s = i[u], d = await Bt(n, t, {
+  for (let a = 0; a < l; a++) {
+    const s = i[a], d = await Bt(n, t, {
       name: s,
       params: n.rules[s]
     });
@@ -394,9 +394,9 @@ function Tt(e) {
           throw i;
         if (!(!((o = i.inner) === null || o === void 0) && o.length) && i.errors.length)
           return { errors: [{ path: i.path, errors: i.errors }] };
-        const l = i.inner.reduce((u, s) => {
+        const l = i.inner.reduce((a, s) => {
           const d = s.path || "";
-          return u[d] || (u[d] = { errors: [], path: d }), u[d].errors.push(...s.errors), u;
+          return a[d] || (a[d] = { errors: [], path: d }), a[d].errors.push(...s.errors), a;
         }, {});
         return { errors: Object.values(l) };
       }
@@ -413,7 +413,7 @@ async function Rt(e, t) {
   };
 }
 async function Bt(e, t, r) {
-  const n = pt(r.name);
+  const n = yt(r.name);
   if (!n)
     throw new Error(`No such validator '${r.name}' exists.`);
   const o = zt(r.params, e.formData), i = {
@@ -442,20 +442,20 @@ let ke = 0;
 function Ut(e, t) {
   const { value: r, initialValue: n, setInitialValue: o } = $t(e, t.modelValue, t.form);
   if (!t.form) {
-    let O = function(h) {
+    let j = function(b) {
       var C;
-      "value" in h && (r.value = h.value), "errors" in h && d(h.errors), "touched" in h && (m.touched = (C = h.touched) !== null && C !== void 0 ? C : m.touched), "initialValue" in h && o(h.initialValue);
+      "value" in b && (r.value = b.value), "errors" in b && d(b.errors), "touched" in b && (m.touched = (C = b.touched) !== null && C !== void 0 ? C : m.touched), "initialValue" in b && o(b.initialValue);
     };
-    const { errors: s, setErrors: d } = qt(), b = ke >= Number.MAX_SAFE_INTEGER ? 0 : ++ke, m = Gt(r, n, s, t.schema);
+    const { errors: s, setErrors: d } = Gt(), h = ke >= Number.MAX_SAFE_INTEGER ? 0 : ++ke, m = qt(r, n, s, t.schema);
     return {
-      id: b,
+      id: h,
       path: e,
       value: r,
       initialValue: n,
       meta: m,
-      flags: { pendingUnmount: { [b]: !1 }, pendingReset: !1 },
+      flags: { pendingUnmount: { [h]: !1 }, pendingReset: !1 },
       errors: s,
-      setState: O
+      setState: j
     };
   }
   const i = t.form.createPathState(e, {
@@ -464,10 +464,10 @@ function Ut(e, t) {
     type: t.type,
     validate: t.validate,
     schema: t.schema
-  }), l = S(() => i.errors);
-  function u(s) {
-    var d, b, m;
-    "value" in s && (r.value = s.value), "errors" in s && ((d = t.form) === null || d === void 0 || d.setFieldError(c(e), s.errors)), "touched" in s && ((b = t.form) === null || b === void 0 || b.setFieldTouched(c(e), (m = s.touched) !== null && m !== void 0 ? m : !1)), "initialValue" in s && o(s.initialValue);
+  }), l = k(() => i.errors);
+  function a(s) {
+    var d, h, m;
+    "value" in s && (r.value = s.value), "errors" in s && ((d = t.form) === null || d === void 0 || d.setFieldError(c(e), s.errors)), "touched" in s && ((h = t.form) === null || h === void 0 || h.setFieldTouched(c(e), (m = s.touched) !== null && m !== void 0 ? m : !1)), "initialValue" in s && o(s.initialValue);
   }
   return {
     id: Array.isArray(i.id) ? i.id[i.id.length - 1] : i.id,
@@ -477,7 +477,7 @@ function Ut(e, t) {
     meta: i,
     initialValue: n,
     flags: i.__flags,
-    setState: u
+    setState: a
   };
 }
 function $t(e, t, r) {
@@ -492,16 +492,16 @@ function $t(e, t, r) {
     }
     r.setFieldInitialValue(c(e), d, !0);
   }
-  const l = S(o);
+  const l = k(o);
   if (!r)
     return {
       value: H(o()),
       initialValue: l,
       setInitialValue: i
     };
-  const u = Lt(t, r, l, e);
-  return r.stageInitialValue(c(e), u, !0), {
-    value: S({
+  const a = Lt(t, r, l, e);
+  return r.stageInitialValue(c(e), a, !0), {
+    value: k({
       get() {
         return U(r.values, c(e));
       },
@@ -516,18 +516,18 @@ function $t(e, t, r) {
 function Lt(e, t, r, n) {
   return ue(e) ? c(e) : e !== void 0 ? e : U(t.values, c(n), c(r));
 }
-function Gt(e, t, r, n) {
-  const o = S(() => {
-    var l, u, s;
-    return (s = (u = (l = y(n)) === null || l === void 0 ? void 0 : l.describe) === null || u === void 0 ? void 0 : u.call(l).required) !== null && s !== void 0 ? s : !1;
+function qt(e, t, r, n) {
+  const o = k(() => {
+    var l, a, s;
+    return (s = (a = (l = g(n)) === null || l === void 0 ? void 0 : l.describe) === null || a === void 0 ? void 0 : a.call(l).required) !== null && s !== void 0 ? s : !1;
   }), i = nt({
     touched: !1,
     pending: !1,
     valid: !0,
     required: o,
     validated: !!c(r).length,
-    initialValue: S(() => c(t)),
-    dirty: S(() => !A(c(e), c(t)))
+    initialValue: k(() => c(t)),
+    dirty: k(() => !A(c(e), c(t)))
   });
   return R(r, (l) => {
     i.valid = !l.length;
@@ -536,16 +536,16 @@ function Gt(e, t, r, n) {
     flush: "sync"
   }), i;
 }
-function qt() {
+function Gt() {
   const e = H([]);
   return {
     errors: e,
     setErrors: (t) => {
-      e.value = xt(t);
+      e.value = At(t);
     }
   };
 }
-const Be = {}, K = {}, J = "vee-validate-inspector", w = {
+const Be = {}, K = {}, J = "vee-validate-inspector", O = {
   error: 12405579,
   success: 448379,
   unknown: 5522283,
@@ -556,7 +556,7 @@ const Be = {}, K = {}, J = "vee-validate-inspector", w = {
   orange: 16099682,
   gray: 12304330
 };
-let g = null, N;
+let p = null, N;
 async function Wt(e) {
   if (process.env.NODE_ENV !== "production") {
     if (!Ee)
@@ -579,34 +579,34 @@ async function Wt(e) {
             icon: "done_outline",
             tooltip: "Validate selected item",
             action: async () => {
-              if (!g) {
+              if (!p) {
                 console.error("There is not a valid selected vee-validate node or component");
                 return;
               }
-              if (g.type === "field") {
-                await g.field.validate();
+              if (p.type === "field") {
+                await p.field.validate();
                 return;
               }
-              if (g.type === "form") {
-                await g.form.validate();
+              if (p.type === "form") {
+                await p.form.validate();
                 return;
               }
-              g.type === "pathState" && await g.form.validateField(g.state.path);
+              p.type === "pathState" && await p.form.validateField(p.state.path);
             }
           },
           {
             icon: "delete_sweep",
             tooltip: "Clear validation state of the selected item",
             action: () => {
-              if (!g) {
+              if (!p) {
                 console.error("There is not a valid selected vee-validate node or component");
                 return;
               }
-              if (g.type === "field") {
-                g.field.resetField();
+              if (p.type === "field") {
+                p.field.resetField();
                 return;
               }
-              g.type === "form" && g.form.resetForm(), g.type === "pathState" && g.form.resetField(g.state.path);
+              p.type === "form" && p.form.resetForm(), p.type === "pathState" && p.form.resetField(p.state.path);
             }
           }
         ]
@@ -621,32 +621,32 @@ async function Wt(e) {
       }), r.on.getInspectorState((n) => {
         if (n.inspectorId !== J)
           return;
-        const { form: o, field: i, state: l, type: u } = Ht(n.nodeId);
-        if (r.unhighlightElement(), o && u === "form") {
-          n.state = Qt(o), g = { type: "form", form: o }, r.highlightElement(o._vm);
+        const { form: o, field: i, state: l, type: a } = Ht(n.nodeId);
+        if (r.unhighlightElement(), o && a === "form") {
+          n.state = Qt(o), p = { type: "form", form: o }, r.highlightElement(o._vm);
           return;
         }
-        if (l && u === "pathState" && o) {
-          n.state = xe(l), g = { type: "pathState", state: l, form: o };
+        if (l && a === "pathState" && o) {
+          n.state = Ae(l), p = { type: "pathState", state: l, form: o };
           return;
         }
-        if (i && u === "field") {
-          n.state = xe({
+        if (i && a === "field") {
+          n.state = Ae({
             errors: i.errors.value,
             dirty: i.meta.dirty,
             valid: i.meta.valid,
             touched: i.meta.touched,
             value: i.value.value,
             initialValue: i.meta.initialValue
-          }), g = { field: i, type: "field" }, r.highlightElement(i._vm);
+          }), p = { field: i, type: "field" }, r.highlightElement(i._vm);
           return;
         }
-        g = null, r.unhighlightElement();
+        p = null, r.unhighlightElement();
       });
     });
   }
 }
-const le = St(() => {
+const le = wt(() => {
   setTimeout(async () => {
     await ot(), N == null || N.sendInspectorState(J), N == null || N.sendInspectorTree(J);
   }, 100);
@@ -666,18 +666,18 @@ function Kt(e) {
 function Jt(e) {
   const { textColor: t, bgColor: r } = Ue(e.meta.value.valid), n = {};
   Object.values(e.getAllPathStates()).forEach((l) => {
-    wt(n, y(l.path), Yt(l, e));
+    St(n, g(l.path), Yt(l, e));
   });
-  function o(l, u = []) {
-    const s = [...u].pop();
+  function o(l, a = []) {
+    const s = [...a].pop();
     return "id" in l ? Object.assign(Object.assign({}, l), { label: s || l.label }) : z(l) ? {
-      id: `${u.join(".")}`,
+      id: `${a.join(".")}`,
       label: s || "",
-      children: Object.keys(l).map((d) => o(l[d], [...u, d]))
+      children: Object.keys(l).map((d) => o(l[d], [...a, d]))
     } : Array.isArray(l) ? {
-      id: `${u.join(".")}`,
+      id: `${a.join(".")}`,
       label: `${s}[]`,
-      children: l.map((d, b) => o(d, [...u, String(b)]))
+      children: l.map((d, h) => o(d, [...a, String(h)]))
     } : { id: "", label: "", children: [] };
   }
   const { children: i } = o(n);
@@ -693,8 +693,8 @@ function Jt(e) {
       },
       {
         label: `${e.getAllPathStates().length} fields`,
-        textColor: w.white,
-        backgroundColor: w.unknown
+        textColor: O.white,
+        backgroundColor: O.unknown
       }
     ]
   };
@@ -702,7 +702,7 @@ function Jt(e) {
 function Yt(e, t) {
   return {
     id: de(t, e),
-    label: y(e.path),
+    label: g(e.path),
     tags: ze(e.multiple, e.fieldsCount, e.type, e.valid, t)
   };
 }
@@ -723,28 +723,28 @@ function ze(e, t, r, n, o) {
     },
     o ? void 0 : {
       label: "Standalone",
-      textColor: w.black,
-      backgroundColor: w.gray
+      textColor: O.black,
+      backgroundColor: O.gray
     },
     r === "checkbox" ? {
       label: "Checkbox",
-      textColor: w.white,
-      backgroundColor: w.blue
+      textColor: O.white,
+      backgroundColor: O.blue
     } : void 0,
     r === "radio" ? {
       label: "Radio",
-      textColor: w.white,
-      backgroundColor: w.purple
+      textColor: O.white,
+      backgroundColor: O.purple
     } : void 0,
     e ? {
       label: "Multiple",
-      textColor: w.black,
-      backgroundColor: w.orange
+      textColor: O.black,
+      backgroundColor: O.orange
     } : void 0
   ].filter(Boolean);
 }
 function de(e, t) {
-  const r = t ? "path" in t ? "pathState" : "field" : "form", n = t ? "path" in t ? t == null ? void 0 : t.path : y(t == null ? void 0 : t.name) : "", o = { f: e == null ? void 0 : e.formId, ff: (t == null ? void 0 : t.id) || n, type: r };
+  const r = t ? "path" in t ? "pathState" : "field" : "form", n = t ? "path" in t ? t == null ? void 0 : t.path : g(t == null ? void 0 : t.name) : "", o = { f: e == null ? void 0 : e.formId, ff: (t == null ? void 0 : t.id) || n, type: r };
   return btoa(encodeURIComponent(JSON.stringify(o)));
 }
 function Ht(e) {
@@ -769,7 +769,7 @@ function Ht(e) {
   }
   return {};
 }
-function xe(e) {
+function Ae(e) {
   return {
     "Field state": [
       { key: "errors", value: e.errors },
@@ -834,10 +834,10 @@ function Qt(e) {
       },
       {
         key: "errors",
-        value: Ie(t.value).reduce((u, s) => {
+        value: Ie(t.value).reduce((a, s) => {
           var d;
-          const b = (d = t.value[s]) === null || d === void 0 ? void 0 : d[0];
-          return b && (u[s] = b), u;
+          const h = (d = t.value[s]) === null || d === void 0 ? void 0 : d[0];
+          return h && (a[s] = h), a;
         }, {})
       }
     ]
@@ -845,56 +845,56 @@ function Qt(e) {
 }
 function Ue(e) {
   return {
-    bgColor: e ? w.success : w.error,
-    textColor: e ? w.black : w.white
+    bgColor: e ? O.success : O.error,
+    textColor: e ? O.black : O.white
   };
 }
 function Zt(e, t, r) {
   return Ne(r == null ? void 0 : r.type) ? tr(e, t, r) : $e(e, t, r);
 }
 function $e(e, t, r) {
-  const { initialValue: n, validateOnMount: o, bails: i, type: l, checkedValue: u, label: s, validateOnValueUpdate: d, uncheckedValue: b, controlled: m, keepValueOnUnmount: O, syncVModel: h, form: C } = er(r), M = m ? Me(Ce) : void 0, f = C || M, E = S(() => bt(y(e))), j = S(() => {
-    if (y(f == null ? void 0 : f.schema))
+  const { initialValue: n, validateOnMount: o, bails: i, type: l, checkedValue: a, label: s, validateOnValueUpdate: d, uncheckedValue: h, controlled: m, keepValueOnUnmount: j, syncVModel: b, form: C } = er(r), M = m ? Me(Ce) : void 0, f = C || M, E = k(() => bt(g(e))), x = k(() => {
+    if (g(f == null ? void 0 : f.schema))
       return;
     const v = c(t);
     return ie(v) || W(v) || _(v) || Array.isArray(v) ? v : Te(v);
-  }), Le = !_(j.value) && W(y(t)), { id: Q, value: $, initialValue: Ge, meta: k, setState: Y, errors: Z, flags: X } = Ut(E, {
+  }), Le = !_(x.value) && W(g(t)), { id: Q, value: $, initialValue: qe, meta: S, setState: Y, errors: Z, flags: X } = Ut(E, {
     modelValue: n,
     form: f,
     bails: i,
     label: s,
     type: l,
-    validate: j.value ? fe : void 0,
+    validate: x.value ? fe : void 0,
     schema: Le ? t : void 0
-  }), qe = S(() => Z.value[0]);
-  h && rr({
+  }), Ge = k(() => Z.value[0]);
+  b && rr({
     value: $,
-    prop: h,
+    prop: b,
     handleChange: ve,
     shouldValidate: () => d && !X.pendingReset
   });
-  const We = (a, v = !1) => {
-    k.touched = !0, v && F();
+  const We = (u, v = !1) => {
+    S.touched = !0, v && F();
   };
-  async function ce(a) {
+  async function ce(u) {
     var v, V;
     if (f != null && f.validateSchema) {
-      const { results: p } = await f.validateSchema(a);
-      return (v = p[y(E)]) !== null && v !== void 0 ? v : { valid: !0, errors: [] };
+      const { results: y } = await f.validateSchema(u);
+      return (v = y[g(E)]) !== null && v !== void 0 ? v : { valid: !0, errors: [] };
     }
-    return j.value ? Mt($.value, j.value, {
-      name: y(E),
-      label: y(s),
+    return x.value ? Mt($.value, x.value, {
+      name: g(E),
+      label: g(s),
       values: (V = f == null ? void 0 : f.values) !== null && V !== void 0 ? V : {},
       bails: i
     }) : { valid: !0, errors: [] };
   }
-  const F = we(async () => (k.pending = !0, k.validated = !0, ce("validated-only")), (a) => (X.pendingUnmount[x.id] || (Y({ errors: a.errors }), k.pending = !1, k.valid = a.valid), a)), D = we(async () => ce("silent"), (a) => (k.valid = a.valid, a));
-  function fe(a) {
-    return (a == null ? void 0 : a.mode) === "silent" ? D() : F();
+  const F = Se(async () => (S.pending = !0, S.validated = !0, ce("validated-only")), (u) => (X.pendingUnmount[w.id] || (Y({ errors: u.errors }), S.pending = !1, S.valid = u.valid), u)), D = Se(async () => ce("silent"), (u) => (S.valid = u.valid, u));
+  function fe(u) {
+    return (u == null ? void 0 : u.mode) === "silent" ? D() : F();
   }
-  function ve(a, v = !0) {
-    const V = De(a);
+  function ve(u, v = !0) {
+    const V = De(u);
     ee(V, v);
   }
   Qe(() => {
@@ -902,46 +902,46 @@ function $e(e, t, r) {
       return F();
     (!f || !f.validateSchema) && D();
   });
-  function Ke(a) {
-    k.touched = a;
+  function Ke(u) {
+    S.touched = u;
   }
-  function me(a) {
+  function me(u) {
     var v;
-    const V = a && "value" in a ? a.value : Ge.value;
+    const V = u && "value" in u ? u.value : qe.value;
     Y({
       value: I(V),
       initialValue: I(V),
-      touched: (v = a == null ? void 0 : a.touched) !== null && v !== void 0 ? v : !1,
-      errors: (a == null ? void 0 : a.errors) || []
-    }), k.pending = !1, k.validated = !1, D();
+      touched: (v = u == null ? void 0 : u.touched) !== null && v !== void 0 ? v : !1,
+      errors: (u == null ? void 0 : u.errors) || []
+    }), S.pending = !1, S.validated = !1, D();
   }
   const be = B();
-  function ee(a, v = !0) {
-    $.value = be && h ? kt(a, be.props.modelModifiers) : a, (v ? F : D)();
+  function ee(u, v = !0) {
+    $.value = be && b ? kt(u, be.props.modelModifiers) : u, (v ? F : D)();
   }
-  function Je(a) {
-    Y({ errors: Array.isArray(a) ? a : [a] });
+  function Je(u) {
+    Y({ errors: Array.isArray(u) ? u : [u] });
   }
-  const Ye = S({
+  const Ye = k({
     get() {
       return $.value;
     },
-    set(a) {
-      ee(a, d);
+    set(u) {
+      ee(u, d);
     }
-  }), x = {
+  }), w = {
     id: Q,
     name: E,
     label: s,
     value: Ye,
-    meta: k,
+    meta: S,
     errors: Z,
-    errorMessage: qe,
+    errorMessage: Ge,
     type: l,
-    checkedValue: u,
-    uncheckedValue: b,
+    checkedValue: a,
+    uncheckedValue: h,
     bails: i,
-    keepValueOnUnmount: O,
+    keepValueOnUnmount: j,
     resetField: me,
     handleReset: () => me(),
     validate: fe,
@@ -952,50 +952,50 @@ function $e(e, t, r) {
     setErrors: Je,
     setValue: ee
   };
-  if (Ze(yt, x), ue(t) && typeof c(t) != "function" && R(t, (a, v) => {
-    A(a, v) || (k.validated ? F() : D());
+  if (Ze(gt, w), ue(t) && typeof c(t) != "function" && R(t, (u, v) => {
+    A(u, v) || (S.validated ? F() : D());
   }, {
     deep: !0
-  }), process.env.NODE_ENV !== "production" && (x._vm = B(), R(() => Object.assign(Object.assign({ errors: Z.value }, k), { value: $.value }), le, {
+  }), process.env.NODE_ENV !== "production" && (w._vm = B(), R(() => Object.assign(Object.assign({ errors: Z.value }, S), { value: $.value }), le, {
     deep: !0
-  }), f || Kt(x)), !f)
-    return x;
-  const Xe = S(() => {
-    const a = j.value;
-    return !a || _(a) || ie(a) || W(a) || Array.isArray(a) ? {} : Object.keys(a).reduce((v, V) => {
-      const p = Nt(a[V]).map((L) => L.__locatorRef).reduce((L, T) => {
+  }), f || Kt(w)), !f)
+    return w;
+  const Xe = k(() => {
+    const u = x.value;
+    return !u || _(u) || ie(u) || W(u) || Array.isArray(u) ? {} : Object.keys(u).reduce((v, V) => {
+      const y = Nt(u[V]).map((L) => L.__locatorRef).reduce((L, T) => {
         const P = U(f.values, T) || f.values[T];
         return P !== void 0 && (L[T] = P), L;
       }, {});
-      return Object.assign(v, p), v;
+      return Object.assign(v, y), v;
     }, {});
   });
-  return R(Xe, (a, v) => {
-    if (!Object.keys(a).length)
+  return R(Xe, (u, v) => {
+    if (!Object.keys(u).length)
       return;
-    !A(a, v) && (k.validated ? F() : D());
+    !A(u, v) && (S.validated ? F() : D());
   }), et(() => {
-    var a;
-    const v = (a = y(x.keepValueOnUnmount)) !== null && a !== void 0 ? a : y(f.keepValuesOnUnmount), V = y(E);
-    if (v || !f || X.pendingUnmount[x.id]) {
+    var u;
+    const v = (u = g(w.keepValueOnUnmount)) !== null && u !== void 0 ? u : g(f.keepValuesOnUnmount), V = g(E);
+    if (v || !f || X.pendingUnmount[w.id]) {
       f == null || f.removePathState(V, Q);
       return;
     }
-    X.pendingUnmount[x.id] = !0;
-    const p = f.getPathState(V);
-    if (Array.isArray(p == null ? void 0 : p.id) && (p != null && p.multiple) ? p != null && p.id.includes(x.id) : (p == null ? void 0 : p.id) === x.id) {
-      if (p != null && p.multiple && Array.isArray(p.value)) {
-        const T = p.value.findIndex((P) => A(P, y(x.checkedValue)));
+    X.pendingUnmount[w.id] = !0;
+    const y = f.getPathState(V);
+    if (Array.isArray(y == null ? void 0 : y.id) && (y != null && y.multiple) ? y != null && y.id.includes(w.id) : (y == null ? void 0 : y.id) === w.id) {
+      if (y != null && y.multiple && Array.isArray(y.value)) {
+        const T = y.value.findIndex((P) => A(P, g(w.checkedValue)));
         if (T > -1) {
-          const P = [...p.value];
+          const P = [...y.value];
           P.splice(T, 1), f.setFieldValue(V, P);
         }
-        Array.isArray(p.id) && p.id.splice(p.id.indexOf(x.id), 1);
+        Array.isArray(y.id) && y.id.splice(y.id.indexOf(w.id), 1);
       } else
-        f.unsetPathValue(y(E));
+        f.unsetPathValue(g(E));
       f.removePathState(V, Q);
     }
-  }), x;
+  }), w;
 }
 function er(e) {
   const t = () => ({
@@ -1010,36 +1010,36 @@ function er(e) {
   }), r = !!(e != null && e.syncVModel), n = typeof (e == null ? void 0 : e.syncVModel) == "string" ? e.syncVModel : (e == null ? void 0 : e.modelPropName) || "modelValue", o = r && !("initialValue" in (e || {})) ? ae(B(), n) : e == null ? void 0 : e.initialValue;
   if (!e)
     return Object.assign(Object.assign({}, t()), { initialValue: o });
-  const i = "valueProp" in e ? e.valueProp : e.checkedValue, l = "standalone" in e ? !e.standalone : e.controlled, u = (e == null ? void 0 : e.modelPropName) || (e == null ? void 0 : e.syncVModel) || !1;
+  const i = "valueProp" in e ? e.valueProp : e.checkedValue, l = "standalone" in e ? !e.standalone : e.controlled, a = (e == null ? void 0 : e.modelPropName) || (e == null ? void 0 : e.syncVModel) || !1;
   return Object.assign(Object.assign(Object.assign({}, t()), e || {}), {
     initialValue: o,
     controlled: l ?? !0,
     checkedValue: i,
-    syncVModel: u
+    syncVModel: a
   });
 }
 function tr(e, t, r) {
   const n = r != null && r.standalone ? void 0 : Me(Ce), o = r == null ? void 0 : r.checkedValue, i = r == null ? void 0 : r.uncheckedValue;
-  function l(u) {
-    const s = u.handleChange, d = S(() => {
-      const m = y(u.value), O = y(o);
-      return Array.isArray(m) ? m.findIndex((h) => A(h, O)) >= 0 : A(O, m);
+  function l(a) {
+    const s = a.handleChange, d = k(() => {
+      const m = g(a.value), j = g(o);
+      return Array.isArray(m) ? m.findIndex((b) => A(b, j)) >= 0 : A(j, m);
     });
-    function b(m, O = !0) {
-      var h, C;
-      if (d.value === ((h = m == null ? void 0 : m.target) === null || h === void 0 ? void 0 : h.checked)) {
-        O && u.validate();
+    function h(m, j = !0) {
+      var b, C;
+      if (d.value === ((b = m == null ? void 0 : m.target) === null || b === void 0 ? void 0 : b.checked)) {
+        j && a.validate();
         return;
       }
-      const M = y(e), f = n == null ? void 0 : n.getPathState(M), E = De(m);
-      let j = (C = y(o)) !== null && C !== void 0 ? C : E;
-      n && (f != null && f.multiple) && f.type === "checkbox" ? j = Oe(U(n.values, M) || [], j, void 0) : (r == null ? void 0 : r.type) === "checkbox" && (j = Oe(y(u.value), j, y(i))), s(j, O);
+      const M = g(e), f = n == null ? void 0 : n.getPathState(M), E = De(m);
+      let x = (C = g(o)) !== null && C !== void 0 ? C : E;
+      n && (f != null && f.multiple) && f.type === "checkbox" ? x = Oe(U(n.values, M) || [], x, void 0) : (r == null ? void 0 : r.type) === "checkbox" && (x = Oe(g(a.value), x, g(i))), s(x, j);
     }
-    return Object.assign(Object.assign({}, u), {
+    return Object.assign(Object.assign({}, a), {
       checked: d,
       checkedValue: o,
       uncheckedValue: i,
-      handleChange: b
+      handleChange: h
     });
   }
   return l($e(e, t, r));
@@ -1051,12 +1051,12 @@ function rr({ prop: e, value: t, handleChange: r, shouldValidate: n }) {
     return;
   }
   const i = typeof e == "string" ? e : "modelValue", l = `update:${i}`;
-  i in o.props && (R(t, (u) => {
-    A(u, ae(o, i)) || o.emit(l, u);
-  }), R(() => ae(o, i), (u) => {
-    if (u === ye && t.value === void 0)
+  i in o.props && (R(t, (a) => {
+    A(a, ae(o, i)) || o.emit(l, a);
+  }), R(() => ae(o, i), (a) => {
+    if (a === ge && t.value === void 0)
       return;
-    const s = u === ye ? void 0 : u;
+    const s = a === ge ? void 0 : a;
     A(s, t.value) || r(s, n());
   }));
 }
@@ -1064,62 +1064,63 @@ function ae(e, t) {
   if (e)
     return e.props[t];
 }
-const nr = { class: "relative" }, or = ["type", "disabled", "placeholder"], ir = { key: 0 }, lr = {
+const nr = { class: "relative" }, or = ["type"], ir = { key: 0 }, lr = {
   key: 1,
   class: "mb-2 mt-1 text-xs text-red-600"
 }, ar = /* @__PURE__ */ ne({
   __name: "PMGInput",
   props: {
-    name: {},
-    label: {},
-    modelValue: { default: "" },
-    type: { default: "text" },
-    disabled: { type: Boolean, default: !1 },
-    placeholder: { default: " " }
+    name: {
+      type: String,
+      required: !0
+      // Ensure name is always provided
+    },
+    label: {
+      type: String,
+      required: !1
+    },
+    modelValue: {
+      type: String,
+      required: !1
+    },
+    type: String
   },
   setup(e) {
-    const t = e, r = it(), n = S(() => "required" in r), o = H(null), i = S(
-      () => t.placeholder && t.placeholder.trim() !== ""
-    ), { value: l, handleBlur: u, meta: s, errorMessage: d } = Zt(
+    const t = e, r = it(), n = k(() => "required" in r), o = H(null), { value: i, handleBlur: l, meta: a, errorMessage: s } = Zt(
       () => t.name,
       void 0,
       {
         syncVModel: !0,
-        validateOnValueUpdate: !1,
-        validateOnMount: !1
+        validateOnValueUpdate: !1
       }
     );
-    return (b, m) => (q(), G("div", nr, [
+    return (d, h) => (G(), q("div", nr, [
       lt(at("input", ut({
         ref_key: "inputRef",
         ref: o,
-        onBlur: m[0] || (m[0] = //@ts-ignore
-        (...O) => c(u) && c(u)(...O)),
-        "onUpdate:modelValue": m[1] || (m[1] = (O) => ue(l) ? l.value = O : null),
-        type: b.type,
-        disabled: b.disabled,
-        placeholder: i.value ? b.placeholder : " "
+        onBlur: h[0] || (h[0] = //@ts-ignore
+        (...m) => c(l) && c(l)(...m)),
+        "onUpdate:modelValue": h[1] || (h[1] = (m) => ue(i) ? i.value = m : null),
+        type: e.type
       }, c(r), {
         class: [
           "peer h-10 w-full rounded-[6px] border bg-transparent px-3 py-2.5 font-sans text-sm font-normal outline-0 transition-all placeholder-shown:border focus:border-2 focus:outline-0 disabled:opacity-50",
-          c(s).valid === !1 && c(s).touched ? "!placeholder-shown:border-red-500 border-red-500 border-t-transparent text-red-500 placeholder-shown:border-t-red-500 focus:border-red-500 focus:border-t-transparent" : "!placeholder-shown:border-gray-700 border-gray-700 border-t-transparent text-gray-700 placeholder-shown:border-t-gray-700 focus:border-gray-700 focus:border-t-transparent"
+          c(a).valid === !1 && c(a).touched ? "!placeholder-shown:border-red-500 border-red-500 border-t-transparent text-red-500 placeholder-shown:border-t-red-500 focus:border-red-500 focus:border-t-transparent" : "!placeholder-shown:border-gray-700 border-gray-700 border-t-transparent text-gray-700 placeholder-shown:border-t-gray-700 focus:border-gray-700 focus:border-t-transparent"
         ]
       }), null, 16, or), [
-        [st, c(l)]
+        [st, c(i)]
       ]),
-      b.label ? (q(), G("label", {
+      e.label ? (G(), q("label", {
         key: 0,
-        class: Ae(["before:content[' '] after:content[' '] pointer-events-none absolute left-0 flex h-full w-full select-none !overflow-visible truncate font-normal leading-tight transition-all before:pointer-events-none before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-l before:border-t before:transition-all after:pointer-events-none after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-r after:border-t after:transition-all peer-disabled:opacity-50", [
-          // Position and size based on placeholder or focus state
-          i.value || c(l) ? "-top-[6.5px] text-[11px] before:mt-[6.5px] after:mt-[6.5px]" : "peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:top-2 peer-focus:text-[11px] peer-focus:leading-tight peer-focus:-top-[6.5px] peer-focus:before:mt-[6.5px] peer-focus:after:mt-[6.5px] -top-[6.5px] text-[11px] before:mt-[6.5px] after:mt-[6.5px]",
-          // Colors based on validation state
-          c(s).valid === !1 && c(s).touched ? "text-red-500 before:border-red-500 after:border-red-500 peer-placeholder-shown:text-red-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-red-500 peer-focus:before:border-t-2 peer-focus:before:!border-red-500 peer-focus:after:border-t-2 peer-focus:after:!border-red-500" : "text-gray-700 before:border-gray-700 after:border-gray-700 peer-placeholder-shown:text-gray-700 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-gray-700 peer-focus:before:border-t-2 peer-focus:before:!border-gray-700 peer-focus:after:border-t-2 peer-focus:after:!border-gray-700"
-        ]])
+        class: je([
+          "before:content[' '] after:content[' '] pointer-events-none absolute -top-[6.5px] left-0 flex h-full w-full select-none !overflow-visible truncate text-[11px] font-normal leading-tight transition-all before:pointer-events-none before:mr-1 before:mt-[6.5px] before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-l before:border-t before:transition-all after:pointer-events-none after:ml-1 after:mt-[6.5px] after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-r after:border-t after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-focus:text-[11px] peer-focus:leading-tight peer-disabled:opacity-50",
+          c(a).valid === !1 && c(a).touched ? "text-red-500 before:border-red-500 after:border-red-500  peer-placeholder-shown:text-red-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-red-500 peer-focus:before:border-t-2 peer-focus:before:!border-red-500 peer-focus:after:border-t-2 peer-focus:after:!border-red-500" : "text-gray-700 before:border-gray-700 after:border-gray-700  peer-placeholder-shown:text-gray-700 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-gray-700 peer-focus:before:border-t-2 peer-focus:before:!border-gray-700 peer-focus:after:border-t-2 peer-focus:after:!border-gray-700"
+        ])
       }, [
-        dt(he(b.label) + " ", 1),
-        n.value ? (q(), G("span", ir, "  *")) : te("", !0)
+        dt(he(e.label) + " ", 1),
+        n.value ? (G(), q("span", ir, "  *")) : te("", !0)
       ], 2)) : te("", !0),
-      c(s).touched && c(s).valid === !1 && c(d) ? (q(), G("div", lr, he(c(d)), 1)) : te("", !0)
+      c(a).touched && c(a).valid === !1 && c(s) ? (G(), q("div", lr, he(c(s)), 1)) : te("", !0)
     ]));
   }
 }), sr = {
