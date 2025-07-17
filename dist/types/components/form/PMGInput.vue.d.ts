@@ -1,71 +1,16 @@
-declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
-    modelValue: (StringConstructor | NumberConstructor)[];
-    name: {
-        type: StringConstructor;
-        required: true;
-    };
-    label: {
-        type: StringConstructor;
-        required: false;
-    };
-    type: {
-        type: StringConstructor;
-        default: string;
-    };
-    disabled: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    placeholder: {
-        type: StringConstructor;
-        required: false;
-    };
-    errorMessage: {
-        type: StringConstructor;
-        required: false;
-    };
-    meta: {
-        type: ObjectConstructor;
-        required: false;
-    };
-}>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
-    "update:modelValue": (...args: any[]) => void;
-}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
-    modelValue: (StringConstructor | NumberConstructor)[];
-    name: {
-        type: StringConstructor;
-        required: true;
-    };
-    label: {
-        type: StringConstructor;
-        required: false;
-    };
-    type: {
-        type: StringConstructor;
-        default: string;
-    };
-    disabled: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    placeholder: {
-        type: StringConstructor;
-        required: false;
-    };
-    errorMessage: {
-        type: StringConstructor;
-        required: false;
-    };
-    meta: {
-        type: ObjectConstructor;
-        required: false;
-    };
-}>> & Readonly<{
-    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-}>, {
+interface Props {
+    name: string;
+    label?: string;
+    modelValue?: string;
+    type?: string;
+    disabled?: boolean;
+    placeholder?: string;
+}
+declare const _default: import('vue').DefineComponent<Props, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<Props> & Readonly<{}>, {
     disabled: boolean;
     type: string;
-}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {
+    placeholder: string;
+}, {}, {}, {}, string, import('vue').ComponentProvideOptions, false, {
     inputRef: HTMLInputElement;
 }, HTMLDivElement>;
 export default _default;
