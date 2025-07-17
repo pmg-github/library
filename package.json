@@ -28,9 +28,11 @@
     "storybook": "storybook dev -p 6006"
   },
   "dependencies": {
-    "vee-validate": "^4.15.1",
     "vite-plugin-dts": "^4.5.4",
-    "vue": "^3.5.13",
+    "vue": "^3.5.13"
+  },
+  "peerDependencies": {
+    "vee-validate": "^4.15.1",
     "yup": "^1.6.1"
   },
   "devDependencies": {
