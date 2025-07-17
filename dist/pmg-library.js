@@ -1072,7 +1072,7 @@ const nr = { class: "relative" }, or = ["type", "disabled", "placeholder"], ir =
   props: {
     name: {},
     label: {},
-    modelValue: {},
+    modelValue: { default: "" },
     type: { default: "text" },
     disabled: { type: Boolean, default: !1 },
     placeholder: { default: " " }
@@ -1081,18 +1081,20 @@ const nr = { class: "relative" }, or = ["type", "disabled", "placeholder"], ir =
     const t = e, r = it(), n = S(() => "required" in r), o = H(null), i = S(
       () => t.placeholder && t.placeholder.trim() !== ""
     ), { value: l, handleBlur: u, meta: s, errorMessage: d } = Zt(
-      t.name,
+      () => t.name,
       void 0,
       {
         syncVModel: !0,
-        validateOnValueUpdate: !0
+        validateOnValueUpdate: !1,
+        validateOnMount: !1
       }
     );
     return (b, m) => (q(), G("div", nr, [
       lt(at("input", ut({
         ref_key: "inputRef",
         ref: o,
-        onBlur: m[0] || (m[0] = (O) => c(u)(O, !0)),
+        onBlur: m[0] || (m[0] = //@ts-ignore
+        (...O) => c(u) && c(u)(...O)),
         "onUpdate:modelValue": m[1] || (m[1] = (O) => ue(l) ? l.value = O : null),
         type: b.type,
         disabled: b.disabled,

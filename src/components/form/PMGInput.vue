@@ -14,6 +14,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   type: "text",
   disabled: false,
+  modelValue: "",
   placeholder: " ",
 });
 
@@ -28,11 +29,12 @@ const hasPlaceholder = computed(
 
 // Using vee-validate with syncVModel handles the update:modelValue emission
 const { value, handleBlur, meta, errorMessage } = useField(
-  props.name,
+  () => props.name,
   undefined,
   {
     syncVModel: true,
-    validateOnValueUpdate: true,
+    validateOnValueUpdate: false,
+    validateOnMount: false,
   }
 );
 </script>
@@ -41,7 +43,7 @@ const { value, handleBlur, meta, errorMessage } = useField(
     <!-- Input Field -->
     <input
       ref="inputRef"
-      @blur="handleBlur($event, true)"
+      @blur="handleBlur"
       v-model="value"
       :type="type"
       :disabled="disabled"
