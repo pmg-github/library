@@ -35,7 +35,12 @@ var nuxt_default = (0, import_kit.defineNuxtModule)({
   defaults: {
     prefix: ""
   },
-  setup(_options) {
+  setup(_options, nuxt) {
+    nuxt.options.build = nuxt.options.build || {};
+    nuxt.options.build.transpile = nuxt.options.build.transpile || [];
+    if (!nuxt.options.build.transpile.includes("vee-validate")) {
+      nuxt.options.build.transpile.push("vee-validate");
+    }
     (0, import_kit.addComponent)({
       name: "PMGButton",
       export: "PMGButton",

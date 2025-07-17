@@ -15,7 +15,14 @@ export default defineNuxtModule<ModuleOptions>({
   defaults: {
     prefix: "",
   },
-  setup(_options: ModuleOptions) {
+  setup(_options: ModuleOptions, nuxt: any) {
+    // Ensure vee-validate is transpiled
+    nuxt.options.build = nuxt.options.build || {};
+    nuxt.options.build.transpile = nuxt.options.build.transpile || [];
+    if (!nuxt.options.build.transpile.includes("vee-validate")) {
+      nuxt.options.build.transpile.push("vee-validate");
+    }
+
     addComponent({
       name: "PMGButton",
       export: "PMGButton",

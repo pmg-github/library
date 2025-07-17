@@ -62,7 +62,7 @@ const q = ["disabled"], z = /* @__PURE__ */ b({
       void 0,
       {
         syncVModel: !0,
-        validateOnValueUpdate: !1
+        validateOnValueUpdate: !0
       }
     );
     return (N, d) => (n(), a("div", $, [

@@ -54,7 +54,9 @@
     "tailwindcss": "^4.1.10",
     "tsup": "^8.5.0",
     "typescript": "~5.8.3",
+    "vee-validate": "^4.15.1",
     "vite": "^6.3.5",
-    "vue-tsc": "^2.2.8"
+    "vue-tsc": "^2.2.8",
+    "yup": "^1.6.1"
   }
 }

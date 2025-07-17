@@ -5,7 +5,7 @@ export default defineConfig({
   format: ["esm", "cjs"],
   dts: true,
   outDir: "dist",
-  external: ["@nuxt/kit", "@nuxt/schema", "vue"],
+  external: ["@nuxt/kit", "@nuxt/schema", "vue", "vee-validate"],
   clean: false, // Don't clean since vite build runs first
   shims: true, // Add Node.js shims for CJS
   cjsInterop: true,

@@ -28,7 +28,7 @@ const { value, handleBlur, meta, errorMessage } = useField(
   undefined,
   {
     syncVModel: true,
-    validateOnValueUpdate: false,
+    validateOnValueUpdate: true,
   }
 );
 </script>
