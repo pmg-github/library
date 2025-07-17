@@ -19,7 +19,7 @@
     "declarationDir": "./dist/types",
     "emitDeclarationOnly": false
   },
-  "include": ["src/**/*", "app.config.ts", "vite.config.ts"],
+  "include": ["src/**/*"],
   "exclude": [
     "**/*.stories.ts",
     "**/*.stories.d.ts",

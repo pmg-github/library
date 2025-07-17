@@ -1,6 +1,6 @@
 import PMGInput from "./PMGInput.vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
-import { useForm } from "vee-validate";
+import { Form, useForm } from "vee-validate";
 import * as yup from "yup";
 
 const meta: Meta<typeof PMGInput> = {
@@ -15,53 +15,26 @@ const meta: Meta<typeof PMGInput> = {
       control: "select",
       options: ["text", "password", "email", "number", "tel", "url"],
     },
-    disabled: { control: "boolean" },
-    placeholder: { control: "text" },
   },
   args: {
     name: "username",
     label: "Username",
     modelValue: "",
     type: "text",
-    disabled: false,
-    placeholder: "Enter your username",
   },
 };
 
 export default meta;
 type Story = StoryObj<typeof PMGInput>;
 
-export const Default: Story = {
-  args: {
-    name: "username",
-    label: "Username",
-    type: "text",
-    disabled: false,
-    placeholder: "Enter your username",
-  },
-  render: (args) => ({
-    components: { PMGInput },
-    setup() {
-      const { handleSubmit } = useForm();
-      return { args, handleSubmit };
-    },
-    template: `
-      <form @submit.prevent="handleSubmit(() => {})">
-        <PMGInput v-bind="args" />
-      </form>
-    `,
-  }),
-};
-
 export const WithValidation: Story = {
   args: {
     name: "email",
     label: "Email Address",
     type: "email",
-    placeholder: "Enter your email",
   },
   render: (args) => ({
-    components: { PMGInput },
+    components: { PMGInput, Form },
     setup() {
       const schema = yup.object({
         email: yup
@@ -70,19 +43,19 @@ export const WithValidation: Story = {
           .required("Email is required"),
       });
 
-      const { handleSubmit } = useForm({
-        validationSchema: schema,
-      });
+      const onSubmit = (values: any) => {
+        console.log("Form submitted:", values);
+      };
 
-      return { args, handleSubmit };
+      return { args, schema, onSubmit };
     },
     template: `
-      <form @submit.prevent="handleSubmit(() => {})">
+      <Form :validation-schema="schema" @submit="onSubmit">
         <PMGInput v-bind="args" required />
         <button type="submit" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
           Submit
         </button>
-      </form>
+      </Form>
     `,
   }),
 };
@@ -92,10 +65,9 @@ export const Password: Story = {
     name: "password",
     label: "Password",
     type: "password",
-    placeholder: "Enter your password",
   },
   render: (args) => ({
-    components: { PMGInput },
+    components: { PMGInput, Form },
     setup() {
       const schema = yup.object({
         password: yup
@@ -104,16 +76,19 @@ export const Password: Story = {
           .required("Password is required"),
       });
 
-      const { handleSubmit } = useForm({
-        validationSchema: schema,
-      });
+      const onSubmit = (values: any) => {
+        console.log("Form submitted:", values);
+      };
 
-      return { args, handleSubmit };
+      return { args, schema, onSubmit };
     },
     template: `
-      <form @submit.prevent="handleSubmit(() => {})">
+      <Form :validation-schema="schema" @submit="onSubmit">
         <PMGInput v-bind="args" required />
-      </form>
+        <button type="submit" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
+          Submit
+        </button>
+      </Form>
     `,
   }),
 };
@@ -124,26 +99,18 @@ export const Disabled: Story = {
     label: "Email",
     modelValue: "user@example.com",
     type: "email",
-    disabled: true,
-    placeholder: "Email is disabled",
   },
   render: (args) => ({
     components: { PMGInput },
-    setup() {
-      const { handleSubmit } = useForm();
-      return { args, handleSubmit };
-    },
     template: `
-      <form @submit.prevent="handleSubmit(() => {})">
-        <PMGInput v-bind="args" />
-      </form>
+      <PMGInput v-bind="args" disabled />
     `,
   }),
 };
 
 export const FormExample: Story = {
   render: () => ({
-    components: { PMGInput },
+    components: { PMGInput, Form },
     setup() {
       const schema = yup.object({
         firstName: yup.string().required("First name is required"),
@@ -173,7 +140,7 @@ export const FormExample: Story = {
       return { onSubmit, values };
     },
     template: `
-      <form @submit.prevent="onSubmit" class="space-y-4 max-w-md">
+      <Form :validation-schema="schema" @submit="onSubmit" class="space-y-4 max-w-md">
         <PMGInput 
           name="firstName" 
           label="First Name" 
@@ -219,7 +186,7 @@ export const FormExample: Story = {
           <h3 class="font-semibold mb-2">Form Values:</h3>
           <pre class="text-sm">{{ JSON.stringify(values, null, 2) }}</pre>
         </div>
-      </form>
+      </Form>
     `,
   }),
 };
@@ -229,21 +196,27 @@ export const WithPlaceholder: Story = {
     name: "email",
     label: "Email Address",
     type: "email",
-    placeholder: "john.doe@example.com",
   },
   render: (args) => ({
-    components: { PMGInput },
+    components: { PMGInput, Form },
     setup() {
-      const { handleSubmit } = useForm();
-      return { args, handleSubmit };
+      const schema = yup.object({
+        email: yup.string().email("Invalid email format"),
+      });
+
+      const onSubmit = (values: any) => {
+        console.log("Form submitted:", values);
+      };
+
+      return { args, schema, onSubmit };
     },
     template: `
-      <form @submit.prevent="handleSubmit(() => {})">
-        <PMGInput v-bind="args" />
+      <Form :validation-schema="schema" @submit="onSubmit">
+        <PMGInput v-bind="args" placeholder="Enter your email address" />
         <p class="mt-2 text-sm text-gray-600">
           Notice how the label stays at the top when there's a meaningful placeholder
         </p>
-      </form>
+      </Form>
     `,
   }),
 };
@@ -253,21 +226,27 @@ export const WithoutPlaceholder: Story = {
     name: "username",
     label: "Username",
     type: "text",
-    placeholder: "",
   },
   render: (args) => ({
-    components: { PMGInput },
+    components: { PMGInput, Form },
     setup() {
-      const { handleSubmit } = useForm();
-      return { args, handleSubmit };
+      const schema = yup.object({
+        username: yup.string(),
+      });
+
+      const onSubmit = (values: any) => {
+        console.log("Form submitted:", values);
+      };
+
+      return { args, schema, onSubmit };
     },
     template: `
-      <form @submit.prevent="handleSubmit(() => {})">
+      <Form :validation-schema="schema" @submit="onSubmit">
         <PMGInput v-bind="args" />
         <p class="mt-2 text-sm text-gray-600">
           Without a placeholder, the label animates from the center
         </p>
-      </form>
+      </Form>
     `,
   }),
 };
