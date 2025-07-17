@@ -32,7 +32,7 @@ const { value, handleBlur, meta, errorMessage } = useField(
   undefined,
   {
     syncVModel: true,
-    validateOnValueUpdate: false,
+    validateOnValueUpdate: true,
   }
 );
 </script>
@@ -63,7 +63,7 @@ const { value, handleBlur, meta, errorMessage } = useField(
         // Position and size based on placeholder or focus state
         hasPlaceholder || value
           ? '-top-[6.5px] text-[11px] before:mt-[6.5px] after:mt-[6.5px]'
-          : 'peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:-top-[6.5px] peer-focus:before:mt-[6.5px] peer-focus:after:mt-[6.5px] -top-[6.5px] text-[11px] before:mt-[6.5px] after:mt-[6.5px]',
+          : 'peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:top-2 peer-focus:text-[11px] peer-focus:leading-tight peer-focus:-top-[6.5px] peer-focus:before:mt-[6.5px] peer-focus:after:mt-[6.5px] -top-[6.5px] text-[11px] before:mt-[6.5px] after:mt-[6.5px]',
         // Colors based on validation state
         meta.valid === false && meta.touched
           ? 'text-red-500 before:border-red-500 after:border-red-500 peer-placeholder-shown:text-red-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-red-500 peer-focus:before:border-t-2 peer-focus:before:!border-red-500 peer-focus:after:border-t-2 peer-focus:after:!border-red-500'

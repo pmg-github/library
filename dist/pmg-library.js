@@ -1085,7 +1085,7 @@ const nr = { class: "relative" }, or = ["type", "disabled", "placeholder"], ir =
       void 0,
       {
         syncVModel: !0,
-        validateOnValueUpdate: !1
+        validateOnValueUpdate: !0
       }
     );
     return (b, m) => (q(), G("div", nr, [
@@ -1109,7 +1109,7 @@ const nr = { class: "relative" }, or = ["type", "disabled", "placeholder"], ir =
         key: 0,
         class: Ae(["before:content[' '] after:content[' '] pointer-events-none absolute left-0 flex h-full w-full select-none !overflow-visible truncate font-normal leading-tight transition-all before:pointer-events-none before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-l before:border-t before:transition-all after:pointer-events-none after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-r after:border-t after:transition-all peer-disabled:opacity-50", [
           // Position and size based on placeholder or focus state
-          i.value || c(l) ? "-top-[6.5px] text-[11px] before:mt-[6.5px] after:mt-[6.5px]" : "peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-focus:text-[11px] peer-focus:leading-tight peer-focus:-top-[6.5px] peer-focus:before:mt-[6.5px] peer-focus:after:mt-[6.5px] -top-[6.5px] text-[11px] before:mt-[6.5px] after:mt-[6.5px]",
+          i.value || c(l) ? "-top-[6.5px] text-[11px] before:mt-[6.5px] after:mt-[6.5px]" : "peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:top-2 peer-focus:text-[11px] peer-focus:leading-tight peer-focus:-top-[6.5px] peer-focus:before:mt-[6.5px] peer-focus:after:mt-[6.5px] -top-[6.5px] text-[11px] before:mt-[6.5px] after:mt-[6.5px]",
           // Colors based on validation state
           c(s).valid === !1 && c(s).touched ? "text-red-500 before:border-red-500 after:border-red-500 peer-placeholder-shown:text-red-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-red-500 peer-focus:before:border-t-2 peer-focus:before:!border-red-500 peer-focus:after:border-t-2 peer-focus:after:!border-red-500" : "text-gray-700 before:border-gray-700 after:border-gray-700 peer-placeholder-shown:text-gray-700 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-gray-700 peer-focus:before:border-t-2 peer-focus:before:!border-gray-700 peer-focus:after:border-t-2 peer-focus:after:!border-gray-700"
         ]])
