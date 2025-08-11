@@ -5,7 +5,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     };
     label: {
         type: StringConstructor;
-        required: false;
+        required: true;
     };
     modelValue: {
         type: StringConstructor;
@@ -19,7 +19,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     };
     label: {
         type: StringConstructor;
-        required: false;
+        required: true;
     };
     modelValue: {
         type: StringConstructor;
