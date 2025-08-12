@@ -16,7 +16,20 @@ export interface TableRow {
     _disabled?: boolean;
 }
 export type SortDirection = "asc" | "desc";
-declare function __VLS_template(): any;
+declare function __VLS_template(): {
+    attrs: Partial<{}>;
+    slots: Partial<Record<`cell-${string}`, (_: {
+        value: any;
+        row: TableRow;
+        index: number;
+        column: TableColumn;
+    }) => any>> & {
+        default?(_: {}): any;
+        empty?(_: {}): any;
+    };
+    refs: {};
+    rootEl: HTMLDivElement;
+};
 type __VLS_TemplateResult = ReturnType<typeof __VLS_template>;
 declare const __VLS_component: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     columns: {
@@ -208,7 +221,7 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     responsive: boolean;
     emptyMessage: string;
     maxHeight: string;
-}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;
 declare const _default: __VLS_WithTemplateSlots<typeof __VLS_component, __VLS_TemplateResult["slots"]>;
 export default _default;
 type __VLS_WithTemplateSlots<T, S> = T & {

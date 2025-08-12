@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, useSlots, ref, watch, provide } from "vue";
+import type { Slots } from "vue";
 
 export interface TableColumn {
   key: string;
@@ -116,7 +117,7 @@ const emit = defineEmits<{
   "update:sortDirection": [direction: SortDirection];
 }>();
 
-const slots = useSlots();
+const slots = useSlots() as Slots;
 
 // Internal state for selection management
 const internalSelected = ref<string[]>([...props.selected]);
@@ -146,7 +147,8 @@ watch(
 );
 
 const tableClasses = computed(() => [
-  "w-full border-collapse text-sm",
+  // Use border-separate for reliable sticky behavior on table cells
+  "w-full border-separate border-spacing-0 text-sm",
   props.bordered ? " overflow-hidden shadow" : "border-b border-pmg-200",
 ]);
 
@@ -154,13 +156,10 @@ const containerClasses = computed(() => [
   props.responsive ? "overflow-x-auto" : "",
   props.maxHeight ? "overflow-y-auto" : "",
   "relative",
-  props.bordered ? " border border-pmg-200 bg-white shadow" : "",
+  props.bordered ? "border border-pmg-200 bg-white shadow" : "",
 ]);
 
-const headerClasses = computed(() => [
-  "bg-pmg-50 border-b border-pmg-200",
-  props.stickyHeader ? "sticky top-0 z-10 shadow-sm" : "",
-]);
+const headerClasses = computed(() => ["bg-pmg-50 border-b border-pmg-200"]);
 
 // Standard padding for all cells
 const cellPadding = "px-6 py-4";
@@ -302,8 +301,16 @@ const getColumnClasses = (column: TableColumn, index: number) => {
   if (props.stickyFirstColumn && index === 0) {
     classes.push("sticky left-0 z-20 bg-pmg-50 shadow-lg");
   }
-  if (props.stickyLastColumn && index === props.columns.length - 1) {
+  const lastIndex = props.selectable
+    ? props.columns.length
+    : props.columns.length - 1;
+  if (props.stickyLastColumn && index === lastIndex) {
     classes.push("sticky right-0 z-20 bg-pmg-50 shadow-lg");
+  }
+
+  // Sticky header (apply to each th instead of thead for better support)
+  if (props.stickyHeader) {
+    classes.push("sticky top-0 z-30 bg-pmg-50");
   }
 
   return classes;
@@ -333,7 +340,10 @@ const getCellClasses = (
       classes.push("bg-white");
     }
   }
-  if (props.stickyLastColumn && index === props.columns.length - 1) {
+  const lastIndexCell = props.selectable
+    ? props.columns.length
+    : props.columns.length - 1;
+  if (props.stickyLastColumn && index === lastIndexCell) {
     classes.push("sticky right-0 z-10 shadow-lg");
     // Keep sticky cell background in sync with row state
     if (isRowSelected(_row, rowIndex)) {

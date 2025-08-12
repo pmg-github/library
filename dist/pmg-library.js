@@ -1,4 +1,4 @@
-import { defineComponent as S, createElementBlock as i, openBlock as d, normalizeClass as y, renderSlot as C, useAttrs as Y, computed as f, ref as T, withDirectives as J, createCommentVNode as w, createElementVNode as h, mergeProps as Q, unref as p, isRef as X, vModelDynamic as Z, createTextVNode as I, toDisplayString as z, useSlots as ee, watch as D, provide as te, normalizeStyle as F, Fragment as R, renderList as _, createStaticVNode as re, withModifiers as se, inject as P } from "vue";
+import { defineComponent as S, createElementBlock as i, openBlock as d, normalizeClass as y, renderSlot as C, useAttrs as Y, computed as f, ref as P, withDirectives as J, createCommentVNode as x, createElementVNode as h, mergeProps as Q, unref as p, isRef as X, vModelDynamic as Z, createTextVNode as I, toDisplayString as z, useSlots as ee, watch as R, provide as te, normalizeStyle as L, Fragment as _, renderList as F, createStaticVNode as re, withModifiers as se, inject as G } from "vue";
 import { useField as le } from "vee-validate";
 const oe = ["disabled"], ae = /* @__PURE__ */ S({
   __name: "PMGButton",
@@ -57,7 +57,7 @@ const oe = ["disabled"], ae = /* @__PURE__ */ S({
     type: String
   },
   setup(r) {
-    const l = r, e = Y(), c = f(() => "required" in e), m = T(null), { value: a, handleBlur: u, meta: n, errorMessage: v } = le(
+    const l = r, e = Y(), c = f(() => "required" in e), m = P(null), { value: a, handleBlur: u, meta: n, errorMessage: v } = le(
       () => l.name,
       void 0,
       {
@@ -65,13 +65,13 @@ const oe = ["disabled"], ae = /* @__PURE__ */ S({
         validateOnValueUpdate: !0
       }
     );
-    return (B, x) => (d(), i("div", ne, [
+    return (B, w) => (d(), i("div", ne, [
       J(h("input", Q({
         ref_key: "inputRef",
         ref: m,
-        onBlur: x[0] || (x[0] = //@ts-ignore
+        onBlur: w[0] || (w[0] = //@ts-ignore
         (...k) => p(u) && p(u)(...k)),
-        "onUpdate:modelValue": x[1] || (x[1] = (k) => X(a) ? a.value = k : null),
+        "onUpdate:modelValue": w[1] || (w[1] = (k) => X(a) ? a.value = k : null),
         type: r.type
       }, p(e), {
         class: ["peer h-10 w-full rounded-[6px] border bg-transparent px-3 py-2.5 font-sans text-sm font-normal outline-0 transition-all focus:border-2 focus:outline-0 disabled:opacity-50", [
@@ -89,9 +89,9 @@ const oe = ["disabled"], ae = /* @__PURE__ */ S({
         ]])
       }, [
         I(z(r.label) + " ", 1),
-        c.value ? (d(), i("span", de, "  *")) : w("", !0)
-      ], 2)) : w("", !0),
-      p(n).touched && p(n).valid === !1 && p(v) ? (d(), i("div", ce, z(p(v)), 1)) : w("", !0)
+        c.value ? (d(), i("span", de, "  *")) : x("", !0)
+      ], 2)) : x("", !0),
+      p(n).touched && p(n).valid === !1 && p(v) ? (d(), i("div", ce, z(p(v)), 1)) : x("", !0)
     ]));
   }
 }), ge = ["checked", "indeterminate"], be = ["onClick"], pe = { class: "flex items-center justify-between" }, fe = { class: "font-medium" }, he = {
@@ -115,7 +115,7 @@ const oe = ["disabled"], ae = /* @__PURE__ */ S({
   viewBox: "0 0 16 16",
   fill: "currentColor",
   class: "text-pmg-600"
-}, ve = { key: 2 }, ke = { key: 0 }, we = ["colspan"], xe = { key: 1 }, Ce = ["colspan"], Se = { class: "py-16" }, Me = { class: "text-base text-pmg-500 text-center" }, Be = ["onClick"], $e = ["checked", "disabled", "onChange"], He = {
+}, ve = { key: 2 }, ke = { key: 0 }, xe = ["colspan"], we = { key: 1 }, Ce = ["colspan"], Se = { class: "py-16" }, Me = { class: "text-base text-pmg-500 text-center" }, Be = ["onClick"], $e = ["checked", "disabled", "onChange"], He = {
   key: 1,
   class: "font-medium"
 }, H = "px-6 py-4", ze = /* @__PURE__ */ S({
@@ -205,35 +205,33 @@ const oe = ["disabled"], ae = /* @__PURE__ */ S({
   },
   emits: ["pmg-sort", "pmg-row-select", "sort", "rowClick", "update:selected", "update:sortKey", "update:sortDirection"],
   setup(r, { emit: l }) {
-    const e = r, c = l, m = ee(), a = T([...e.selected]), u = T(e.sortKey), n = T(e.sortDirection);
-    D(
+    const e = r, c = l, m = ee(), a = P([...e.selected]), u = P(e.sortKey), n = P(e.sortDirection);
+    R(
       () => e.selected,
       (t) => {
         a.value = [...t];
       }
-    ), D(
+    ), R(
       () => e.sortKey,
       (t) => {
         u.value = t;
       }
-    ), D(
+    ), R(
       () => e.sortDirection,
       (t) => {
         n.value = t;
       }
     );
     const v = f(() => [
-      "w-full border-collapse text-sm",
+      // Use border-separate for reliable sticky behavior on table cells
+      "w-full border-separate border-spacing-0 text-sm",
       e.bordered ? " overflow-hidden shadow" : "border-b border-pmg-200"
     ]), B = f(() => [
       e.responsive ? "overflow-x-auto" : "",
       e.maxHeight ? "overflow-y-auto" : "",
       "relative",
-      e.bordered ? " border border-pmg-200 bg-white shadow" : ""
-    ]), x = f(() => [
-      "bg-pmg-50 border-b border-pmg-200",
-      e.stickyHeader ? "sticky top-0 z-10 shadow-sm" : ""
-    ]), k = (t, o) => {
+      e.bordered ? "border border-pmg-200 bg-white shadow" : ""
+    ]), w = f(() => ["bg-pmg-50 border-b border-pmg-200"]), k = (t, o) => {
       var s;
       return t._selectionKey || ((s = t.id) == null ? void 0 : s.toString()) || o.toString();
     }, M = (t, o) => {
@@ -249,14 +247,14 @@ const oe = ["disabled"], ae = /* @__PURE__ */ S({
       t.every(
         (s) => a.value.includes(s)
       ) ? a.value = [] : a.value = t, c("update:selected", a.value), c("pmg-row-select", a.value);
-    }, G = f(() => {
+    }, V = f(() => {
       const t = e.data.filter((o) => !o._disabled).map((o, s) => k(o, s));
       return t.length > 0 && t.every((o) => a.value.includes(o));
-    }), L = f(() => e.data.filter((o) => !o._disabled).map((o, s) => k(o, s)).some((o) => a.value.includes(o)) && !G.value), j = (t) => {
+    }), A = f(() => e.data.filter((o) => !o._disabled).map((o, s) => k(o, s)).some((o) => a.value.includes(o)) && !V.value), j = (t) => {
       if (!t.sortable && !e.sortable) return;
       const o = u.value === t.key && n.value === "asc" ? "desc" : "asc";
       u.value = t.key, n.value = o, c("update:sortKey", t.key), c("update:sortDirection", o), c("sort", t.key, o), c("pmg-sort", [t.key]);
-    }, V = (t) => !t.sortable && !e.sortable ? null : u.value !== t.key ? "unsorted" : n.value === "asc" ? "asc" : "desc", q = (t) => {
+    }, D = (t) => !t.sortable && !e.sortable ? null : u.value !== t.key ? "unsorted" : n.value === "asc" ? "asc" : "desc", q = (t) => {
       if (!e.sortable || !t) return;
       const o = u.value === t && n.value === "asc" ? "desc" : "asc";
       u.value = t, n.value = o, c("update:sortKey", t), c("update:sortDirection", o), c("sort", t, o), c("pmg-sort", [t]);
@@ -268,17 +266,21 @@ const oe = ["disabled"], ae = /* @__PURE__ */ S({
       const s = [
         H,
         "font-semibold text-pmg-800 border-r border-pmg-200 last:border-r-0 bg-pmg-50",
-        N(t.align),
+        W(t.align),
         t.sortable || e.sortable ? "cursor-pointer hover:bg-pmg-100 select-none transition-all duration-200 hover:shadow-sm" : ""
       ];
-      return e.stickyFirstColumn && o === 0 && s.push("sticky left-0 z-20 bg-pmg-50 shadow-lg"), e.stickyLastColumn && o === e.columns.length - 1 && s.push("sticky right-0 z-20 bg-pmg-50 shadow-lg"), s;
-    }, A = (t, o, s, g) => {
+      e.stickyFirstColumn && o === 0 && s.push("sticky left-0 z-20 bg-pmg-50 shadow-lg");
+      const g = e.selectable ? e.columns.length : e.columns.length - 1;
+      return e.stickyLastColumn && o === g && s.push("sticky right-0 z-20 bg-pmg-50 shadow-lg"), e.stickyHeader && s.push("sticky top-0 z-30 bg-pmg-50"), s;
+    }, N = (t, o, s, g) => {
       const b = [
         H,
         "border-r border-pmg-200 last:border-r-0 text-pmg-700",
-        N(t.align)
+        W(t.align)
       ];
-      return e.stickyFirstColumn && o === 0 && (b.push("sticky left-0 z-10 shadow-lg"), M(s, g) ? b.push("bg-pmg-100") : e.striped && g % 2 === 1 ? b.push("bg-pmg-25") : b.push("bg-white")), e.stickyLastColumn && o === e.columns.length - 1 && (b.push("sticky right-0 z-10 shadow-lg"), M(s, g) ? b.push("bg-pmg-100") : e.striped && g % 2 === 1 ? b.push("bg-pmg-25") : b.push("bg-white")), t.disabled && b.push("opacity-50 cursor-not-allowed"), b;
+      e.stickyFirstColumn && o === 0 && (b.push("sticky left-0 z-10 shadow-lg"), M(s, g) ? b.push("bg-pmg-100") : e.striped && g % 2 === 1 ? b.push("bg-pmg-25") : b.push("bg-white"));
+      const T = e.selectable ? e.columns.length : e.columns.length - 1;
+      return e.stickyLastColumn && o === T && (b.push("sticky right-0 z-10 shadow-lg"), M(s, g) ? b.push("bg-pmg-100") : e.striped && g % 2 === 1 ? b.push("bg-pmg-25") : b.push("bg-white")), t.disabled && b.push("opacity-50 cursor-not-allowed"), b;
     }, U = (t, o = "text") => {
       if (t == null) return "";
       switch (o) {
@@ -291,7 +293,7 @@ const oe = ["disabled"], ae = /* @__PURE__ */ S({
         default:
           return t;
       }
-    }, N = (t = "left") => {
+    }, W = (t = "left") => {
       switch (t) {
         case "center":
           return "text-center";
@@ -313,21 +315,21 @@ const oe = ["disabled"], ae = /* @__PURE__ */ S({
       clickToSelect: f(() => e.clickToSelect),
       stickyFirstColumn: f(() => e.stickyFirstColumn),
       stickyLastColumn: f(() => e.stickyLastColumn),
-      areAllRowsSelected: G,
-      areSomeRowsSelected: L,
+      areAllRowsSelected: V,
+      areSomeRowsSelected: A,
       selectAllRows: $,
       toggleRowSelectionByKey: E,
       setSortByKey: q
     }), (t, o) => (d(), i("div", {
       class: y(B.value),
-      style: F({ maxHeight: r.maxHeight })
+      style: L({ maxHeight: r.maxHeight })
     }, [
       h("table", {
         class: y(v.value)
       }, [
         p(m).default ? C(t.$slots, "default", { key: 0 }) : (d(), i("thead", {
           key: 1,
-          class: y(x.value)
+          class: y(w.value)
         }, [
           h("tr", null, [
             r.selectable ? (d(), i("th", {
@@ -341,16 +343,16 @@ const oe = ["disabled"], ae = /* @__PURE__ */ S({
               r.multiple ? (d(), i("input", {
                 key: 0,
                 type: "checkbox",
-                checked: G.value,
-                indeterminate: L.value,
+                checked: V.value,
+                indeterminate: A.value,
                 onChange: $,
                 class: "size-4 text-pmg-600 bg-white border-2 border-pmg-300 focus:ring-pmg-500 focus:ring-2 transition-all duration-200 hover:border-pmg-400"
-              }, null, 40, ge)) : w("", !0)
-            ], 2)) : w("", !0),
-            (d(!0), i(R, null, _(r.columns, (s, g) => (d(), i("th", {
+              }, null, 40, ge)) : x("", !0)
+            ], 2)) : x("", !0),
+            (d(!0), i(_, null, F(r.columns, (s, g) => (d(), i("th", {
               key: s.key,
               class: y(O(s, r.selectable ? g + 1 : g)),
-              style: F({
+              style: L({
                 width: s.width,
                 minWidth: s.minWidth,
                 "--pmg-table-header-cell-width": s.width,
@@ -364,27 +366,27 @@ const oe = ["disabled"], ae = /* @__PURE__ */ S({
                   key: 0,
                   class: y(["ml-3 flex-shrink-0 transition-colors duration-200", { "text-pmg-600": u.value === s.key }])
                 }, [
-                  V(s) === "unsorted" ? (d(), i("svg", he, o[1] || (o[1] = [
+                  D(s) === "unsorted" ? (d(), i("svg", he, o[1] || (o[1] = [
                     h("path", { d: "M8 1l3 3H9v4H7V4H5l3-3zM8 15l-3-3h2V8h2v4h2l-3 3z" }, null, -1)
-                  ]))) : V(s) === "asc" ? (d(), i("svg", me, o[2] || (o[2] = [
+                  ]))) : D(s) === "asc" ? (d(), i("svg", me, o[2] || (o[2] = [
                     h("path", { d: "M8 1l3 3H9v8H7V4H5l3-3z" }, null, -1)
-                  ]))) : V(s) === "desc" ? (d(), i("svg", ye, o[3] || (o[3] = [
+                  ]))) : D(s) === "desc" ? (d(), i("svg", ye, o[3] || (o[3] = [
                     h("path", { d: "M8 15l-3-3h2V4h2v8h2l-3 3z" }, null, -1)
-                  ]))) : w("", !0)
-                ], 2)) : w("", !0)
+                  ]))) : x("", !0)
+                ], 2)) : x("", !0)
               ])
             ], 14, be))), 128))
           ])
         ], 2)),
-        p(m).default ? w("", !0) : (d(), i("tbody", ve, [
+        p(m).default ? x("", !0) : (d(), i("tbody", ve, [
           r.loading ? (d(), i("tr", ke, [
             h("td", {
               colspan: r.columns.length + (r.selectable ? 1 : 0),
               class: y([H, "text-center text-pmg-500"])
             }, o[4] || (o[4] = [
               re('<div class="flex items-center justify-center space-x-4 py-16"><svg class="animate-spin h-6 w-6 text-pmg-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><span class="text-base font-medium text-pmg-700">Loading data...</span></div>', 1)
-            ]), 10, we)
-          ])) : r.data.length === 0 ? (d(), i("tr", xe, [
+            ]), 10, xe)
+          ])) : r.data.length === 0 ? (d(), i("tr", we, [
             h("td", {
               colspan: r.columns.length + (r.selectable ? 1 : 0),
               class: y([H, "text-center text-pmg-500"])
@@ -410,7 +412,7 @@ const oe = ["disabled"], ae = /* @__PURE__ */ S({
                 ])
               ])
             ], 10, Ce)
-          ])) : (d(!0), i(R, { key: 2 }, _(r.data, (s, g) => (d(), i("tr", {
+          ])) : (d(!0), i(_, { key: 2 }, F(r.data, (s, g) => (d(), i("tr", {
             key: k(s, g),
             class: y([
               "border-b border-pmg-100 last:border-b-0 transition-all duration-200",
@@ -425,7 +427,7 @@ const oe = ["disabled"], ae = /* @__PURE__ */ S({
             r.selectable ? (d(), i("td", {
               key: 0,
               class: y(
-                A(
+                N(
                   { align: "center" },
                   0,
                   s,
@@ -442,13 +444,13 @@ const oe = ["disabled"], ae = /* @__PURE__ */ S({
                 onChange: (b) => K(s, g),
                 class: "size-4 text-pmg-600 bg-white border-2 border-pmg-300 focus:ring-pmg-500 focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:border-pmg-400"
               }, null, 40, $e)
-            ], 2)) : w("", !0),
-            (d(!0), i(R, null, _(r.columns, (b, W) => (d(), i("td", {
+            ], 2)) : x("", !0),
+            (d(!0), i(_, null, F(r.columns, (b, T) => (d(), i("td", {
               key: b.key,
               class: y(
-                A(
+                N(
                   b,
-                  r.selectable ? W + 1 : W,
+                  r.selectable ? T + 1 : T,
                   s,
                   g
                 )
@@ -473,7 +475,7 @@ const oe = ["disabled"], ae = /* @__PURE__ */ S({
     sticky: { type: Boolean }
   },
   setup(r) {
-    const l = P("pmgTable"), e = r, c = f(() => {
+    const l = G("pmgTable"), e = r, c = f(() => {
       var m;
       return [
         "bg-pmg-50 border-b border-pmg-200",
@@ -504,7 +506,7 @@ const Ve = /* @__PURE__ */ Te(Pe, [["render", Ge]]), De = /* @__PURE__ */ S({
     disabled: { type: Boolean }
   },
   setup(r) {
-    const l = P("pmgTable"), e = r, c = f(() => {
+    const l = G("pmgTable"), e = r, c = f(() => {
       var u, n;
       return !!e.selectionKey && ((n = (u = l == null ? void 0 : l.internalSelected) == null ? void 0 : u.value) == null ? void 0 : n.includes(e.selectionKey));
     }), m = f(() => {
@@ -560,7 +562,7 @@ const Ve = /* @__PURE__ */ Te(Pe, [["render", Ge]]), De = /* @__PURE__ */ S({
     sticky: { type: [Boolean, String] }
   },
   setup(r) {
-    const l = P("pmgTable"), e = r, c = f(() => {
+    const l = G("pmgTable"), e = r, c = f(() => {
       switch (e.align) {
         case "center":
           return "text-center";
@@ -586,10 +588,10 @@ const Ve = /* @__PURE__ */ Te(Pe, [["render", Ge]]), De = /* @__PURE__ */ S({
       m.value && ((n = l == null ? void 0 : l.setSortByKey) == null || n.call(l, e.sortKey));
     }
     return (n, v) => {
-      var B, x, k, M, K, $;
+      var B, w, k, M, K, $;
       return d(), i("th", {
         class: y(a.value),
-        style: F({
+        style: L({
           width: e.width,
           minWidth: e.minWidth,
           "--pmg-table-header-cell-width": e.width,
@@ -604,7 +606,7 @@ const Ve = /* @__PURE__ */ Te(Pe, [["render", Ge]]), De = /* @__PURE__ */ S({
           m.value ? (d(), i("span", {
             key: 0,
             class: y(["ml-3 flex-shrink-0 transition-colors duration-200", {
-              "text-pmg-600": ((x = (B = p(l)) == null ? void 0 : B.internalSortKey) == null ? void 0 : x.value) === e.sortKey
+              "text-pmg-600": ((w = (B = p(l)) == null ? void 0 : B.internalSortKey) == null ? void 0 : w.value) === e.sortKey
             }])
           }, [
             ((M = (k = p(l)) == null ? void 0 : k.internalSortKey) == null ? void 0 : M.value) !== e.sortKey ? (d(), i("svg", Fe, v[0] || (v[0] = [
@@ -614,7 +616,7 @@ const Ve = /* @__PURE__ */ Te(Pe, [["render", Ge]]), De = /* @__PURE__ */ S({
             ]))) : (d(), i("svg", Ae, v[2] || (v[2] = [
               h("path", { d: "M8 15l-3-3h2V4h2v8h2l-3 3z" }, null, -1)
             ])))
-          ], 2)) : w("", !0)
+          ], 2)) : x("", !0)
         ])
       ], 6);
     };
@@ -626,7 +628,7 @@ const Ve = /* @__PURE__ */ Te(Pe, [["render", Ge]]), De = /* @__PURE__ */ S({
     sticky: { type: [String, Boolean] }
   },
   setup(r) {
-    const l = P("pmgTable"), e = r, c = f(() => {
+    const l = G("pmgTable"), e = r, c = f(() => {
       switch (e.align) {
         case "center":
           return "text-center";
