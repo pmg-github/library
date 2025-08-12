@@ -76,10 +76,6 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  striped: {
-    type: Boolean,
-    default: false,
-  },
   bordered: {
     type: Boolean,
     default: false,
@@ -149,17 +145,20 @@ watch(
 const tableClasses = computed(() => [
   // Use border-separate for reliable sticky behavior on table cells
   "w-full border-separate border-spacing-0 text-sm",
-  props.bordered ? " overflow-hidden shadow" : "border-b border-pmg-200",
+  props.bordered ? " overflow-hidden " : "border-b border-pmg-200",
 ]);
 
 const containerClasses = computed(() => [
   props.responsive ? "overflow-x-auto" : "",
   props.maxHeight ? "overflow-y-auto" : "",
   "relative",
-  props.bordered ? "border border-pmg-200 bg-white shadow" : "",
+  props.bordered ? "border border-pmg-200 bg-white " : "",
 ]);
 
-const headerClasses = computed(() => ["bg-pmg-50 border-b border-pmg-200"]);
+const headerClasses = computed(() => [
+  // Header background; borders are handled on individual TH cells
+  "bg-pmg-50",
+]);
 
 // Standard padding for all cells
 const cellPadding = "px-6 py-4";
@@ -290,22 +289,22 @@ const toggleRowSelectionByKey = (key?: string, disabled?: boolean) => {
 const getColumnClasses = (column: TableColumn, index: number) => {
   const classes = [
     cellPadding,
-    "font-semibold text-pmg-800 border-r border-pmg-200 last:border-r-0 bg-pmg-50",
+    "font-semibold text-pmg-800 border-r border-b border-pmg-200 last:border-r-0 bg-pmg-50",
     getColumnAlignment(column.align),
     column.sortable || props.sortable
-      ? "cursor-pointer hover:bg-pmg-100 select-none transition-all duration-200 hover:shadow-sm"
+      ? "cursor-pointer hover:bg-pmg-100 select-none transition-all duration-200 "
       : "",
   ];
 
   // Add sticky classes
   if (props.stickyFirstColumn && index === 0) {
-    classes.push("sticky left-0 z-20 bg-pmg-50 shadow-lg");
+    classes.push("sticky left-0 z-20 bg-pmg-50 ");
   }
   const lastIndex = props.selectable
     ? props.columns.length
     : props.columns.length - 1;
   if (props.stickyLastColumn && index === lastIndex) {
-    classes.push("sticky right-0 z-20 bg-pmg-50 shadow-lg");
+    classes.push("sticky right-0 z-20 bg-pmg-50 ");
   }
 
   // Sticky header (apply to each th instead of thead for better support)
@@ -324,35 +323,27 @@ const getCellClasses = (
 ) => {
   const classes = [
     cellPadding,
-    "border-r border-pmg-200 last:border-r-0 text-pmg-700",
+    // vertical and horizontal borders per cell for border-separate layout
+    "border-r border-b border-pmg-200 last:border-r-0 text-pmg-700",
     getColumnAlignment(column.align),
   ];
 
+  // Apply row background per-cell for consistent look with border-separate
+  if (isRowSelected(_row, rowIndex)) {
+    classes.push("bg-pmg-50");
+  } else {
+    classes.push("bg-white");
+  }
+
   // Add sticky classes
   if (props.stickyFirstColumn && index === 0) {
-    classes.push("sticky left-0 z-10 shadow-lg");
-    // Keep sticky cell background in sync with row state
-    if (isRowSelected(_row, rowIndex)) {
-      classes.push("bg-pmg-100");
-    } else if (props.striped && rowIndex % 2 === 1) {
-      classes.push("bg-pmg-25");
-    } else {
-      classes.push("bg-white");
-    }
+    classes.push("sticky left-0 z-10 ");
   }
   const lastIndexCell = props.selectable
     ? props.columns.length
     : props.columns.length - 1;
   if (props.stickyLastColumn && index === lastIndexCell) {
-    classes.push("sticky right-0 z-10 shadow-lg");
-    // Keep sticky cell background in sync with row state
-    if (isRowSelected(_row, rowIndex)) {
-      classes.push("bg-pmg-100");
-    } else if (props.striped && rowIndex % 2 === 1) {
-      classes.push("bg-pmg-25");
-    } else {
-      classes.push("bg-white");
-    }
+    classes.push("sticky right-0 z-10 ");
   }
 
   if (column.disabled) {
@@ -396,7 +387,6 @@ provide("pmgTable", {
   selectable: computed(() => props.selectable),
   multiple: computed(() => props.multiple),
   sortable: computed(() => props.sortable),
-  striped: computed(() => props.striped),
   hover: computed(() => props.hover),
   clickToSelect: computed(() => props.clickToSelect),
   stickyFirstColumn: computed(() => props.stickyFirstColumn),
@@ -423,8 +413,8 @@ provide("pmgTable", {
             v-if="selectable"
             :class="[
               cellPadding,
-              'font-semibold text-pmg-800 border-r border-pmg-200 w-12 bg-pmg-50',
-              stickyFirstColumn ? 'sticky left-0 z-20 bg-pmg-50 shadow-lg' : '',
+              'font-semibold text-pmg-800 border-r border-b border-pmg-200 w-12 bg-pmg-50',
+              stickyFirstColumn ? 'sticky left-0 z-20 bg-pmg-50 ' : '',
             ]"
           >
             <template v-if="multiple">
@@ -573,14 +563,14 @@ provide("pmgTable", {
           v-for="(row, rowIndex) in data"
           :key="getRowSelectionKey(row, rowIndex)"
           :class="[
-            'border-b border-pmg-100 last:border-b-0 transition-all duration-200',
-            striped && rowIndex % 2 === 1 ? 'bg-pmg-25' : 'bg-white',
+            'transition-all duration-200',
+            'bg-white',
             hover && !row._disabled
-              ? 'hover:bg-pmg-50 hover:shadow-sm transition-all duration-200'
+              ? 'hover:bg-pmg-50  transition-all duration-200'
               : '',
             // no row click-to-select when selectable; keep cursor default
             isRowSelected(row, rowIndex)
-              ? 'bg-pmg-100 border-pmg-300 shadow-sm ring-1 ring-pmg-200'
+              ? 'bg-pmg-100 border-pmg-300  ring-1 ring-pmg-200'
               : '',
             row._disabled ? 'opacity-60 cursor-not-allowed bg-slate-50' : '',
           ]"

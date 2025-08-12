@@ -7,7 +7,6 @@ const meta: Meta<typeof PMGTable> = {
   component: PMGTable,
   tags: ["autodocs"],
   argTypes: {
-    striped: { control: "boolean" },
     hover: { control: "boolean" },
     bordered: { control: "boolean" },
     responsive: { control: "boolean" },
@@ -20,7 +19,6 @@ const meta: Meta<typeof PMGTable> = {
     maxHeight: { control: "text" },
   },
   args: {
-    striped: true,
     hover: true,
     bordered: true,
     responsive: true,

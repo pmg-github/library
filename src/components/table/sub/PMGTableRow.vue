@@ -16,7 +16,7 @@ const isSelected = computed(() => {
 
 const rowClasses = computed(() => [
   "border-b border-pmg-100 last:border-b-0 transition-all duration-200",
-  table?.striped?.value ? "odd:bg-white even:bg-pmg-25" : "bg-white",
+  "bg-white",
   table?.hover?.value && !props.disabled
     ? "hover:bg-pmg-50 hover:shadow-sm"
     : "",

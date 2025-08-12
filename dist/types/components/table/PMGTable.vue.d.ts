@@ -80,10 +80,6 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
         type: BooleanConstructor;
         default: boolean;
     };
-    striped: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
     bordered: {
         type: BooleanConstructor;
         default: boolean;
@@ -165,10 +161,6 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
         type: BooleanConstructor;
         default: boolean;
     };
-    striped: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
     bordered: {
         type: BooleanConstructor;
         default: boolean;
@@ -214,7 +206,6 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     stickyLastColumn: boolean;
     stickyHeader: boolean;
     loading: boolean;
-    striped: boolean;
     bordered: boolean;
     hover: boolean;
     clickToSelect: boolean;
