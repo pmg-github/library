@@ -21,7 +21,7 @@ type __VLS_TemplateResult = ReturnType<typeof __VLS_template>;
 declare const __VLS_component: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     columns: {
         type: () => TableColumn[];
-        required: true;
+        default: () => never[];
     };
     data: {
         type: () => TableRow[];
@@ -102,7 +102,7 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
 }, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     columns: {
         type: () => TableColumn[];
-        required: true;
+        default: () => never[];
     };
     data: {
         type: () => TableRow[];
@@ -182,6 +182,7 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     "onUpdate:sortDirection"?: ((direction: SortDirection) => any) | undefined;
 }>, {
     data: TableRow[];
+    columns: TableColumn[];
     selected: string[];
     selectable: boolean;
     multiple: boolean;

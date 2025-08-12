@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, useSlots, ref, watch } from "vue";
+import { computed, useSlots, ref, watch, provide } from "vue";
 
 export interface TableColumn {
   key: string;
@@ -25,7 +25,7 @@ export type SortDirection = "asc" | "desc";
 const props = defineProps({
   columns: {
     type: Array as () => TableColumn[],
-    required: true,
+    default: () => [],
   },
   data: {
     type: Array as () => TableRow[],
@@ -142,21 +142,19 @@ watch(
 
 const tableClasses = computed(() => [
   "w-full border-collapse text-sm",
-  props.bordered
-    ? "border border-pmg-200 rounded-xl overflow-hidden shadow-lg"
-    : "border-b border-pmg-200",
+  props.bordered ? " overflow-hidden shadow" : "border-b border-pmg-200",
 ]);
 
 const containerClasses = computed(() => [
   props.responsive ? "overflow-x-auto" : "",
   props.maxHeight ? "overflow-y-auto" : "",
   "relative",
-  props.bordered ? "rounded-xl border border-pmg-200 bg-white shadow-lg" : "",
+  props.bordered ? " border border-pmg-200 bg-white shadow" : "",
 ]);
 
 const headerClasses = computed(() => [
-  "bg-gradient-to-r from-pmg-50 to-pmg-100 border-b border-pmg-200",
-  props.stickyHeader ? "sticky top-0 z-10" : "",
+  "bg-pmg-50 border-b border-pmg-200",
+  props.stickyHeader ? "sticky top-0 z-10 shadow-sm" : "",
 ]);
 
 // Standard padding for all cells
@@ -237,26 +235,51 @@ const getSortIcon = (column: TableColumn) => {
   return internalSortDirection.value === "asc" ? "asc" : "desc";
 };
 
+// Manual-mode helpers
+const setSortByKey = (key?: string) => {
+  if (!props.sortable || !key) return;
+  const newDirection: SortDirection =
+    internalSortKey.value === key && internalSortDirection.value === "asc"
+      ? "desc"
+      : "asc";
+  internalSortKey.value = key;
+  internalSortDirection.value = newDirection;
+  emit("update:sortKey", key);
+  emit("update:sortDirection", newDirection);
+  emit("sort", key, newDirection);
+  emit("pmg-sort", [key]);
+};
+
+const toggleRowSelectionByKey = (key?: string, disabled?: boolean) => {
+  if (!props.selectable || !key || disabled) return;
+  const isSelected = internalSelected.value.includes(key);
+  if (props.multiple) {
+    internalSelected.value = isSelected
+      ? internalSelected.value.filter((k) => k !== key)
+      : [...internalSelected.value, key];
+  } else {
+    internalSelected.value = isSelected ? [] : [key];
+  }
+  emit("update:selected", internalSelected.value);
+  emit("pmg-row-select", internalSelected.value);
+};
+
 const getColumnClasses = (column: TableColumn, index: number) => {
   const classes = [
     cellPadding,
-    "font-semibold text-pmg-800 border-r border-pmg-200 last:border-r-0 bg-gradient-to-r from-pmg-50 to-pmg-100",
+    "font-semibold text-pmg-800 border-r border-pmg-200 last:border-r-0 bg-pmg-50",
     getColumnAlignment(column.align),
     column.sortable || props.sortable
-      ? "cursor-pointer hover:from-pmg-100 hover:to-pmg-200 select-none transition-all duration-200 hover:shadow-sm"
+      ? "cursor-pointer hover:bg-pmg-100 select-none transition-all duration-200 hover:shadow-sm"
       : "",
   ];
 
   // Add sticky classes
   if (props.stickyFirstColumn && index === 0) {
-    classes.push(
-      "sticky left-0 z-20 bg-gradient-to-r from-pmg-50 to-pmg-100 shadow-lg"
-    );
+    classes.push("sticky left-0 z-20 bg-pmg-50 shadow-lg");
   }
   if (props.stickyLastColumn && index === props.columns.length - 1) {
-    classes.push(
-      "sticky right-0 z-20 bg-gradient-to-r from-pmg-50 to-pmg-100 shadow-lg"
-    );
+    classes.push("sticky right-0 z-20 bg-pmg-50 shadow-lg");
   }
 
   return classes;
@@ -277,7 +300,10 @@ const getCellClasses = (
   // Add sticky classes
   if (props.stickyFirstColumn && index === 0) {
     classes.push("sticky left-0 z-10 shadow-lg");
-    if (props.striped && rowIndex % 2 === 1) {
+    // Keep sticky cell background in sync with row state
+    if (isRowSelected(_row, rowIndex)) {
+      classes.push("bg-pmg-100");
+    } else if (props.striped && rowIndex % 2 === 1) {
       classes.push("bg-pmg-25");
     } else {
       classes.push("bg-white");
@@ -285,7 +311,10 @@ const getCellClasses = (
   }
   if (props.stickyLastColumn && index === props.columns.length - 1) {
     classes.push("sticky right-0 z-10 shadow-lg");
-    if (props.striped && rowIndex % 2 === 1) {
+    // Keep sticky cell background in sync with row state
+    if (isRowSelected(_row, rowIndex)) {
+      classes.push("bg-pmg-100");
+    } else if (props.striped && rowIndex % 2 === 1) {
       classes.push("bg-pmg-25");
     } else {
       classes.push("bg-white");
@@ -324,23 +353,40 @@ const getColumnAlignment = (align: string = "left") => {
       return "text-left";
   }
 };
+
+// Provide context for manual subcomponents
+provide("pmgTable", {
+  internalSelected,
+  internalSortKey,
+  internalSortDirection,
+  selectable: computed(() => props.selectable),
+  multiple: computed(() => props.multiple),
+  sortable: computed(() => props.sortable),
+  striped: computed(() => props.striped),
+  hover: computed(() => props.hover),
+  stickyFirstColumn: computed(() => props.stickyFirstColumn),
+  stickyLastColumn: computed(() => props.stickyLastColumn),
+  toggleRowSelectionByKey,
+  setSortByKey,
+});
 </script>
 
 <template>
   <div :class="containerClasses" :style="{ maxHeight }">
     <table :class="tableClasses">
+      <template v-if="slots.default">
+        <slot />
+      </template>
       <!-- Header -->
-      <thead :class="headerClasses">
+      <thead v-else :class="headerClasses">
         <tr>
           <!-- Selection header -->
           <th
             v-if="selectable && multiple"
             :class="[
               cellPadding,
-              'font-semibold text-pmg-800 border-r border-pmg-200 w-12 bg-gradient-to-r from-pmg-50 to-pmg-100',
-              stickyFirstColumn
-                ? 'sticky left-0 z-20 bg-gradient-to-r from-pmg-50 to-pmg-100 shadow-lg'
-                : '',
+              'font-semibold text-pmg-800 border-r border-pmg-200 w-12 bg-pmg-50',
+              stickyFirstColumn ? 'sticky left-0 z-20 bg-pmg-50 shadow-lg' : '',
             ]"
           >
             <input
@@ -354,7 +400,7 @@ const getColumnAlignment = (align: string = "left") => {
                 !data.every((row, index) => isRowSelected(row, index))
               "
               @change="selectAllRows"
-              class="size-4 text-pmg-600 bg-white border-2 border-pmg-300 rounded-md focus:ring-pmg-500 focus:ring-2 transition-all duration-200 hover:border-pmg-400"
+              class="size-4 text-pmg-600 bg-white border-2 border-pmg-300 focus:ring-pmg-500 focus:ring-2 transition-all duration-200 hover:border-pmg-400"
             />
           </th>
 
@@ -424,7 +470,7 @@ const getColumnAlignment = (align: string = "left") => {
       </thead>
 
       <!-- Body -->
-      <tbody>
+      <tbody v-if="!slots.default">
         <!-- Loading State -->
         <tr v-if="loading">
           <td
@@ -535,7 +581,7 @@ const getColumnAlignment = (align: string = "left") => {
               :disabled="row._disabled"
               @click.stop
               @change="toggleRowSelection(row, rowIndex)"
-              class="size-4 text-pmg-600 bg-white border-2 border-pmg-300 rounded-md focus:ring-pmg-500 focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:border-pmg-400"
+              class="size-4 text-pmg-600 bg-white border-2 border-pmg-300 focus:ring-pmg-500 focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:border-pmg-400"
             />
           </td>
 
