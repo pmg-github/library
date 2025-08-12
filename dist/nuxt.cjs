@@ -51,5 +51,35 @@ var nuxt_default = (0, import_kit.defineNuxtModule)({
       export: "PMGInput",
       filePath: "pmg-library"
     });
+    (0, import_kit.addComponent)({
+      name: "PMGTable",
+      export: "PMGTable",
+      filePath: "pmg-library"
+    });
+    (0, import_kit.addComponent)({
+      name: "PMGTableHeader",
+      export: "PMGTableHeader",
+      filePath: "pmg-library"
+    });
+    (0, import_kit.addComponent)({
+      name: "PMGTableBody",
+      export: "PMGTableBody",
+      filePath: "pmg-library"
+    });
+    (0, import_kit.addComponent)({
+      name: "PMGTableRow",
+      export: "PMGTableRow",
+      filePath: "pmg-library"
+    });
+    (0, import_kit.addComponent)({
+      name: "PMGTableHeaderCell",
+      export: "PMGTableHeaderCell",
+      filePath: "pmg-library"
+    });
+    (0, import_kit.addComponent)({
+      name: "PMGTableCell",
+      export: "PMGTableCell",
+      filePath: "pmg-library"
+    });
   }
 });
