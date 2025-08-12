@@ -79,6 +79,10 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
         type: BooleanConstructor;
         default: boolean;
     };
+    clickToSelect: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
     responsive: {
         type: BooleanConstructor;
         default: boolean;
@@ -160,6 +164,10 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
         type: BooleanConstructor;
         default: boolean;
     };
+    clickToSelect: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
     responsive: {
         type: BooleanConstructor;
         default: boolean;
@@ -196,6 +204,7 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     striped: boolean;
     bordered: boolean;
     hover: boolean;
+    clickToSelect: boolean;
     responsive: boolean;
     emptyMessage: string;
     maxHeight: string;

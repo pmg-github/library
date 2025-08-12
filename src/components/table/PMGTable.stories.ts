@@ -38,7 +38,7 @@ export default meta;
 export type Story = StoryObj<typeof PMGTable>;
 
 const demoColumns = [
-  { key: "id", label: "ID", width: "80px", align: "right", sortable: true },
+  { key: "id", label: "ID", width: "80px", align: "left", sortable: true },
   { key: "name", label: "Name", minWidth: "160px", sortable: true },
   { key: "email", label: "Email", minWidth: "220px" },
   {

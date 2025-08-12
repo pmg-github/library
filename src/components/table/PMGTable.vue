@@ -87,6 +87,11 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  // Control whether clicking a row toggles selection
+  clickToSelect: {
+    type: Boolean,
+    default: false,
+  },
   responsive: {
     type: Boolean,
     default: true,
@@ -209,6 +214,25 @@ const selectAllRows = () => {
   emit("update:selected", internalSelected.value);
   emit("pmg-row-select", internalSelected.value);
 };
+
+// Selection helpers for header checkbox in manual mode
+const areAllRowsSelected = computed(() => {
+  const allKeys = props.data
+    .filter((row) => !row._disabled)
+    .map((row, index) => getRowSelectionKey(row, index));
+  return (
+    allKeys.length > 0 &&
+    allKeys.every((key) => internalSelected.value.includes(key))
+  );
+});
+
+const areSomeRowsSelected = computed(() => {
+  const someSelected = props.data
+    .filter((row) => !row._disabled)
+    .map((row, index) => getRowSelectionKey(row, index))
+    .some((key) => internalSelected.value.includes(key));
+  return someSelected && !areAllRowsSelected.value;
+});
 
 // Sorting methods
 const handleSort = (column: TableColumn) => {
@@ -364,8 +388,12 @@ provide("pmgTable", {
   sortable: computed(() => props.sortable),
   striped: computed(() => props.striped),
   hover: computed(() => props.hover),
+  clickToSelect: computed(() => props.clickToSelect),
   stickyFirstColumn: computed(() => props.stickyFirstColumn),
   stickyLastColumn: computed(() => props.stickyLastColumn),
+  areAllRowsSelected,
+  areSomeRowsSelected,
+  selectAllRows,
   toggleRowSelectionByKey,
   setSortByKey,
 });
@@ -382,37 +410,28 @@ provide("pmgTable", {
         <tr>
           <!-- Selection header -->
           <th
-            v-if="selectable && multiple"
+            v-if="selectable"
             :class="[
               cellPadding,
               'font-semibold text-pmg-800 border-r border-pmg-200 w-12 bg-pmg-50',
               stickyFirstColumn ? 'sticky left-0 z-20 bg-pmg-50 shadow-lg' : '',
             ]"
           >
-            <input
-              type="checkbox"
-              :checked="
-                data.length > 0 &&
-                data.every((row, index) => isRowSelected(row, index))
-              "
-              :indeterminate="
-                data.some((row, index) => isRowSelected(row, index)) &&
-                !data.every((row, index) => isRowSelected(row, index))
-              "
-              @change="selectAllRows"
-              class="size-4 text-pmg-600 bg-white border-2 border-pmg-300 focus:ring-pmg-500 focus:ring-2 transition-all duration-200 hover:border-pmg-400"
-            />
+            <template v-if="multiple">
+              <input
+                type="checkbox"
+                :checked="areAllRowsSelected"
+                :indeterminate="areSomeRowsSelected"
+                @change="selectAllRows"
+                class="size-4 text-pmg-600 bg-white border-2 border-pmg-300 focus:ring-pmg-500 focus:ring-2 transition-all duration-200 hover:border-pmg-400"
+              />
+            </template>
           </th>
 
           <th
             v-for="(column, index) in columns"
             :key="column.key"
-            :class="
-              getColumnClasses(
-                column,
-                selectable && multiple ? index + 1 : index
-              )
-            "
+            :class="getColumnClasses(column, selectable ? index + 1 : index)"
             :style="{
               width: column.width,
               minWidth: column.minWidth,
@@ -474,7 +493,7 @@ provide("pmgTable", {
         <!-- Loading State -->
         <tr v-if="loading">
           <td
-            :colspan="columns.length + (selectable && multiple ? 1 : 0)"
+            :colspan="columns.length + (selectable ? 1 : 0)"
             :class="[cellPadding, 'text-center text-pmg-500']"
           >
             <div class="flex items-center justify-center space-x-4 py-16">
@@ -508,7 +527,7 @@ provide("pmgTable", {
         <!-- Empty State -->
         <tr v-else-if="data.length === 0">
           <td
-            :colspan="columns.length + (selectable && multiple ? 1 : 0)"
+            :colspan="columns.length + (selectable ? 1 : 0)"
             :class="[cellPadding, 'text-center text-pmg-500']"
           >
             <div class="py-16">
@@ -549,23 +568,17 @@ provide("pmgTable", {
             hover && !row._disabled
               ? 'hover:bg-pmg-50 hover:shadow-sm transition-all duration-200'
               : '',
-            selectable && !row._disabled ? 'cursor-pointer' : '',
+            // no row click-to-select when selectable; keep cursor default
             isRowSelected(row, rowIndex)
               ? 'bg-pmg-100 border-pmg-300 shadow-sm ring-1 ring-pmg-200'
               : '',
             row._disabled ? 'opacity-60 cursor-not-allowed bg-slate-50' : '',
           ]"
-          @click="
-            !row._disabled && selectable
-              ? toggleRowSelection(row, rowIndex)
-              : !row._disabled
-              ? emit('rowClick', row, rowIndex)
-              : undefined
-          "
+          @click="!row._disabled ? emit('rowClick', row, rowIndex) : undefined"
         >
           <!-- Selection cell -->
           <td
-            v-if="selectable && multiple"
+            v-if="selectable"
             :class="
               getCellClasses(
                 { key: '_selection', label: '', align: 'center' },
@@ -591,7 +604,7 @@ provide("pmgTable", {
             :class="
               getCellClasses(
                 column,
-                selectable && multiple ? colIndex + 1 : colIndex,
+                selectable ? colIndex + 1 : colIndex,
                 row,
                 rowIndex
               )

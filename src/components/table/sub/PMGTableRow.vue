@@ -29,7 +29,11 @@ const rowClasses = computed(() => [
 
 function onClick() {
   if (props.disabled) return;
-  if (table?.selectable?.value && props.selectionKey) {
+  if (
+    table?.selectable?.value &&
+    table?.clickToSelect?.value &&
+    props.selectionKey
+  ) {
     table.toggleRowSelectionByKey?.(props.selectionKey, props.disabled);
   }
 }

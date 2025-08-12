@@ -7,7 +7,7 @@ const props = defineProps<{
   width?: string;
   minWidth?: string;
   align?: "left" | "center" | "right";
-  sticky?: boolean;
+  sticky?: boolean | "left" | "right";
 }>();
 
 const base =
@@ -32,7 +32,9 @@ const thClasses = computed(() => [
   clickable.value
     ? "cursor-pointer hover:bg-pmg-100 select-none transition-all duration-200 hover:shadow-sm"
     : "",
-  props.sticky || table?.stickyFirstColumn?.value
+  props.sticky === "right"
+    ? "sticky right-0 z-20 bg-pmg-50 shadow-lg"
+    : props.sticky || table?.stickyFirstColumn?.value
     ? "sticky left-0 z-20 bg-pmg-50 shadow-lg"
     : "",
 ]);

@@ -3,7 +3,7 @@ type __VLS_Props = {
     width?: string;
     minWidth?: string;
     align?: "left" | "center" | "right";
-    sticky?: boolean;
+    sticky?: boolean | "left" | "right";
 };
 declare function __VLS_template(): {
     attrs: Partial<{}>;
