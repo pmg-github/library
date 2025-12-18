@@ -6,6 +6,8 @@ import PMGTableHeader from "./components/table/PMGTableHeader.vue";
 import PMGTableHeaderCell from "./components/table/PMGTableHeaderCell.vue";
 import PMGTableRow from "./components/table/PMGTableRow.vue";
 import PMGTableCell from "./components/table/PMGTableCell.vue";
+import PMGTable from "./components/table/PMGTable.vue";
+import PMGTableBody from "./components/table/PMGTableBody.vue";
 
 // Export for individual imports
 export {
@@ -16,6 +18,8 @@ export {
   PMGTableHeaderCell,
   PMGTableRow,
   PMGTableCell,
+  PMGTable,
+  PMGTableBody,
 };
 
 // Export for plugin installation
@@ -28,5 +32,7 @@ export default {
     app.component("PMGTableHeaderCell", PMGTableHeaderCell);
     app.component("PMGTableRow", PMGTableRow);
     app.component("PMGTableCell", PMGTableCell);
+    app.component("PMGTable", PMGTable);
+    app.component("PMGTableBody", PMGTableBody);
   },
 };

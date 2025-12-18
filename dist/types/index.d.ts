@@ -6,7 +6,9 @@ import { default as PMGTableHeader } from './components/table/PMGTableHeader.vue
 import { default as PMGTableHeaderCell } from './components/table/PMGTableHeaderCell.vue';
 import { default as PMGTableRow } from './components/table/PMGTableRow.vue';
 import { default as PMGTableCell } from './components/table/PMGTableCell.vue';
-export { PMGButton, PMGInput, PMGPhoneInput, PMGTableHeader, PMGTableHeaderCell, PMGTableRow, PMGTableCell, };
+import { default as PMGTable } from './components/table/PMGTable.vue';
+import { default as PMGTableBody } from './components/table/PMGTableBody.vue';
+export { PMGButton, PMGInput, PMGPhoneInput, PMGTableHeader, PMGTableHeaderCell, PMGTableRow, PMGTableCell, PMGTable, PMGTableBody, };
 declare const _default: {
     install(app: App): void;
 };
