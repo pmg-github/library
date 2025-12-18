@@ -30,23 +30,12 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
         type: BooleanConstructor;
         default: boolean;
     };
-    autoSelectColumn: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    infiniteVisible: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
     rowKey: {
         type: StringConstructor;
         default: string;
     };
     infinite: {
-        type: PropType<(() => any) | {
-            handler: () => any;
-            loading?: boolean;
-        }>;
+        type: PropType<() => void>;
         default: undefined;
     };
     loading: {
@@ -74,23 +63,12 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
         type: BooleanConstructor;
         default: boolean;
     };
-    autoSelectColumn: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    infiniteVisible: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
     rowKey: {
         type: StringConstructor;
         default: string;
     };
     infinite: {
-        type: PropType<(() => any) | {
-            handler: () => any;
-            loading?: boolean;
-        }>;
+        type: PropType<() => void>;
         default: undefined;
     };
     loading: {
@@ -105,12 +83,7 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     wrapperClass: string;
     tableClass: string;
     selectable: boolean;
-    autoSelectColumn: boolean;
-    infiniteVisible: boolean;
-    infinite: (() => any) | {
-        handler: () => any;
-        loading?: boolean;
-    };
+    infinite: () => void;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;
 declare const _default: __VLS_WithTemplateSlots<typeof __VLS_component, __VLS_TemplateResult["slots"]>;
 export default _default;

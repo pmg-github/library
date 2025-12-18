@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { ref, computed, provide, PropType, useSlots } from "vue";
+import { ref, computed, provide, PropType } from "vue";
 import PMGTableInfinite from "./PMGTableInfinite.vue";
-import PMGTableHeader from "./PMGTableHeader.vue";
-import PMGTableHeaderCell from "./PMGTableHeaderCell.vue";
-import PMGTableHeaderSelect from "./PMGTableHeaderSelect.vue";
+// Removed unnecessary imports
 
 const props = defineProps({
   striped: { type: Boolean, default: false },
@@ -11,21 +9,12 @@ const props = defineProps({
   wrapperClass: { type: String, default: "" },
   tableClass: { type: String, default: "" },
   selectable: { type: Boolean, default: false },
-  autoSelectColumn: { type: Boolean, default: true },
-  infiniteVisible: { type: Boolean, default: false },
+  // keep props minimal
   rowKey: { type: String, default: "id" },
-  infinite: {
-    type: [Function, Object] as PropType<
-      (() => any) | { handler: () => any; loading?: boolean }
-    >,
-    default: undefined,
-  },
+  infinite: { type: Function as PropType<() => void>, default: undefined },
   loading: { type: Boolean, default: false },
 });
 
-const slots = useSlots();
-
-// Selection state (used for manual composition mode)
 const registeredRowKeys = ref(new Set<string | number>());
 const internalSelected = ref(new Set<string | number>());
 
@@ -67,7 +56,6 @@ function selectAll(checked: boolean) {
 
 provide("pmgTable", {
   selectable: props.selectable,
-  autoSelectColumn: props.autoSelectColumn,
   sticky: props.sticky,
   registerRow,
   unregisterRow,
@@ -76,50 +64,15 @@ provide("pmgTable", {
   selectAll,
   allSelected,
 });
-const internalInfiniteLoading = ref(false);
-
-async function handleInView() {
+function handleInView() {
   try {
     if (!props.infinite) return;
-    if (internalInfiniteLoading.value) return;
-
-    let handler: (() => any) | undefined;
-    if (typeof props.infinite === "function")
-      handler = props.infinite as () => any;
-    else if (
-      typeof props.infinite === "object" &&
-      typeof (props.infinite as any).handler === "function"
-    )
-      handler = (props.infinite as any).handler;
-
-    if (!handler) return;
-
-    internalInfiniteLoading.value = true;
-    try {
-      const res = handler();
-      if (res && typeof (res as any).then === "function") {
-        await res;
-      } else {
-        // small cooldown to avoid rapid retrigger for sync handlers
-        await new Promise((r) => setTimeout(r, 200));
-      }
-    } catch (e) {
-      // swallow user errors
-    } finally {
-      internalInfiniteLoading.value = false;
-    }
+    // call the provided handler; consumers manage loading if needed
+    (props.infinite as any)();
   } catch (e) {
-    // swallow errors from user-provided callback
+    // swallow user callback errors
   }
 }
-
-const effectiveLoading = computed(() => {
-  if (props.loading) return true;
-  if (internalInfiniteLoading.value) return true;
-  if (props.infinite && typeof props.infinite === "object")
-    return !!(props.infinite as any).loading;
-  return false;
-});
 </script>
 
 <template>
@@ -131,11 +84,7 @@ const effectiveLoading = computed(() => {
       <slot />
     </table>
 
-    <PMGTableInfinite
-      :disabled="internalInfiniteLoading"
-      :visible="effectiveLoading"
-      @in-view="handleInView"
-    />
+    <PMGTableInfinite :disabled="props.loading" :visible="props.loading" @in-view="handleInView" />
     <div v-if="isEmpty" class="pmg-table-empty p-4 text-center text-gray-500">
       <slot name="empty">No items</slot>
     </div>

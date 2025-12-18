@@ -87,29 +87,13 @@ watch(
 </script>
 
 <template>
-  <div>
-    <div
-      ref="sentinel"
-      :class="[
-        'pmg-table-infinite-sentinel',
-        { 'pmg-table-infinite-visible': props.visible },
-      ]"
-      aria-hidden="true"
-    >
-      <template v-if="props.visible">
-        <div class="pmg-table-skeleton mt-3 px-2">
-          <div class="animate-pulse space-y-2">
-            <div class="h-6 bg-pmg-50/50 rounded"></div>
-          </div>
-        </div>
-      </template>
+  <div v-if="props.visible">
+    <div ref="sentinel" class="pmg-table-skeleton mt-3 px-2">
+      <div class="animate-pulse space-y-2">
+        <div class="h-6 bg-pmg-50/50 rounded"></div>
+      </div>
     </div>
   </div>
 </template>
 
-<style scoped>
-.pmg-table-infinite-sentinel {
-  height: 1px;
-  width: 100%;
-}
-</style>
+<style scoped></style>

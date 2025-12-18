@@ -52,5 +52,5 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     visible: boolean;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {
     sentinel: HTMLDivElement;
-}, HTMLDivElement>;
+}, any>;
 export default _default;
