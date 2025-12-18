@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, watch } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 
 const props = defineProps({
   rootSelector: { type: String, default: "" },
@@ -28,6 +28,7 @@ function getScrollParent(el: Element | null): Element | null {
 
 function createObserver() {
   if (observer) observer.disconnect();
+  if (props.disabled) return;
   if (
     typeof window === "undefined" ||
     typeof IntersectionObserver === "undefined"
@@ -71,8 +72,6 @@ onBeforeUnmount(() => {
     observer = null;
   }
 });
-
-// Observe all the time; consumers control presence via `visible` or parent rendering
 </script>
 
 <template>
