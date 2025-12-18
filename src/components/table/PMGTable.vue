@@ -84,7 +84,7 @@ function handleInView() {
     </table>
 
     <PMGTableInfinite
-      :disabled="props.loading"
+      v-if="props.infinite && props.loading"
       :visible="props.loading"
       @in-view="handleInView"
     />

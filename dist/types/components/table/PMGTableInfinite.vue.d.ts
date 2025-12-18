@@ -11,10 +11,6 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         type: (NumberConstructor | ArrayConstructor)[];
         default: number;
     };
-    disabled: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
     visible: {
         type: BooleanConstructor;
         default: boolean;
@@ -34,10 +30,6 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         type: (NumberConstructor | ArrayConstructor)[];
         default: number;
     };
-    disabled: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
     visible: {
         type: BooleanConstructor;
         default: boolean;
@@ -45,7 +37,6 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
 }>> & Readonly<{
     "onIn-view"?: (() => any) | undefined;
 }>, {
-    disabled: boolean;
     rootSelector: string;
     rootMargin: string;
     threshold: number | unknown[];

@@ -5,7 +5,6 @@ const props = defineProps({
   rootSelector: { type: String, default: "" },
   rootMargin: { type: String, default: "0px" },
   threshold: { type: [Number, Array], default: 0.1 },
-  disabled: { type: Boolean, default: false },
   visible: { type: Boolean, default: false },
 });
 
@@ -29,7 +28,6 @@ function getScrollParent(el: Element | null): Element | null {
 
 function createObserver() {
   if (observer) observer.disconnect();
-  if (props.disabled) return;
   if (
     typeof window === "undefined" ||
     typeof IntersectionObserver === "undefined"
@@ -74,16 +72,7 @@ onBeforeUnmount(() => {
   }
 });
 
-watch(
-  () => props.disabled,
-  (v) => {
-    if (v) {
-      if (observer) observer.disconnect();
-    } else {
-      createObserver();
-    }
-  }
-);
+// Observe all the time; consumers control presence via `visible` or parent rendering
 </script>
 
 <template>
