@@ -30,6 +30,10 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
         type: BooleanConstructor;
         default: boolean;
     };
+    autoSelectColumn: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
     rowKey: {
         type: StringConstructor;
         default: string;
@@ -63,6 +67,10 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
         type: BooleanConstructor;
         default: boolean;
     };
+    autoSelectColumn: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
     rowKey: {
         type: StringConstructor;
         default: string;
@@ -83,6 +91,7 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     wrapperClass: string;
     tableClass: string;
     selectable: boolean;
+    autoSelectColumn: boolean;
     infinite: () => void;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
 declare const _default: __VLS_WithTemplateSlots<typeof __VLS_component, __VLS_TemplateResult["slots"]>;

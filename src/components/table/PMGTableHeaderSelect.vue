@@ -9,7 +9,7 @@ function onChange(e: Event) {
 }
 </script>
 <template>
-  <div>
+  <div v-if="table?.selectable">
     <input
       type="checkbox"
       :checked="table?.allSelected"

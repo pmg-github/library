@@ -188,9 +188,8 @@ export const InfiniteScroll = (args: any) => ({
   },
   template: `
     <section>
-      <PMGTable :infinite="loadMore" :loading="loading" sticky wrapperClass="h-full" selectable>
+      <PMGTable :infinite="loadMore" :loading="loading" sticky selectable>
         <PMGTableHeader>
-          <PMGTableHeaderCell @sort=><PMGTableHeaderSelect /></PMGTableHeaderCell>
           <PMGTableHeaderCell>ID</PMGTableHeaderCell>
           <PMGTableHeaderCell>Name</PMGTableHeaderCell>
           <PMGTableHeaderCell>Email</PMGTableHeaderCell>

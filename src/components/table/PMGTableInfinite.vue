@@ -87,7 +87,6 @@ watch(
 
 <template>
   <div>
-    <slot />
     <div
       ref="sentinel"
       class="pmg-table-infinite-sentinel"

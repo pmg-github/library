@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { ref, computed, provide, PropType } from "vue";
+import { ref, computed, provide, PropType, useSlots } from "vue";
 import PMGTableInfinite from "./PMGTableInfinite.vue";
+import PMGTableHeader from "./PMGTableHeader.vue";
+import PMGTableHeaderCell from "./PMGTableHeaderCell.vue";
+import PMGTableHeaderSelect from "./PMGTableHeaderSelect.vue";
 
 const props = defineProps({
   striped: { type: Boolean, default: false },
@@ -8,9 +11,24 @@ const props = defineProps({
   wrapperClass: { type: String, default: "" },
   tableClass: { type: String, default: "" },
   selectable: { type: Boolean, default: false },
+  autoSelectColumn: { type: Boolean, default: true },
   rowKey: { type: String, default: "id" },
   infinite: { type: Function as PropType<() => void>, default: undefined },
   loading: { type: Boolean, default: false },
+});
+
+const slots = useSlots();
+
+const hasHeaderSlot = computed(() => {
+  const vnodes = slots.default ? slots.default() : [];
+  return vnodes.some((v) => {
+    if (!v) return false;
+    const t = (v as any).type;
+    if (typeof t === "string") return t === "thead";
+    if (t && (t.name === "PMGTableHeader" || t.__name === "PMGTableHeader"))
+      return true;
+    return false;
+  });
 });
 
 // Selection state (used for manual composition mode)
@@ -55,6 +73,8 @@ function selectAll(checked: boolean) {
 
 provide("pmgTable", {
   selectable: props.selectable,
+  autoSelectColumn: props.autoSelectColumn,
+  sticky: props.sticky,
   registerRow,
   unregisterRow,
   toggleRowSelection,
@@ -74,10 +94,10 @@ function handleInView() {
 </script>
 
 <template>
-  <div :class="['w-full overflow-auto', wrapperClass]">
+  <div :class="['w-full', wrapperClass, { 'overflow-auto': !props.sticky }]">
     <table
       class="min-w-full border-collapse bg-white"
-      :class="[tableClass, { striped: striped, sticky: sticky }]"
+      :class="[tableClass, { striped: striped }]"
     >
       <slot />
     </table>
