@@ -27,7 +27,7 @@ const headerClass = computed(() => {
       ? (attrs as Record<string, any>).class
       : "bg-pmg-50",
   ];
-  if (table && table.sticky) base.push("sticky w-full top-0");
+  if (table && table.sticky) base.push("sticky w-full top-0 z-1");
   return base;
 });
 </script>

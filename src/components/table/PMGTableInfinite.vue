@@ -6,6 +6,7 @@ const props = defineProps({
   rootMargin: { type: String, default: "0px" },
   threshold: { type: [Number, Array], default: 0.1 },
   disabled: { type: Boolean, default: false },
+  visible: { type: Boolean, default: false },
 });
 
 const emit = defineEmits<{
@@ -89,9 +90,20 @@ watch(
   <div>
     <div
       ref="sentinel"
-      class="pmg-table-infinite-sentinel"
+      :class="[
+        'pmg-table-infinite-sentinel',
+        { 'pmg-table-infinite-visible': props.visible },
+      ]"
       aria-hidden="true"
-    />
+    >
+      <template v-if="props.visible">
+        <div class="pmg-table-skeleton mt-3 px-2">
+          <div class="animate-pulse space-y-2">
+            <div class="h-6 bg-pmg-50/50 rounded"></div>
+          </div>
+        </div>
+      </template>
+    </div>
   </div>
 </template>
 

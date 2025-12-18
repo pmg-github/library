@@ -167,28 +167,29 @@ export const InfiniteScroll = (args: any) => ({
     );
     const loading = ref(false);
 
-    function loadMore() {
+    // async loadMore returns a Promise so PMGTable can auto-detect loading
+    async function loadMore() {
       if (loading.value) return;
       loading.value = true;
-      setTimeout(() => {
-        const next = items.value.length;
-        items.value.push(
-          ...Array.from({ length: 40 }, (_, i) => ({
-            id: next + i + 1,
-            name: `Item ${next + i + 1}`,
-            email: `${next + i + 1}@example.com`,
-            role: "User",
-          }))
-        );
-        loading.value = false;
-      }, 600);
+      await new Promise((r) => setTimeout(r, 600));
+      const next = items.value.length;
+      items.value.push(
+        ...Array.from({ length: 40 }, (_, i) => ({
+          id: next + i + 1,
+          name: `Item ${next + i + 1}`,
+          email: `${next + i + 1}@example.com`,
+          role: "User",
+        }))
+      );
+      loading.value = false;
     }
 
     return { items, loading, loadMore };
   },
   template: `
     <section>
-      <PMGTable :infinite="loadMore" :loading="loading" sticky selectable>
+      <!-- simple usage: pass async handler only; sentinel will show loader -->
+      <PMGTable :infinite="loadMore" sticky selectable>
         <PMGTableHeader>
           <PMGTableHeaderCell>ID</PMGTableHeaderCell>
           <PMGTableHeaderCell>Name</PMGTableHeaderCell>

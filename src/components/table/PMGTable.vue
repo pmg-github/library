@@ -12,6 +12,7 @@ const props = defineProps({
   tableClass: { type: String, default: "" },
   selectable: { type: Boolean, default: false },
   autoSelectColumn: { type: Boolean, default: true },
+  infiniteVisible: { type: Boolean, default: false },
   rowKey: { type: String, default: "id" },
   infinite: {
     type: [Function, Object] as PropType<
@@ -23,18 +24,6 @@ const props = defineProps({
 });
 
 const slots = useSlots();
-
-const hasHeaderSlot = computed(() => {
-  const vnodes = slots.default ? slots.default() : [];
-  return vnodes.some((v) => {
-    if (!v) return false;
-    const t = (v as any).type;
-    if (typeof t === "string") return t === "thead";
-    if (t && (t.name === "PMGTableHeader" || t.__name === "PMGTableHeader"))
-      return true;
-    return false;
-  });
-});
 
 // Selection state (used for manual composition mode)
 const registeredRowKeys = ref(new Set<string | number>());
@@ -92,6 +81,7 @@ const internalInfiniteLoading = ref(false);
 async function handleInView() {
   try {
     if (!props.infinite) return;
+    if (internalInfiniteLoading.value) return;
 
     let handler: (() => any) | undefined;
     if (typeof props.infinite === "function")
@@ -104,16 +94,19 @@ async function handleInView() {
 
     if (!handler) return;
 
-    const res = handler();
-    if (res && typeof (res as any).then === "function") {
-      internalInfiniteLoading.value = true;
-      try {
+    internalInfiniteLoading.value = true;
+    try {
+      const res = handler();
+      if (res && typeof (res as any).then === "function") {
         await res;
-      } catch (e) {
-        // swallow user errors
-      } finally {
-        internalInfiniteLoading.value = false;
+      } else {
+        // small cooldown to avoid rapid retrigger for sync handlers
+        await new Promise((r) => setTimeout(r, 200));
       }
+    } catch (e) {
+      // swallow user errors
+    } finally {
+      internalInfiniteLoading.value = false;
     }
   } catch (e) {
     // swallow errors from user-provided callback
@@ -138,16 +131,14 @@ const effectiveLoading = computed(() => {
       <slot />
     </table>
 
-    <div v-if="effectiveLoading" class="pmg-table-skeleton mt-3 px-2">
-      <div class="animate-pulse space-y-2">
-        <div class="h-6 bg-pmg-50/50 rounded"></div>
-      </div>
-    </div>
-
+    <PMGTableInfinite
+      :disabled="internalInfiniteLoading"
+      :visible="effectiveLoading"
+      @in-view="handleInView"
+    />
     <div v-if="isEmpty" class="pmg-table-empty p-4 text-center text-gray-500">
       <slot name="empty">No items</slot>
     </div>
-    <PMGTableInfinite @in-view="handleInView" />
   </div>
 </template>
 

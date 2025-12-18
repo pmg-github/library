@@ -34,6 +34,10 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
         type: BooleanConstructor;
         default: boolean;
     };
+    infiniteVisible: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
     rowKey: {
         type: StringConstructor;
         default: string;
@@ -74,6 +78,10 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
         type: BooleanConstructor;
         default: boolean;
     };
+    infiniteVisible: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
     rowKey: {
         type: StringConstructor;
         default: string;
@@ -98,6 +106,7 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     tableClass: string;
     selectable: boolean;
     autoSelectColumn: boolean;
+    infiniteVisible: boolean;
     infinite: (() => any) | {
         handler: () => any;
         loading?: boolean;
