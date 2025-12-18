@@ -1,7 +1,7 @@
 <template>
   <th
     :class="[
-      'p-4 text-sm font-medium',
+      'px-4 py-2 text-sm font-medium',
       className,
       {
         'text-blue-600': isAscending || isDescending,

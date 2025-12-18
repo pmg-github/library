@@ -6,7 +6,7 @@ declare function __VLS_template(): {
         empty?(_: {}): any;
     };
     refs: {};
-    rootEl: any;
+    rootEl: HTMLDivElement;
 };
 type __VLS_TemplateResult = ReturnType<typeof __VLS_template>;
 declare const __VLS_component: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
@@ -39,7 +39,10 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
         default: string;
     };
     infinite: {
-        type: PropType<() => void>;
+        type: PropType<(() => any) | {
+            handler: () => any;
+            loading?: boolean;
+        }>;
         default: undefined;
     };
     loading: {
@@ -76,7 +79,10 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
         default: string;
     };
     infinite: {
-        type: PropType<() => void>;
+        type: PropType<(() => any) | {
+            handler: () => any;
+            loading?: boolean;
+        }>;
         default: undefined;
     };
     loading: {
@@ -92,8 +98,11 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     tableClass: string;
     selectable: boolean;
     autoSelectColumn: boolean;
-    infinite: () => void;
-}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+    infinite: (() => any) | {
+        handler: () => any;
+        loading?: boolean;
+    };
+}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;
 declare const _default: __VLS_WithTemplateSlots<typeof __VLS_component, __VLS_TemplateResult["slots"]>;
 export default _default;
 type __VLS_WithTemplateSlots<T, S> = T & {

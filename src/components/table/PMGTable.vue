@@ -13,7 +13,12 @@ const props = defineProps({
   selectable: { type: Boolean, default: false },
   autoSelectColumn: { type: Boolean, default: true },
   rowKey: { type: String, default: "id" },
-  infinite: { type: Function as PropType<() => void>, default: undefined },
+  infinite: {
+    type: [Function, Object] as PropType<
+      (() => any) | { handler: () => any; loading?: boolean }
+    >,
+    default: undefined,
+  },
   loading: { type: Boolean, default: false },
 });
 
@@ -82,15 +87,46 @@ provide("pmgTable", {
   selectAll,
   allSelected,
 });
+const internalInfiniteLoading = ref(false);
 
-function handleInView() {
+async function handleInView() {
   try {
-    props.infinite && props.infinite();
+    if (!props.infinite) return;
+
+    let handler: (() => any) | undefined;
+    if (typeof props.infinite === "function")
+      handler = props.infinite as () => any;
+    else if (
+      typeof props.infinite === "object" &&
+      typeof (props.infinite as any).handler === "function"
+    )
+      handler = (props.infinite as any).handler;
+
+    if (!handler) return;
+
+    const res = handler();
+    if (res && typeof (res as any).then === "function") {
+      internalInfiniteLoading.value = true;
+      try {
+        await res;
+      } catch (e) {
+        // swallow user errors
+      } finally {
+        internalInfiniteLoading.value = false;
+      }
+    }
   } catch (e) {
     // swallow errors from user-provided callback
-    // (parent components can handle their own errors)
   }
 }
+
+const effectiveLoading = computed(() => {
+  if (props.loading) return true;
+  if (internalInfiniteLoading.value) return true;
+  if (props.infinite && typeof props.infinite === "object")
+    return !!(props.infinite as any).loading;
+  return false;
+});
 </script>
 
 <template>
@@ -102,7 +138,7 @@ function handleInView() {
       <slot />
     </table>
 
-    <div v-if="props.loading" class="pmg-table-skeleton mt-3 px-2">
+    <div v-if="effectiveLoading" class="pmg-table-skeleton mt-3 px-2">
       <div class="animate-pulse space-y-2">
         <div class="h-6 bg-pmg-50/50 rounded"></div>
       </div>
@@ -111,8 +147,8 @@ function handleInView() {
     <div v-if="isEmpty" class="pmg-table-empty p-4 text-center text-gray-500">
       <slot name="empty">No items</slot>
     </div>
+    <PMGTableInfinite @in-view="handleInView" />
   </div>
-  <PMGTableInfinite @in-view="handleInView" />
 </template>
 
 <style scoped lang="postcss">
