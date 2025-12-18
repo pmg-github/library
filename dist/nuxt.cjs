@@ -76,5 +76,15 @@ var nuxt_default = (0, import_kit.defineNuxtModule)({
       export: "PMGTableCell",
       filePath: "pmg-library"
     });
+    (0, import_kit.addComponent)({
+      name: "PMGTable",
+      export: "PMGTable",
+      filePath: "pmg-library"
+    });
+    (0, import_kit.addComponent)({
+      name: "PMGTableBody",
+      export: "PMGTableBody",
+      filePath: "pmg-library"
+    });
   }
 });

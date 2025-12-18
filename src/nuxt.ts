@@ -65,6 +65,18 @@ export default defineNuxtModule<ModuleOptions>({
       filePath: "pmg-library",
     });
 
+    addComponent({
+      name: "PMGTable",
+      export: "PMGTable",
+      filePath: "pmg-library",
+    });
+
+    addComponent({
+      name: "PMGTableBody",
+      export: "PMGTableBody",
+      filePath: "pmg-library",
+    });
+
     // Add CSS from the library
   },
 });
