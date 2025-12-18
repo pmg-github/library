@@ -36,8 +36,8 @@ export default defineNuxtModule<ModuleOptions>({
     });
 
     addComponent({
-      name: "PMGTable",
-      export: "PMGTable",
+      name: "PMGPhoneInput",
+      export: "PMGPhoneInput",
       filePath: "pmg-library",
     });
 
@@ -48,20 +48,14 @@ export default defineNuxtModule<ModuleOptions>({
     });
 
     addComponent({
-      name: "PMGTableBody",
-      export: "PMGTableBody",
+      name: "PMGTableHeaderCell",
+      export: "PMGTableHeaderCell",
       filePath: "pmg-library",
     });
 
     addComponent({
       name: "PMGTableRow",
       export: "PMGTableRow",
-      filePath: "pmg-library",
-    });
-
-    addComponent({
-      name: "PMGTableHeaderCell",
-      export: "PMGTableHeaderCell",
       filePath: "pmg-library",
     });
 

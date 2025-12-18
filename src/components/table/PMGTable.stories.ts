@@ -1,179 +1,211 @@
-import type { Meta, StoryObj } from "@storybook/vue3";
-import { ref } from "vue";
 import PMGTable from "./PMGTable.vue";
+import PMGTableHeader from "./PMGTableHeader.vue";
+import PMGTableHeaderCell from "./PMGTableHeaderCell.vue";
+import PMGTableRow from "./PMGTableRow.vue";
+import PMGTableCell from "./PMGTableCell.vue";
+import PMGTableBody from "./PMGTableBody.vue";
+import PMGTableHeaderSelect from "./PMGTableHeaderSelect.vue";
+import { ref, computed, defineComponent, inject, onMounted, watch } from "vue";
 
-const meta: Meta<typeof PMGTable> = {
-  title: "PMG/Table",
+export default {
+  title: "Components/PMGTable",
   component: PMGTable,
-  tags: ["autodocs"],
-  argTypes: {
-    hover: { control: "boolean" },
-    bordered: { control: "boolean" },
-    responsive: { control: "boolean" },
-    stickyHeader: { control: "boolean" },
-    stickyFirstColumn: { control: "boolean" },
-    stickyLastColumn: { control: "boolean" },
-    selectable: { control: "boolean" },
-    multiple: { control: "boolean" },
-    sortable: { control: "boolean" },
-    maxHeight: { control: "text" },
-  },
-  args: {
-    hover: true,
-    bordered: true,
-    responsive: true,
-    stickyHeader: false,
-    stickyFirstColumn: false,
-    stickyLastColumn: false,
-    selectable: false,
-    multiple: false,
-    sortable: false,
-    maxHeight: "",
-  },
 };
 
-export default meta;
-export type Story = StoryObj<typeof PMGTable>;
+const Template = (args: any) => ({
+  components: {
+    PMGTable,
+    PMGTableBody,
+    PMGTableHeader,
+    PMGTableHeaderCell,
+    PMGTableRow,
+    PMGTableCell,
+  },
+  setup() {
+    return { args };
+  },
+  template: `
+		<PMGTable :items="args.items" :columns="args.columns" selectable />
+	`,
+});
 
-const demoColumns = [
-  { key: "id", label: "ID", width: "80px", align: "left", sortable: true },
-  { key: "name", label: "Name", minWidth: "160px", sortable: true },
-  { key: "email", label: "Email", minWidth: "220px" },
-  {
-    key: "joinedAt",
-    label: "Joined",
-    width: "140px",
-    type: "date",
-    align: "center",
-    sortable: true,
+export const Basic = (args: any) => ({
+  components: {
+    PMGTable,
+    PMGTableHeader,
+    PMGTableHeaderCell,
+    PMGTableBody,
+    PMGTableRow,
+    PMGTableCell,
+    PMGTableHeaderSelect,
   },
-  {
-    key: "active",
-    label: "Active",
-    width: "100px",
-    type: "boolean",
-    align: "center",
-  },
-  { key: "status", label: "Status", width: "120px", sortable: true },
-] as const;
+  setup() {
+    const items = ref([
+      { id: 1, name: "Alice", email: "alice@example.com", role: "Admin" },
+      { id: 2, name: "Bob", email: "bob@example.com", role: "Editor" },
+      { id: 3, name: "Carol", email: "carol@example.com", role: "Viewer" },
+      { id: 4, name: "Dan", email: "dan@example.com", role: "Editor" },
+      { id: 5, name: "Eve", email: "eve@example.com", role: "Admin" },
+      { id: 6, name: "Frank", email: "frank@example.com", role: "Viewer" },
+      { id: 7, name: "Grace", email: "grace@example.com", role: "Editor" },
+      { id: 8, name: "Heidi", email: "heidi@example.com", role: "Viewer" },
+      { id: 9, name: "Ivan", email: "ivan@example.com", role: "Admin" },
+      { id: 10, name: "Judy", email: "judy@example.com", role: "Editor" },
+      { id: 11, name: "Karl", email: "karl@example.com", role: "Viewer" },
+      { id: 12, name: "Laura", email: "laura@example.com", role: "Admin" },
+    ]);
 
-const demoRows = [
-  {
-    _selectionKey: "u-1001",
-    id: 1001,
-    name: "Ada Lovelace",
-    email: "ada@domain.com",
-    joinedAt: "2024-03-12",
-    active: true,
-    status: "Active",
-  },
-  {
-    _selectionKey: "u-1002",
-    id: 1002,
-    name: "Grace Hopper",
-    email: "grace@domain.com",
-    joinedAt: "2024-07-01",
-    active: true,
-    status: "Invited",
-  },
-  {
-    _selectionKey: "u-1003",
-    id: 1003,
-    name: "Linus Torvalds",
-    email: "linus@domain.com",
-    joinedAt: "2023-11-20",
-    active: false,
-    status: "Suspended",
-  },
-];
+    const original = items.value.slice();
+    const sortBy = ref<string | null>(null);
+    const sortDir = ref<"asc" | "desc" | null>(null);
+    const loading = ref(false);
+    function onRowClick(item: any) {
+      // eslint-disable-next-line no-console
+      console.log("row-click", item);
+    }
 
-export const Basic: Story = {
-  render: (args) => ({
-    components: { PMGTable },
-    setup() {
-      const columns = demoColumns as any;
-      const rows = demoRows as any;
-      return { args, columns, rows };
-    },
-    template: `
-      <div style="padding:16px">
-        <PMGTable v-bind="args" :columns="columns" :data="rows">
-          <template #cell-status="{ value }">
-            <span
-              class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium"
-              :class="{
-                'bg-green-50 text-green-700 ring-1 ring-green-200': value === 'Active',
-                'bg-yellow-50 text-yellow-700 ring-1 ring-yellow-200': value === 'Invited',
-                'bg-red-50 text-red-700 ring-1 ring-red-200': value === 'Suspended',
-              }"
-            >{{ value }}</span>
-          </template>
-        </PMGTable>
-      </div>
-    `,
-  }),
-};
-
-export const SelectableMultiple: Story = {
-  args: {
-    selectable: true,
-    multiple: true,
-    stickyHeader: true,
-    stickyFirstColumn: true,
-    maxHeight: "320px",
-  },
-  render: (args) => ({
-    components: { PMGTable },
-    setup() {
-      const columns = demoColumns as any;
-      const rows = demoRows as any;
-      const selected = ref<string[]>([]);
-      return { args, columns, rows, selected };
-    },
-    template: `
-      <div style="padding:16px">
-        <PMGTable
-          v-bind="args"
-          :columns="columns"
-          :data="rows"
-          v-model:selected="selected"
-        />
-        <div class="mt-3 text-pmg-600 text-sm">Selected: {{ selected }}</div>
-      </div>
-    `,
-  }),
-};
-
-export const Sortable: Story = {
-  args: { sortable: true, sortKey: "name", sortDirection: "asc" },
-  render: (args) => ({
-    components: { PMGTable },
-    setup() {
-      const columns = demoColumns as any;
-      const rows = demoRows as any;
-      const sortKey = ref<string>(args.sortKey as string);
-      const sortDirection = ref<"asc" | "desc">(
-        args.sortDirection as "asc" | "desc"
-      );
-      function onSort(column: string, direction: "asc" | "desc") {
-        // Keep in sync if you want to show current sort externally
-        sortKey.value = column;
-        sortDirection.value = direction;
-        console.log("sort", { column, direction });
+    function onHeaderSort(key: string) {
+      // toggle sort state
+      if (sortBy.value !== key) {
+        sortBy.value = key;
+        sortDir.value = "asc";
+      } else if (sortDir.value === "asc") {
+        sortDir.value = "desc";
+      } else {
+        sortBy.value = null;
+        sortDir.value = null;
       }
-      return { args, columns, rows, sortKey, sortDirection, onSort };
-    },
-    template: `
-      <div style="padding:16px">
-        <PMGTable
-          v-bind="args"
-          :columns="columns"
-          :data="rows"
-          v-model:sortKey="sortKey"
-          v-model:sortDirection="sortDirection"
-          @sort="onSort"
-        />
-      </div>
-    `,
-  }),
-};
+
+      // simulate remote fetch with a short delay and show loading indicator
+      loading.value = true;
+      setTimeout(() => {
+        if (!sortBy.value) {
+          items.value = original.slice();
+          loading.value = false;
+          return;
+        }
+
+        const dir = sortDir.value === "desc" ? -1 : 1;
+        items.value = original.slice().sort((a, b) => {
+          const A = a[sortBy.value!];
+          const B = b[sortBy.value!];
+          if (A == null && B == null) return 0;
+          if (A == null) return -1 * dir;
+          if (B == null) return 1 * dir;
+          if (typeof A === "number" && typeof B === "number")
+            return (A - B) * dir;
+          return String(A).localeCompare(String(B)) * dir;
+        });
+        loading.value = false;
+      }, 450);
+    }
+
+    return { items, onRowClick, onHeaderSort, sortBy, sortDir, loading };
+  },
+  template: `
+    <section>
+      <h3>Manual composition (all subcomponents)</h3>
+      <PMGTable selectable sticky striped class="min-w-full border-collapse">
+        <PMGTableHeader>
+            <PMGTableHeaderCell ><PMGTableHeaderSelect /></PMGTableHeaderCell>
+            <PMGTableHeaderCell
+              @sort="() => onHeaderSort('id')"
+              :ariaSort="sortBy==='id' ? (sortDir==='asc' ? 'ascending' : 'descending') : 'none'"
+              :loading="loading && sortBy==='id'"
+            >
+              <span class="flex items-center gap-2">ID</span>
+            </PMGTableHeaderCell>
+            <PMGTableHeaderCell
+              @sort="() => onHeaderSort('name')"
+              :ariaSort="sortBy==='name' ? (sortDir==='asc' ? 'ascending' : 'descending') : 'none'"
+              :loading="loading && sortBy==='name'"
+            >
+              <span class="flex items-center gap-2">Name</span>
+            </PMGTableHeaderCell>
+            <PMGTableHeaderCell>Email</PMGTableHeaderCell>
+            <PMGTableHeaderCell
+              @sort="() => onHeaderSort('role')"
+              :ariaSort="sortBy==='role' ? (sortDir==='asc' ? 'ascending' : 'descending') : 'none'"
+              :loading="loading && sortBy==='role'"
+            >
+              <span class="flex items-center gap-2">Role</span>
+            </PMGTableHeaderCell>
+            <PMGTableHeaderCell align="right">Actions</PMGTableHeaderCell>
+        </PMGTableHeader>
+        <PMGTableBody>
+          <PMGTableRow v-for="item in items" :key="item.id" :item="item" @click="onRowClick(item)">
+            <PMGTableCell><div class="flex flex-col gap-2 justify-end">{{ item.id }} <span>test</span></div></PMGTableCell>
+            <PMGTableCell><a :href="'/user/' + item.id">{{ item.name }}</a></PMGTableCell>
+            <PMGTableCell>{{ item.email }}</PMGTableCell>
+            <PMGTableCell>{{ item.role }}</PMGTableCell>
+            <PMGTableCell align="right"><button class="px-2 py-1 bg-blue-500 text-white rounded">Action</button></PMGTableCell>
+          </PMGTableRow>
+        </PMGTableBody>
+      </PMGTable>
+    </section>
+  `,
+});
+
+export const InfiniteScroll = (args: any) => ({
+  components: {
+    PMGTable,
+    PMGTableHeader,
+    PMGTableHeaderCell,
+    PMGTableBody,
+    PMGTableRow,
+    PMGTableCell,
+    PMGTableHeaderSelect,
+  },
+  setup() {
+    const items = ref(
+      Array.from({ length: 20 }, (_, i) => ({
+        id: i + 1,
+        name: `Item ${i + 1}`,
+        email: `${i + 1}@example.com`,
+        role: "User",
+      }))
+    );
+    const loading = ref(false);
+
+    function loadMore() {
+      if (loading.value) return;
+      loading.value = true;
+      setTimeout(() => {
+        const next = items.value.length;
+        items.value.push(
+          ...Array.from({ length: 40 }, (_, i) => ({
+            id: next + i + 1,
+            name: `Item ${next + i + 1}`,
+            email: `${next + i + 1}@example.com`,
+            role: "User",
+          }))
+        );
+        loading.value = false;
+      }, 600);
+    }
+
+    return { items, loading, loadMore };
+  },
+  template: `
+    <section>
+      <PMGTable :infinite="loadMore" :loading="loading" sticky wrapperClass="h-full" selectable>
+        <PMGTableHeader>
+          <PMGTableHeaderCell @sort=><PMGTableHeaderSelect /></PMGTableHeaderCell>
+          <PMGTableHeaderCell>ID</PMGTableHeaderCell>
+          <PMGTableHeaderCell>Name</PMGTableHeaderCell>
+          <PMGTableHeaderCell>Email</PMGTableHeaderCell>
+          <PMGTableHeaderCell>Role</PMGTableHeaderCell>
+        </PMGTableHeader>
+        <PMGTableBody>
+          <PMGTableRow v-for="item in items" :key="item.id" :item="item">
+            <PMGTableCell>{{ item.id }}</PMGTableCell>
+            <PMGTableCell>{{ item.name }}</PMGTableCell>
+            <PMGTableCell>{{ item.email }}</PMGTableCell>
+            <PMGTableCell>{{ item.role }}</PMGTableCell>
+          </PMGTableRow>
+        </PMGTableBody>
+      </PMGTable>
+      
+    </section>
+  `,
+});
