@@ -42,7 +42,23 @@ const allSelected = computed(() => {
   return keys.length > 0 && keys.every((k) => internalSelected.value.has(k));
 });
 
-const isEmpty = computed(() => registeredRowKeys.value.size === 0);
+// Improved: isEmpty checks for presence of data rows in the default slot
+import { useSlots } from "vue";
+const slots = useSlots();
+const isEmpty = computed(() => {
+  // If there are no registered row keys, and no default slot content, consider empty
+  if (registeredRowKeys.value.size > 0) return false;
+  // If slot is provided, check if it renders any content
+  const slotContent = slots.default ? slots.default() : [];
+  // Filter out empty text nodes and comments
+  return (
+    slotContent.filter(
+      (vnode) =>
+        vnode.type !== Comment &&
+        !(typeof vnode.children === "string" && vnode.children.trim() === "")
+    ).length === 0
+  );
+});
 
 function selectAll(checked: boolean) {
   if (checked) {
@@ -84,7 +100,7 @@ function handleInView() {
     </table>
 
     <PMGTableInfinite
-      v-if="props.infinite && props.loading"
+      :disabled="props.loading"
       :visible="props.loading"
       @in-view="handleInView"
     />
