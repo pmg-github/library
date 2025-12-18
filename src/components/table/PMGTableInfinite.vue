@@ -87,7 +87,7 @@ watch(
 </script>
 
 <template>
-  <div>
+  <div v-show="visible">
     <div ref="sentinel" class="pmg-table-skeleton mt-3 px-2">
       <div class="animate-pulse space-y-2">
         <div class="h-6 bg-pmg-50/50 rounded"></div>

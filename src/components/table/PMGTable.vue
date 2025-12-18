@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, provide, PropType } from "vue";
 import PMGTableInfinite from "./PMGTableInfinite.vue";
-// Removed unnecessary imports
 
 const props = defineProps({
   striped: { type: Boolean, default: false },
@@ -84,7 +83,11 @@ function handleInView() {
       <slot />
     </table>
 
-    <PMGTableInfinite :disabled="props.loading" :visible="props.loading" @in-view="handleInView" />
+    <PMGTableInfinite
+      :disabled="props.loading"
+      :visible="props.loading"
+      @in-view="handleInView"
+    />
     <div v-if="isEmpty" class="pmg-table-empty p-4 text-center text-gray-500">
       <slot name="empty">No items</slot>
     </div>
