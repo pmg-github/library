@@ -17,6 +17,10 @@
       "types": "./dist/types/index.d.ts",
       "import": "./dist/pmg-library.js"
     },
+    "./gallery": {
+      "types": "./src/extensions/Gallery.ts",
+      "import": "./src/extensions/Gallery.ts"
+    },
     "./nuxt.config": "./nuxt.config.ts"
   },
   "files": [

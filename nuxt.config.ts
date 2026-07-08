@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     {
       path: "~/components",
       pathPrefix: false,
+      ignore: ["**/tiptap/**"], // Exclude TipTap components from auto-import
     },
   ],
   build: {

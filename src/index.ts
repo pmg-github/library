@@ -8,7 +8,6 @@ import PMGTableRow from "./components/table/PMGTableRow.vue";
 import PMGTableCell from "./components/table/PMGTableCell.vue";
 import PMGTable from "./components/table/PMGTable.vue";
 import PMGTableBody from "./components/table/PMGTableBody.vue";
-import PMGGallery from "./components/tiptap/Gallery.vue";
 import PMGModal from "./components/layout/PMGModal.vue";
 
 // Export for individual imports
@@ -22,11 +21,10 @@ export {
   PMGTableCell,
   PMGTable,
   PMGTableBody,
-  PMGGallery,
   PMGModal,
 };
 
-// Export TipTap extension
+// Export TipTap extension (requires @tiptap/vue-3)
 export { Gallery } from "./extensions/Gallery";
 export type { GalleryImage } from "./extensions/Gallery";
 
@@ -42,7 +40,7 @@ export default {
     app.component("PMGTableCell", PMGTableCell);
     app.component("PMGTable", PMGTable);
     app.component("PMGTableBody", PMGTableBody);
-    app.component("PMGGallery", PMGGallery);
     app.component("PMGModal", PMGModal);
+    // Note: PMGGallery not registered - requires @tiptap/vue-3
   },
 };
