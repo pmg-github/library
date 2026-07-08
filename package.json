@@ -16,7 +16,8 @@
     ".": {
       "types": "./dist/types/index.d.ts",
       "import": "./dist/pmg-library.js"
-    }
+    },
+    "./nuxt.config": "./nuxt.config.ts"
   },
   "files": [
     "dist",
