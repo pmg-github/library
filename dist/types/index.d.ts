@@ -8,7 +8,11 @@ import { default as PMGTableRow } from './components/table/PMGTableRow.vue';
 import { default as PMGTableCell } from './components/table/PMGTableCell.vue';
 import { default as PMGTable } from './components/table/PMGTable.vue';
 import { default as PMGTableBody } from './components/table/PMGTableBody.vue';
-export { PMGButton, PMGInput, PMGPhoneInput, PMGTableHeader, PMGTableHeaderCell, PMGTableRow, PMGTableCell, PMGTable, PMGTableBody, };
+import { default as PMGGallery } from './components/tiptap/Gallery.vue';
+import { default as PMGModal } from './components/layout/PMGModal.vue';
+export { PMGButton, PMGInput, PMGPhoneInput, PMGTableHeader, PMGTableHeaderCell, PMGTableRow, PMGTableCell, PMGTable, PMGTableBody, PMGGallery, PMGModal, };
+export { Gallery } from './extensions/Gallery';
+export type { GalleryImage } from './extensions/Gallery';
 declare const _default: {
     install(app: App): void;
 };

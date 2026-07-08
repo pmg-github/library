@@ -28,7 +28,6 @@ function getScrollParent(el: Element | null): Element | null {
 
 function createObserver() {
   if (observer) observer.disconnect();
-  if (props.disabled) return;
   if (
     typeof window === "undefined" ||
     typeof IntersectionObserver === "undefined"

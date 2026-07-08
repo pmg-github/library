@@ -10,6 +10,7 @@ export default defineConfig({
     dts({
       insertTypesEntry: true,
       outDir: "dist/types",
+      exclude: ["src/nuxt.ts"],
       beforeWriteFile: (filePath, content) => {
         return {
           filePath: filePath.replace(/\/src\//, "/"),
@@ -26,11 +27,14 @@ export default defineConfig({
       fileName: "pmg-library",
     },
     rollupOptions: {
-      external: ["vue", "vee-validate"],
+      external: ["vue", "vee-validate", "@tiptap/core", "@tiptap/vue-3", "@headlessui/vue"],
       output: {
         globals: {
           vue: "Vue",
           "vee-validate": "VeeValidate",
+          "@tiptap/core": "TiptapCore",
+          "@tiptap/vue-3": "TiptapVue3",
+          "@headlessui/vue": "HeadlessUI",
         },
         exports: "named",
       },

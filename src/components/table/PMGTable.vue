@@ -100,6 +100,6 @@ function handleInView() {
 <style scoped lang="postcss">
 /* Striped rows (use deep selector so it reaches into child components) */
 .striped ::v-deep tbody tr:nth-child(odd) {
-  @apply bg-pmg-200;
+  background-color: var(--color-pmg-200);
 }
 </style>

@@ -1,10 +1,6 @@
 import { defineNuxtModule, addComponent } from "@nuxt/kit";
 
-interface ModuleOptions {
-  prefix?: string;
-}
-
-export default defineNuxtModule<ModuleOptions>({
+export default defineNuxtModule({
   meta: {
     name: "pmg-library",
     configKey: "pmgLibrary",
@@ -12,13 +8,8 @@ export default defineNuxtModule<ModuleOptions>({
       nuxt: "^3.0.0",
     },
   },
-  defaults: {
-    prefix: "",
-  },
-  setup(_options: ModuleOptions, nuxt: any) {
-    // Ensure vee-validate is transpiled
-    nuxt.options.build = nuxt.options.build || {};
-    nuxt.options.build.transpile = nuxt.options.build.transpile || [];
+  setup(_options, nuxt: any) {
+    nuxt.options.build.transpile ??= [];
     if (!nuxt.options.build.transpile.includes("vee-validate")) {
       nuxt.options.build.transpile.push("vee-validate");
     }
@@ -76,7 +67,5 @@ export default defineNuxtModule<ModuleOptions>({
       export: "PMGTableBody",
       filePath: "pmg-library",
     });
-
-    // Add CSS from the library
   },
 });

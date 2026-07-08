@@ -25,9 +25,9 @@ const headerClass = computed(() => {
     "border-b border-pmg-100",
     (attrs as Record<string, any>).class
       ? (attrs as Record<string, any>).class
-      : "bg-pmg-50",
+      : "bg-gray-50",
   ];
-  if (table && table.sticky) base.push("sticky w-full top-0 z-[2]");
+  if (table && table.sticky) base.push("sticky w-full top-0 z-[2] shadow-sm");
   return base;
 });
 </script>
