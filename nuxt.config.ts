@@ -1,5 +1,7 @@
+import { fileURLToPath } from "node:url";
+
 export default defineNuxtConfig({
-  css: ["./assets/index.css"],
+  css: [fileURLToPath(new URL("./assets/index.css", import.meta.url))],
 
   components: [
     {
