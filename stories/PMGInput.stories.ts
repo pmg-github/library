@@ -1,4 +1,4 @@
-import PMGInput from "../components/form/PMGInput.vue";
+import PMGInput from "../components/form/Input.vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import { Form } from "vee-validate";
 import { object, string } from "yup";

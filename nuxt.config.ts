@@ -4,12 +4,12 @@ export default defineNuxtConfig({
   components: [
     {
       path: "./components",
-      prefix: "Pmg",
+      prefix: "PMG",
       ignore: ["**/tiptap/**"],
     },
     {
       path: "./components/tiptap",
-      prefix: "PmgTiptap",
+      prefix: "PMGTiptap",
     },
   ],
 

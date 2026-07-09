@@ -1,10 +1,10 @@
-import PMGTable from "../components/table/PMGTable.vue";
-import PMGTableHeader from "../components/table/PMGTableHeader.vue";
-import PMGTableHeaderCell from "../components/table/PMGTableHeaderCell.vue";
-import PMGTableRow from "../components/table/PMGTableRow.vue";
-import PMGTableCell from "../components/table/PMGTableCell.vue";
-import PMGTableBody from "../components/table/PMGTableBody.vue";
-import PMGTableHeaderSelect from "../components/table/PMGTableHeaderSelect.vue";
+import PMGTable from "../components/table/Table.vue";
+import PMGTableHeader from "../components/table/TableHeader.vue";
+import PMGTableHeaderCell from "../components/table/TableHeaderCell.vue";
+import PMGTableRow from "../components/table/TableRow.vue";
+import PMGTableCell from "../components/table/TableCell.vue";
+import PMGTableBody from "../components/table/TableBody.vue";
+import PMGTableHeaderSelect from "../components/table/TableHeaderSelect.vue";
 import { ref, computed, defineComponent, inject, onMounted, watch } from "vue";
 
 export default {

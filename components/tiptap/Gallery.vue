@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { NodeViewWrapper } from "@tiptap/vue-3";
-import PMGModal from "../layout/PMGModal.vue";
+import Modal from "../layout/Modal.vue";
 
 export interface GalleryImage {
   id: number;
@@ -293,7 +293,7 @@ const onDrop = async (e: DragEvent) => {
     </small>
 
     <!-- Modal for managing images (only when editable) -->
-    <PMGModal
+    <Modal
       v-if="isEditable"
       v-model:open="isModalOpen"
       size="4xl"
@@ -386,6 +386,6 @@ const onDrop = async (e: DragEvent) => {
           </div>
         </div>
       </slot>
-    </PMGModal>
+    </Modal>
   </NodeViewWrapper>
 </template>

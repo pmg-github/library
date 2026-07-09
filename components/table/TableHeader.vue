@@ -1,9 +1,9 @@
 <template>
   <thead :class="headerClass">
     <tr>
-      <PMGTableHeaderCell v-if="table?.selectable" class="w-16">
-        <PMGTableHeaderSelect />
-      </PMGTableHeaderCell>
+      <TableHeaderCell v-if="table?.selectable" class="w-16">
+        <TableHeaderSelect />
+      </TableHeaderCell>
       <slot />
     </tr>
   </thead>
@@ -11,9 +11,8 @@
 
 <script setup lang="ts">
 import { useAttrs, computed, inject } from "vue";
-import PMGTableHeaderCell from "./PMGTableHeaderCell.vue";
-import PMGTableHeaderSelect from "./PMGTableHeaderSelect.vue";
-defineOptions({ name: "PMGTableHeader" });
+import TableHeaderCell from "./TableHeaderCell.vue";
+import TableHeaderSelect from "./TableHeaderSelect.vue";
 
 const table = inject<any>("pmgTable", null);
 

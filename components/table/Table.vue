@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, provide, PropType } from "vue";
-import PMGTableInfinite from "./PMGTableInfinite.vue";
+import TableInfinite from "./TableInfinite.vue";
 
 const props = defineProps({
   striped: { type: Boolean, default: false },
@@ -83,7 +83,7 @@ function handleInView() {
       <slot />
     </table>
 
-    <PMGTableInfinite
+    <TableInfinite
       v-if="props.infinite && props.loading"
       :visible="props.loading"
       @in-view="handleInView"

@@ -1,9 +1,4 @@
 <script setup lang="ts">
-import { defineComponent } from "vue";
-
-defineComponent({
-  name: "PMGButton",
-});
 defineProps({
   disabled: { type: Boolean, default: false },
   size: {
@@ -31,10 +26,10 @@ defineEmits(["click"]);
       size === 'sm'
         ? 'text-sm'
         : size === 'md'
-        ? 'text-base'
-        : size === 'lg'
-        ? 'text-lg'
-        : '',
+          ? 'text-base'
+          : size === 'lg'
+            ? 'text-lg'
+            : '',
       theme === 'primary' ? 'bg-blue-500 text-white hover:bg-blue-600' : '',
       theme === 'secondary' ? 'bg-gray-500 text-white hover:bg-gray-600' : '',
       theme === 'success' ? 'bg-green-500 text-white hover:bg-green-600' : '',

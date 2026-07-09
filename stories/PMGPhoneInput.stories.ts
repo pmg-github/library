@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
 import { Form } from "vee-validate";
 import { object, string } from "yup";
-import PMGPhoneInput from "../components/form/PMGPhoneInput.vue";
+import PMGPhoneInput from "../components/form/PhoneInput.vue";
 
 const meta: Meta<typeof PMGPhoneInput> = {
   title: "PMG/PhoneInput",
