@@ -15,16 +15,23 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "declaration": true,
-    "declarationDir": "./dist/types",
-    "emitDeclarationOnly": false
+    "declaration": false
   },
-  "include": ["src/**/*"],
+  "include": [
+    "components/**/*",
+    "composables/**/*",
+    "plugins/**/*",
+    "tiptap/**/*",
+    "stories/**/*",
+    "shims-vue.d.ts",
+    "nuxt.config.ts"
+  ],
   "exclude": [
     "**/*.stories.ts",
     "**/*.stories.d.ts",
     "**/*.stories.js",
     "auto-imports.d.ts",
-    "components.d.ts"
+    "components.d.ts",
+    "dist"
   ]
 }

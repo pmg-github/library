@@ -3,14 +3,13 @@ import colors from "tailwindcss/colors";
 module.exports = {
   content: [
     "./components/**/*.{js,vue,ts}",
-    "./src/**/*.{js,vue,ts}",
-    "./src/**/*.stories.{js,ts}",
+    "./composables/**/*.{js,ts}",
+    "./plugins/**/*.{js,ts}",
+    "./stories/**/*.{js,ts}",
     "./.storybook/**/*.{js,ts}",
     "./layouts/**/*.vue",
     "./pages/**/*.vue",
-    "./plugins/**/*.{js,ts}",
     "./app.vue",
-    "./error.vue",
   ],
 
   theme: {

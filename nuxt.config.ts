@@ -1,17 +1,25 @@
-import { defineNuxtConfig } from "nuxt/config";
-
 export default defineNuxtConfig({
-  srcDir: "src",
-  css: ["./src/index.css"],
+  css: ["./assets/index.css"],
+
   components: [
     {
-      path: "~/components",
-      pathPrefix: false,
-      ignore: ["**/tiptap/**"], // Exclude TipTap components from auto-import
+      path: "./components",
+      prefix: "Pmg",
+      ignore: ["**/tiptap/**"],
+    },
+    {
+      path: "./components/tiptap",
+      prefix: "PmgTiptap",
     },
   ],
-  build: {
-    transpile: ["vee-validate", "@tiptap/vue-3"],
+
+  imports: {
+    dirs: ["./composables"],
   },
+
+  build: {
+    transpile: ["vee-validate", "@tiptap/vue-3", "@headlessui/vue"],
+  },
+
   compatibilityDate: "2026-07-08",
 });
