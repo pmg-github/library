@@ -1,7 +1,6 @@
-import { fileURLToPath } from "node:url";
-
 export default defineNuxtConfig({
-  css: [fileURLToPath(new URL("./assets/index.css", import.meta.url))],
+  // CSS removed - consuming apps should add it themselves if needed
+  // css: [fileURLToPath(new URL("./assets/index.css", import.meta.url))],
 
   components: [
     {
