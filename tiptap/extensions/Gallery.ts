@@ -1,6 +1,6 @@
 import { Node } from "@tiptap/core";
 import { VueNodeViewRenderer } from "@tiptap/vue-3";
-import GalleryComponent from "../components/tiptap/Gallery.vue";
+import GalleryComponent from "../../components/tiptap/Gallery.vue";
 
 export interface GalleryImage {
   id: number;
