@@ -1,20 +1,21 @@
 import { defineNuxtConfig } from "nuxt/config";
+import { fileURLToPath } from "node:url";
 
 export default defineNuxtConfig({
   components: [
     {
-      path: "./components",
+      path: fileURLToPath(new URL("./components", import.meta.url)),
       prefix: "PMG",
       ignore: ["**/tiptap/**"],
     },
     {
-      path: "./components/tiptap",
+      path: fileURLToPath(new URL("./components/tiptap", import.meta.url)),
       prefix: "PMGTiptap",
     },
   ],
 
   imports: {
-    dirs: ["./composables"],
+    dirs: [fileURLToPath(new URL("./composables", import.meta.url))],
   },
 
   build: {
