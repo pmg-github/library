@@ -8,6 +8,14 @@ import type {
 export function useFetchVideos() {
   const { locale } = useI18n();
   const api = useApi();
+
+  const getLocale = () => {
+    const i18nLocale = (useNuxtApp() as any).$i18n?.locale;
+    if (typeof i18nLocale === 'string') return i18nLocale;
+    if (typeof i18nLocale?.value === 'string') return i18nLocale.value;
+    return 'nl';
+  };
+
   const getProjects = (
     options: {
       keyword?: string;

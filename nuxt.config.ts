@@ -22,5 +22,14 @@ export default defineNuxtConfig({
     transpile: ["vee-validate", "@tiptap/vue-3", "@headlessui/vue"],
   },
 
+  modules: ["@nuxtjs/i18n"],
+
+  i18n: {
+    locales: [
+      { code: "en", file: "en.json" },
+      { code: "nl", file: "nl.json" },
+    ],
+  },
+
   compatibilityDate: "2026-07-08",
 });
