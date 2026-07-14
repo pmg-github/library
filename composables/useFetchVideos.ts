@@ -4,6 +4,8 @@ import type {
   BoVideoDetailViewModel,
   FetchOpts,
 } from "models";
+import { useApi } from "./useApi";
+import { useI18n } from "vue-i18n";
 
 export function useFetchVideos() {
   const { locale } = useI18n();
