@@ -1,4 +1,7 @@
 import type { StorybookConfig } from "@storybook/vue3-vite";
+import { mergeConfig } from "vite";
+import autoprefixer from "autoprefixer";
+import tailwindcss from "@tailwindcss/postcss";
 
 const config: StorybookConfig = {
   stories: [
@@ -9,6 +12,15 @@ const config: StorybookConfig = {
   framework: {
     name: "@storybook/vue3-vite",
     options: {},
+  },
+  async viteFinal(baseConfig) {
+    return mergeConfig(baseConfig, {
+      css: {
+        postcss: {
+          plugins: [tailwindcss(), autoprefixer()],
+        },
+      },
+    });
   },
 };
 export default config;

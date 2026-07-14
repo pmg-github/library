@@ -3,18 +3,11 @@ import type {
   BoVideoViewModelWitCursorAndContent,
   BoVideoDetailViewModel,
   FetchOpts,
-} from 'models';
+} from "models";
 
 export function useFetchVideos() {
   const { locale } = useI18n();
   const api = useApi();
-
-  const getLocale = () => {
-    const i18nLocale = (useNuxtApp() as any).$i18n?.locale;
-    if (typeof i18nLocale === 'string') return i18nLocale;
-    if (typeof i18nLocale?.value === 'string') return i18nLocale.value;
-    return 'nl';
-  };
 
   const getProjects = (
     options: {
@@ -38,11 +31,11 @@ export function useFetchVideos() {
         normalArray.forEach((value) => params.append(key, value.toString()));
       }
     };
-    appendParam('keyword', options.keyword);
-    appendParam('limit', options.limit);
-    appendParam('cursor', options.cursor);
-    appendArray('producerCodes', options.producerCodes);
-    appendArray('ownerCodes', options.ownerCodes);
+    appendParam("keyword", options.keyword);
+    appendParam("limit", options.limit);
+    appendParam("cursor", options.cursor);
+    appendArray("producerCodes", options.producerCodes);
+    appendArray("ownerCodes", options.ownerCodes);
     return api(`/api/bo/videos/project/search?${params.toString()}`, {
       signal: fetchOpts?.signal,
     });
@@ -58,13 +51,13 @@ export function useFetchVideos() {
     statusId: number,
   ): Promise<BoVideoListViewModel[]> => {
     return api(`/api/bo/videos/status/${id}`, {
-      method: 'PUT',
+      method: "PUT",
       body: { statusId },
     });
   };
   const deleteVideo = (id: number): Promise<BoVideoListViewModel[]> => {
     return api(`/api/bo/videos/${id}`, {
-      method: 'DELETE',
+      method: "DELETE",
     });
   };
   const getVision = (id: number): Promise<string> => {
@@ -72,7 +65,7 @@ export function useFetchVideos() {
   };
   const getJobCodeFromArticle = (reference: string): Promise<string> => {
     return api(`/api/bo/videos/job-code/`, {
-      method: 'POST',
+      method: "POST",
       body: { reference },
     });
   };

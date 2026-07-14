@@ -22,11 +22,21 @@ export default defineNuxtConfig({
     transpile: ["vee-validate", "@tiptap/vue-3", "@headlessui/vue"],
   },
 
+  postcss: {
+    plugins: {
+      "@tailwindcss/postcss": {},
+      autoprefixer: {},
+    },
+  },
+
   modules: ["@nuxtjs/i18n"],
 
   i18n: {
+    defaultLocale: "nl",
+    langDir: "locales",
     locales: [
       { code: "en", file: "en.json" },
+      { code: "fr", file: "fr.json" },
       { code: "nl", file: "nl.json" },
     ],
   },
