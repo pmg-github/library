@@ -2,7 +2,7 @@
   "name": "pmg-library",
   "private": true,
   "version": "0.0.1",
-  "description": "A Vue 3 component library integration for Nuxt projects",
+  "description": "Shared PMG Nuxt layer for internal main projects",
   "keywords": [
     "vue",
     "nuxt",
@@ -10,33 +10,20 @@
     "vee-validate"
   ],
   "type": "module",
-  "main": "./nuxt.config.ts",
-  "exports": {
-    ".": "./nuxt.config.ts",
-    "./tiptap/extensions/gallery": "./tiptap/extensions/Gallery.ts"
-  },
-  "files": [
-    "components",
-    "composables",
-    "plugins",
-    "assets",
-    "tiptap",
-    "nuxt.config.ts"
-  ],
   "scripts": {
     "dev": "nuxi dev",
     "prepare": "nuxi prepare",
+    "typecheck": "vue-tsc --noEmit",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@headlessui/vue": "^1.7.0",
     "reka-ui": "^2.4.1"
   },
   "peerDependencies": {
     "@tiptap/core": "^3.0.0",
     "@tiptap/vue-3": "^3.0.0",
-    "nuxt": "^3.0.0 || ^4.0.0",
+    "nuxt": "^4.0.0",
     "vee-validate": "^4.15.0",
     "vue": "^3.5.13",
     "yup": "^1.6.1"
@@ -69,7 +56,7 @@
     "@types/node": "^24.0.1",
     "@vitejs/plugin-vue": "^5.2.3",
     "autoprefixer": "^10.4.21",
-    "nuxt": "^3.0.0",
+    "nuxt": "^4.0.0",
     "postcss": "^8.5.5",
     "storybook": "^9.0.8",
     "tailwindcss": "^4.1.10",

@@ -3,6 +3,8 @@
 A reusable Vue 3 component library built with TypeScript and Vite.  
 This library provides a set of pre-styled, accessible UI components for use in Vue 3 projects.
 
+This repository is intended to be consumed as a **Nuxt layer** via `extends`, not as a published npm package.
+
 ---
 
 ## Features
@@ -11,27 +13,27 @@ This library provides a set of pre-styled, accessible UI components for use in V
 - **TypeScript** types included
 - **Tailwind CSS** utility classes for styling
 - **Storybook** for interactive component documentation
-- **Ready for Nuxt 3 and Vite projects**
+- **Ready for Nuxt 4 projects**
 
 ---
 
 ## Installation
 
-```sh
-npm install https://github.com/pmg-github/library.git
-```
+## Nuxt Layer Integration (Recommended)
 
-### For Nuxt 3 Projects (Auto-import)
+### For Nuxt 4 Projects (Auto-import)
 
-To enable auto-importing of components in Nuxt 3, add the module to your `nuxt.config.ts`:
+Use this repository as a Nuxt layer from your main project.
+
+In your main project `nuxt.config.ts`:
 
 ```typescript
 export default defineNuxtConfig({
-  modules: ["pmg-library/nuxt"],
+  extends: ["../library"],
 });
 ```
 
-After adding the module, all PMG components will be auto-imported and available globally in your Nuxt project without explicit imports.
+After adding the layer, PMG components are auto-imported and available globally without explicit imports.
 
 📖 **For detailed Nuxt setup instructions, see [NUXT_SETUP.md](./NUXT_SETUP.md)**
 
@@ -61,30 +63,10 @@ const handleClick = () => {
 </script>
 ```
 
-### For Vue 3 Projects
+### For Vue 3 Projects (Non-Nuxt)
 
-You can either install the plugin globally or import components individually.
-
-**Global Plugin Installation:**
-
-```typescript
-// main.ts
-import { createApp } from "vue";
-import PMGLibrary from "pmg-library";
-import App from "./App.vue";
-
-const app = createApp(App);
-app.use(PMGLibrary);
-app.mount("#app");
-```
-
-**Individual Component Import:**
-
-```vue
-<script setup>
-import { PMGButton, PMGInput } from "pmg-library";
-</script>
-```
+This repository currently does not expose a standalone Vue plugin entrypoint.
+Use Nuxt layer integration as the supported path.
 
 ---
 
@@ -147,4 +129,4 @@ You get full IntelliSense and type checking when using the components.
 
 **For backend developers:**  
 This library is intended for frontend integration in Vue/Nuxt apps.  
-See the [Storybook](#storybook) or the `src/components` directory for available UI components and their props/events.
+See the [Storybook](#storybook) or the `components` directory for available UI components and their props/events.

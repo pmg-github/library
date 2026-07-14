@@ -5,29 +5,12 @@ import PMGTableRow from "../components/table/TableRow.vue";
 import PMGTableCell from "../components/table/TableCell.vue";
 import PMGTableBody from "../components/table/TableBody.vue";
 import PMGTableHeaderSelect from "../components/table/TableHeaderSelect.vue";
-import { ref, computed, defineComponent, inject, onMounted, watch } from "vue";
+import { ref } from "vue";
 
 export default {
   title: "Components/PMGTable",
   component: PMGTable,
 };
-
-const Template = (args: any) => ({
-  components: {
-    PMGTable,
-    PMGTableBody,
-    PMGTableHeader,
-    PMGTableHeaderCell,
-    PMGTableRow,
-    PMGTableCell,
-  },
-  setup() {
-    return { args };
-  },
-  template: `
-		<PMGTable :items="args.items" :columns="args.columns" selectable />
-	`,
-});
 
 export const Basic = (args: any) => ({
   components: {

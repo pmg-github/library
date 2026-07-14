@@ -36,9 +36,7 @@ export const Default: Story = {
     components: { PMGInput, Form },
     setup() {
       const schema = object({
-        email: string()
-          .email("Invalid email format")
-          .required("Email is required"),
+        username: string().required("Username is required"),
       });
 
       const onSubmit = (values: any) => {

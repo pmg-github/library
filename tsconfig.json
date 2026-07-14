@@ -3,7 +3,7 @@
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "moduleResolution": "Node",
+    "moduleResolution": "Bundler",
     "strict": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -20,7 +20,6 @@
   "include": [
     "components/**/*",
     "composables/**/*",
-    "plugins/**/*",
     "tiptap/**/*",
     "stories/**/*",
     "shims-vue.d.ts",

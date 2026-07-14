@@ -1,15 +1,10 @@
 /** @type {import('tailwindcss').Config} */
-import colors from "tailwindcss/colors";
 module.exports = {
   content: [
     "./components/**/*.{js,vue,ts}",
     "./composables/**/*.{js,ts}",
-    "./plugins/**/*.{js,ts}",
     "./stories/**/*.{js,ts}",
     "./.storybook/**/*.{js,ts}",
-    "./layouts/**/*.vue",
-    "./pages/**/*.vue",
-    "./app.vue",
   ],
 
   theme: {
@@ -38,5 +33,4 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/container-queries")],
 };

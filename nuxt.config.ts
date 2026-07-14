@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     },
     {
       path: fileURLToPath(new URL("./components/tiptap", import.meta.url)),
-      prefix: "PMGTiptap",
+      prefix: "Tiptap",
     },
   ],
 

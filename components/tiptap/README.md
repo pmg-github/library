@@ -109,3 +109,39 @@ Supports parsing from:
 ## Dependencies
 
 Requires `@headlessui/vue` as a peer dependency (for the modal).
+
+---
+
+## Video Extension
+
+A TipTap video node is also available and uses the same editable/read-only behavior split:
+
+- `editor.isEditable = true`: shows edit controls and modal fields to update video settings.
+- `editor.isEditable = false`: renders front-end display only (no edit affordances).
+
+### Video Commands
+
+```ts
+editor.commands.setVideo({
+  libraryId: "698074",
+  videoId: "123456",
+  autoplay: false,
+  muted: true,
+});
+
+editor.commands.updateVideo({
+  videoId: "654321",
+});
+```
+
+### Video Attributes
+
+```ts
+interface VideoAttrs {
+  libraryId?: string;
+  videoId?: string;
+  autoplay?: boolean;
+  muted?: boolean;
+  src?: string; // Optional direct embed URL fallback
+}
+```
