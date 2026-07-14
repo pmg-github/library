@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { NodeViewWrapper } from "@tiptap/vue-3";
 import Modal from "../layout/Modal.vue";
+import { useFetchVideos } from "../../composables/useFetchVideos";
 
 interface VideoAttrs {
-  libraryId?: string;
   videoId?: string;
   autoplay?: boolean;
   muted?: boolean;
-  src?: string;
 }
 
 const props = defineProps<{
@@ -21,54 +20,68 @@ const props = defineProps<{
 const isEditable = computed(() => props.editor?.isEditable ?? false);
 const isModalOpen = ref(false);
 
-const libraryId = computed(() => String(props.node.attrs.libraryId || ""));
+const BUNNY_LIBRARY_ID = "698074";
+
 const videoId = computed(() => String(props.node.attrs.videoId || ""));
 const autoplay = computed(() => Boolean(props.node.attrs.autoplay));
 const muted = computed(() => Boolean(props.node.attrs.muted));
-const sourceUrl = computed(() => String(props.node.attrs.src || ""));
+const video = ref<any>(null);
+
+const { getVideo } = useFetchVideos();
 
 const draftVideoId = ref("");
-const draftLibraryId = ref("");
-const draftSourceUrl = ref("");
 const draftAutoplay = ref(false);
 const draftMuted = ref(false);
 
-const hasVideo = computed(
-  () => !!videoId.value.trim() || !!sourceUrl.value.trim(),
-);
+const hasVideo = computed(() => {
+  const value = videoId.value?.trim();
+  return !!value;
+});
+
+const loadVideo = async () => {
+  if (!videoId.value) {
+    video.value = null;
+    return;
+  }
+
+  try {
+    video.value = await getVideo(videoId.value, undefined);
+  } catch (error) {
+    video.value = null;
+    console.error("Failed to load video:", error);
+  }
+};
+
+watch(videoId, loadVideo, { immediate: true });
 
 const embedUrl = computed(() => {
-  if (sourceUrl.value.trim()) {
-    return sourceUrl.value.trim();
-  }
-  const id = videoId.value.trim();
-  const lib = libraryId.value.trim();
-  if (!id || !lib) return "";
+  if (!video.value) return "";
 
   const params = new URLSearchParams();
   if (autoplay.value) params.set("autoplay", "true");
   if (muted.value) params.set("muted", "true");
 
-  const qs = params.toString();
-  return `https://player.mediadelivery.net/embed/${lib}/${id}${qs ? `?${qs}` : ""}`;
+  if (video.value?.bunnyVideoId) {
+    return `https://player.mediadelivery.net/embed/${BUNNY_LIBRARY_ID}/${video.value?.bunnyVideoId}?${params.toString()}`;
+  }
+
+  return video.value?.sources?.[0]?.url || "";
 });
 
 function openModal() {
   if (!isEditable.value) return;
   draftVideoId.value = videoId.value;
-  draftLibraryId.value = libraryId.value;
-  draftSourceUrl.value = sourceUrl.value;
   draftAutoplay.value = autoplay.value;
   draftMuted.value = muted.value;
   isModalOpen.value = true;
 }
 
 function applyVideo() {
+  const trimmed = draftVideoId.value.trim();
+  if (!trimmed) return;
   if (!props.updateAttributes) return;
   props.updateAttributes({
-    videoId: draftVideoId.value.trim(),
-    libraryId: draftLibraryId.value.trim(),
-    src: draftSourceUrl.value.trim(),
+    videoId: trimmed,
     autoplay: draftAutoplay.value,
     muted: draftMuted.value,
   });
@@ -84,8 +97,6 @@ function clearVideo() {
   if (props.updateAttributes) {
     props.updateAttributes({
       videoId: "",
-      libraryId: "",
-      src: "",
       autoplay: false,
       muted: false,
     });
@@ -127,7 +138,7 @@ function clearVideo() {
       </svg>
       <h3 class="mb-2 text-lg font-medium text-gray-700">Nog geen video</h3>
       <p class="mb-4 text-center text-xs text-gray-400">
-        Voeg een video toe met Bunny IDs of een directe embed URL.
+        Voer een video ID in om de video weer te geven.
       </p>
 
       <button
@@ -190,35 +201,11 @@ function clearVideo() {
     >
       <div class="space-y-4">
         <div>
-          <label class="mb-1 block text-sm text-gray-600"
-            >Bunny Library ID</label
-          >
-          <input
-            v-model="draftLibraryId"
-            type="text"
-            placeholder="Bijv. 698074"
-            class="w-full rounded border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-          />
-        </div>
-
-        <div>
-          <label class="mb-1 block text-sm text-gray-600">Bunny Video ID</label>
+          <label class="mb-1 block text-sm text-gray-600">Video ID</label>
           <input
             v-model="draftVideoId"
             type="text"
             placeholder="Bijv. 123456"
-            class="w-full rounded border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-          />
-        </div>
-
-        <div>
-          <label class="mb-1 block text-sm text-gray-600"
-            >Of directe embed URL</label
-          >
-          <input
-            v-model="draftSourceUrl"
-            type="url"
-            placeholder="https://..."
             class="w-full rounded border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
@@ -254,7 +241,7 @@ function clearVideo() {
             <button
               type="button"
               class="rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
-              :disabled="!draftSourceUrl.trim() && !draftVideoId.trim()"
+              :disabled="!draftVideoId.trim()"
               @click="applyVideo"
             >
               Toepassen

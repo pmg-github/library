@@ -138,10 +138,13 @@ editor.commands.updateVideo({
 
 ```ts
 interface VideoAttrs {
-  libraryId?: string;
   videoId?: string;
   autoplay?: boolean;
   muted?: boolean;
-  src?: string; // Optional direct embed URL fallback
 }
 ```
+
+Notes:
+
+- Bunny library ID is fixed in the component implementation.
+- If Bunny embed data is not available, the component falls back to the API-provided source URL.

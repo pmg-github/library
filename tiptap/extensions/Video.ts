@@ -3,11 +3,9 @@ import { VueNodeViewRenderer } from "@tiptap/vue-3";
 import VideoComponent from "../../components/tiptap/Video.vue";
 
 export interface VideoAttrs {
-  libraryId?: string;
   videoId?: string;
   autoplay?: boolean;
   muted?: boolean;
-  src?: string;
 }
 
 export interface VideoOptions {
@@ -38,9 +36,6 @@ export const Video = Node.create<VideoOptions>({
 
   addAttributes() {
     return {
-      libraryId: {
-        default: "",
-      },
       videoId: {
         default: "",
       },
@@ -49,9 +44,6 @@ export const Video = Node.create<VideoOptions>({
       },
       muted: {
         default: false,
-      },
-      src: {
-        default: "",
       },
     };
   },
@@ -64,11 +56,9 @@ export const Video = Node.create<VideoOptions>({
           if (typeof node === "string") return false;
           const element = node as HTMLElement;
           return {
-            libraryId: element.getAttribute("data-library-id") || "",
             videoId: element.getAttribute("data-video-id") || "",
             autoplay: element.getAttribute("data-autoplay") === "true",
             muted: element.getAttribute("data-muted") === "true",
-            src: element.getAttribute("data-src") || "",
           };
         },
       },
@@ -85,11 +75,9 @@ export const Video = Node.create<VideoOptions>({
           try {
             const data = JSON.parse(match[1]);
             return {
-              libraryId: String(data.libraryId || ""),
               videoId: String(data.videoId || ""),
               autoplay: Boolean(data.autoplay),
               muted: Boolean(data.muted),
-              src: String(data.src || ""),
             };
           } catch {
             return false;
@@ -104,11 +92,9 @@ export const Video = Node.create<VideoOptions>({
       "div",
       {
         "data-video": "true",
-        "data-library-id": HTMLAttributes.libraryId || "",
         "data-video-id": HTMLAttributes.videoId || "",
         "data-autoplay": String(Boolean(HTMLAttributes.autoplay)),
         "data-muted": String(Boolean(HTMLAttributes.muted)),
-        "data-src": HTMLAttributes.src || "",
         ...this.options.HTMLAttributes,
       },
     ];
